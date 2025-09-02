@@ -3,6 +3,9 @@ import bcrypt from 'bcryptjs';
 import { PrismaClient } from '@prisma/client';
 import { generateToken } from '@/lib/auth-utils';
 
+// Force Node.js Runtime (not Edge)
+export const runtime = 'nodejs';
+
 const prisma = new PrismaClient();
 
 export async function POST(request: NextRequest) {
