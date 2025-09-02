@@ -1,9 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import bcrypt from 'bcryptjs';
-import { PrismaClient } from '@prisma/client';
 import { generateToken } from '@/lib/auth-utils';
 
-const prisma = new PrismaClient();
+// Access global user storage
+declare global {
+  var registeredUsers: any[];
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -45,11 +47,9 @@ export async function POST(request: NextRequest) {
       return response;
     }
 
-    // Regular user login
-    const user = await prisma.user.findUnique({
-      where: { email }
-    });
-
+    // Check registered users in memory store
+    const user = global.registeredUsers?.find(u => u.email === email);
+    
     if (!user) {
       return NextResponse.json(
         { error: 'Invalid credentials' },
