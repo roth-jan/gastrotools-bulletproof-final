@@ -1,0 +1,82 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  password  String
+  plan      String   @default("free")
+  company   String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  recipes       Recipe[]
+  speisekarten  Speisekarte[]
+  usageTracking UsageTracking[]
+  leads         Lead[]
+}
+
+model Recipe {
+  id          String   @id @default(cuid())
+  name        String
+  ingredients Json
+  nutrition   Json?
+  allergens   Json?
+  portions    Int      @default(1)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+}
+
+model Speisekarte {
+  id          String   @id @default(cuid())
+  name        String
+  template    String   @default("modern-minimal")
+  categories  Json
+  published   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+}
+
+model UsageTracking {
+  id        String   @id @default(cuid())
+  tool      String   // Fixed: individual tool tracking
+  count     Int      @default(0)
+  month     String   // "2024-07"
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+
+  @@unique([userId, tool, month])
+}
+
+model Lead {
+  id               String   @id @default(cuid())
+  name             String
+  email            String
+  company          String?
+  phone            String?
+  toolInterest     String
+  source           String
+  status           String   @default("new")
+  notes            String?
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  user   User?   @relation(fields: [userId], references: [id], onDelete: SetNull)
+  userId String?
+}

@@ -1,0 +1,226 @@
+'use client'
+
+import { useState, useEffect } from 'react'
+import { useRouter } from 'next/navigation'
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { Navigation } from "@/components/navigation"
+import { useLanguage } from "@/contexts/LanguageContext"
+import { Users, Activity, TrendingUp, Settings, Eye, Mail } from "lucide-react"
+
+interface AdminStats {
+  totalUsers: number
+  totalLeads: number
+  monthlySignups: number
+  activeUsers: number
+}
+
+interface Lead {
+  id: string
+  name: string
+  email: string
+  company: string
+  toolInterest: string
+  status: string
+  createdAt: string
+}
+
+export default function AdminPage() {
+  const router = useRouter()
+  const { t } = useLanguage()
+  const [stats, setStats] = useState<AdminStats>({
+    totalUsers: 0,
+    totalLeads: 0,
+    monthlySignups: 0,
+    activeUsers: 0
+  })
+  const [leads, setLeads] = useState<Lead[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    const userData = localStorage.getItem('user')
+    
+    if (!token || !userData) {
+      router.push('/login')
+      return
+    }
+
+    // Demo data for admin
+    setStats({
+      totalUsers: 45,
+      totalLeads: 12,
+      monthlySignups: 8,
+      activeUsers: 23
+    })
+
+    setLeads([
+      {
+        id: '1',
+        name: 'Restaurant Milano',
+        email: 'info@milano.de',
+        company: 'Milano Restaurant',
+        toolInterest: 'naehrwertrechner',
+        status: 'new',
+        createdAt: '2024-08-27'
+      },
+      {
+        id: '2',
+        name: 'Café Zentral',
+        email: 'contact@zentral.com',
+        company: 'Café Zentral GmbH',
+        toolInterest: 'speisekarten',
+        status: 'contacted',
+        createdAt: '2024-08-26'
+      }
+    ])
+
+    setLoading(false)
+  }, [router])
+
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case 'new': return 'bg-blue-100 text-blue-800'
+      case 'contacted': return 'bg-yellow-100 text-yellow-800'  
+      case 'qualified': return 'bg-green-100 text-green-800'
+      case 'closed': return 'bg-gray-100 text-gray-800'
+      default: return 'bg-gray-100 text-gray-800'
+    }
+  }
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-orange-50">
+        <Navigation />
+        <div className="container mx-auto px-4 py-8">
+          <div className="flex items-center justify-center min-h-[50vh]">
+            <div className="text-center">
+              <div className="animate-spin w-8 h-8 border-2 border-purple-600 border-t-transparent rounded-full mx-auto mb-4"></div>
+              <p className="text-gray-600">Loading admin dashboard...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-pink-50 to-orange-50">
+      <Navigation />
+      
+      <main className="container mx-auto px-4 py-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-8">
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+              Admin Dashboard
+            </h1>
+            <p className="text-xl text-gray-600">
+              Monitor system performance and manage leads
+            </p>
+          </div>
+
+          {/* Stats Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <Card className="glass">
+              <CardContent className="p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium text-gray-600">Total Users</p>
+                    <p className="text-2xl font-bold text-gray-900">{stats.totalUsers}</p>
+                  </div>
+                  <Users className="w-8 h-8 text-blue-600" />
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="glass">
+              <CardContent className="p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium text-gray-600">Total Leads</p>
+                    <p className="text-2xl font-bold text-gray-900">{stats.totalLeads}</p>
+                  </div>
+                  <Mail className="w-8 h-8 text-green-600" />
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="glass">
+              <CardContent className="p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium text-gray-600">Monthly Signups</p>
+                    <p className="text-2xl font-bold text-gray-900">{stats.monthlySignups}</p>
+                  </div>
+                  <TrendingUp className="w-8 h-8 text-purple-600" />
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="glass">
+              <CardContent className="p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm font-medium text-gray-600">Active Users</p>
+                    <p className="text-2xl font-bold text-gray-900">{stats.activeUsers}</p>
+                  </div>
+                  <Activity className="w-8 h-8 text-orange-600" />
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Leads Management */}
+          <Card className="glass">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Mail className="w-5 h-5 text-green-600" />
+                Lead Management ({leads.length})
+              </CardTitle>
+              <CardDescription>
+                Manage customer leads and conversion tracking
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              {leads.length === 0 ? (
+                <p className="text-gray-500 text-center py-8">
+                  No leads yet
+                </p>
+              ) : (
+                <div className="space-y-4">
+                  {leads.map(lead => (
+                    <div key={lead.id} className="flex items-center justify-between p-4 bg-white rounded border">
+                      <div className="flex-1">
+                        <div className="flex items-center gap-3">
+                          <div>
+                            <div className="font-semibold">{lead.name}</div>
+                            <div className="text-sm text-gray-600">{lead.email}</div>
+                            <div className="text-sm text-gray-600">{lead.company}</div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <div className="text-right">
+                          <div className="text-sm text-gray-600">Interested in</div>
+                          <div className="font-medium">{lead.toolInterest}</div>
+                          <div className="text-xs text-gray-500">{lead.createdAt}</div>
+                        </div>
+                        <Badge className={getStatusColor(lead.status)}>
+                          {lead.status}
+                        </Badge>
+                        <Button variant="outline" size="sm">
+                          <Eye className="w-4 h-4" />
+                        </Button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </CardContent>
+          </Card>
+        </div>
+      </main>
+    </div>
+  )
+}
