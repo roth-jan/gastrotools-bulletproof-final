@@ -63,10 +63,10 @@ export async function POST(request: NextRequest) {
       message: 'Registration successful! You can now sign in.'
     });
 
-  } catch (error) {
+  } catch (error: any) {
     console.error('Registration error:', error);
     return NextResponse.json(
-      { error: 'Registration failed' },
+      { error: `Registration failed: ${error?.message || 'Database error'}` },
       { status: 500 }
     );
   }
