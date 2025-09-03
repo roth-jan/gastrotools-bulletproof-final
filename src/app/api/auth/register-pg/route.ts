@@ -74,10 +74,10 @@ export async function POST(request: NextRequest) {
       message: 'Registration successful! You can now sign in.'
     });
 
-  } catch (error) {
+  } catch (error: any) {
     console.error('Native registration error:', error);
     return NextResponse.json(
-      { error: `Registration failed: ${error.message}` },
+      { error: `Registration failed: ${error?.message || 'Unknown error'}` },
       { status: 500 }
     );
   } finally {
