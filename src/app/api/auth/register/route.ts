@@ -1,12 +1,14 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import bcrypt from 'bcryptjs';
 
 // Force Node.js Runtime
 export const runtime = 'nodejs';
 
-export async function POST(request: NextRequest) {
+export async function POST(request: Request) {
   try {
-    const { email, password, name, company } = await request.json();
+    // Parse request body
+    const body = await request.json();
+    const { email, password, name, company } = body;
 
     // Validation
     if (!email || !password || !name) {
@@ -23,22 +25,22 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Create user with native PostgreSQL (lazy loaded to avoid searchParams issue)
+    // Dynamic import to avoid compilation issues
     const { Pool } = await import('pg');
     
+    // Create PostgreSQL connection
     const pool = new Pool({
       connectionString: process.env.DATABASE_URL_PROJECT || process.env.DATABASE_URL,
-      ssl: {
-        rejectUnauthorized: false
-      },
+      ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
       max: 1,
       idleTimeoutMillis: 30000,
       connectionTimeoutMillis: 10000,
     });
 
-    const client = await pool.connect();
-
+    let client;
     try {
+      client = await pool.connect();
+
       // Check if user exists
       const existingUser = await client.query(
         'SELECT id FROM "User" WHERE email = $1',
@@ -55,10 +57,10 @@ export async function POST(request: NextRequest) {
       // Hash password
       const hashedPassword = await bcrypt.hash(password, 10);
 
-      // Generate user ID
+      // Generate unique user ID
       const userId = `user_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
 
-      // Create user
+      // Insert user into database
       const result = await client.query(
         `INSERT INTO "User" (id, email, password, name, company, plan, "createdAt", "updatedAt") 
          VALUES ($1, $2, $3, $4, $5, $6, NOW(), NOW()) 
@@ -68,8 +70,6 @@ export async function POST(request: NextRequest) {
 
       const user = result.rows[0];
 
-      console.log(`✅ User registered successfully: ${email}`);
-
       return NextResponse.json({
         success: true,
         user,
@@ -77,14 +77,16 @@ export async function POST(request: NextRequest) {
       });
 
     } finally {
-      client.release();
+      if (client) {
+        client.release();
+      }
       await pool.end();
     }
 
   } catch (error: any) {
     console.error('Registration error:', error);
     return NextResponse.json(
-      { error: `Registration failed: ${error?.message || 'Unknown error'}` },
+      { error: `Registration failed: ${error?.message || error?.toString() || 'Unknown error'}` },
       { status: 500 }
     );
   }
