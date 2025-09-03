@@ -7,7 +7,7 @@ export const runtime = 'nodejs';
 
 // PostgreSQL client with explicit SSL configuration
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
+  connectionString: process.env.DATABASE_URL_PROJECT || process.env.DATABASE_URL,
   ssl: {
     rejectUnauthorized: false // Accept all SSL certificates for Neon
   },
