@@ -2,34 +2,19 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { Client } = require('pg');
 
-// EXPERT FIX: URL normalization function  
-function normalizeConn(raw) {
-  const trimmed = raw.trim();
-  // Add schema if missing (common PROD issue)
-  const withScheme = /^[a-zA-Z]+:\/\//.test(trimmed) ? trimmed : `postgres://${trimmed}`;
-  return withScheme;
-}
-
 module.exports = async (req, res) => {
-  // CORS headers
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');  
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-  res.setHeader('Cache-Control', 'no-store'); // Expert fix: prevent caching
+  res.setHeader('Cache-Control', 'no-store');
   
-  if (req.method === 'OPTIONS') {
-    return res.status(200).end();
-  }
-
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
-  }
+  if (req.method === 'OPTIONS') return res.status(200).end();
+  if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
   const { action, email, password, name, company } = req.body || {};
 
   try {
     if (action === 'register') {
-      // Validation
       if (!email || !password || !name) {
         return res.status(400).json({
           error: 'Email, password and name are required'
@@ -42,32 +27,23 @@ module.exports = async (req, res) => {
         });
       }
 
-      // EXPERT FIX: Safe database connection handling
-      const rawUrl = process.env.DATABASE_URL_PROJECT || process.env.DATABASE_URL;
-      console.log('DB_URL=', rawUrl ? `${rawUrl.substring(0, 20)}...` : 'missing');
+      // Use working DATABASE_URL 
+      const workingUrl = process.env.DATABASE_URL_WORKING;
       
-      if (!rawUrl) {
+      if (!workingUrl) {
         return res.status(500).json({ error: 'Database not configured' });
       }
 
-      const normalizedUrl = normalizeConn(rawUrl);
-      
-      // Safe URL handling with proper error checking
-      const url = new URL(normalizedUrl);
-      if (!url.searchParams.has("sslmode")) {
-        url.searchParams.set("sslmode", "require");
-      }
+      console.log('Using DATABASE_URL_WORKING');
 
       const client = new Client({
-        connectionString: url.toString(),
+        connectionString: workingUrl,
         ssl: { rejectUnauthorized: false }
       });
 
       try {
         await client.connect();
-
-        // Test database write capability
-        await client.query('SELECT 1 as test');
+        console.log('✅ Database connection successful');
 
         // Check if user exists
         const existingUser = await client.query(
@@ -84,26 +60,23 @@ module.exports = async (req, res) => {
         // Hash password
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        // EXPERT FIX: URL-safe user ID (no +, /, =)
-        const { randomBytes } = require('crypto');
-        const userId = `user_${Date.now()}_${randomBytes(8).toString('base64url')}`;
+        // Generate user ID
+        const userId = `user_${Date.now()}`;
 
-        // Create user with explicit types
+        // Create user
         const result = await client.query(
           `INSERT INTO "User" (id, email, password, name, company, plan, "createdAt", "updatedAt") 
            VALUES ($1, $2, $3, $4, $5, $6, NOW(), NOW()) 
-           RETURNING id, email, name, company, plan, "createdAt", "updatedAt"`,
+           RETURNING id, email, name, company, plan`,
           [userId, email, hashedPassword, name, company || null, 'free']
         );
 
         const user = result.rows[0];
 
-        console.log(`✅ User registered successfully: ${email}`);
-
         return res.json({
           success: true,
           user,
-          message: 'Registration successful! You can now sign in.'
+          message: 'Registration successful!'
         });
 
       } finally {
@@ -111,13 +84,16 @@ module.exports = async (req, res) => {
       }
 
     } else if (action === 'login') {
-      // Demo user (no database needed)
+      if (!email || !password) {
+        return res.status(400).json({ error: 'Email and password required' });
+      }
+
+      // Demo user (priority)
       if (email === 'demo@gastrotools.de' && password === 'demo123') {
-        // URL-safe JWT token
         const token = jwt.sign(
           { userId: 'demo-user-123', email, plan: 'free' },
           process.env.JWT_SECRET || 'secret',
-          { expiresIn: '7d', algorithm: 'HS256' }
+          { expiresIn: '7d' }
         );
 
         return res.json({
@@ -128,16 +104,67 @@ module.exports = async (req, res) => {
         });
       }
 
-      return res.status(401).json({ error: 'Invalid credentials' });
+      // Regular user login
+      const workingUrl = process.env.DATABASE_URL_WORKING;
+      
+      if (!workingUrl) {
+        return res.status(500).json({ error: 'Database not configured' });
+      }
 
-    } else {
-      return res.status(400).json({ error: 'Invalid action' });
+      const client = new Client({
+        connectionString: workingUrl,
+        ssl: { rejectUnauthorized: false }
+      });
+
+      try {
+        await client.connect();
+
+        // Find user
+        const result = await client.query(
+          'SELECT id, email, password, name, company, plan FROM "User" WHERE email = $1',
+          [email]
+        );
+
+        if (result.rows.length === 0) {
+          return res.status(401).json({ error: 'Invalid credentials' });
+        }
+
+        const user = result.rows[0];
+
+        // Check password
+        const validPassword = await bcrypt.compare(password, user.password);
+        if (!validPassword) {
+          return res.status(401).json({ error: 'Invalid credentials' });
+        }
+
+        // Generate token
+        const token = jwt.sign(
+          { userId: user.id, email: user.email, plan: user.plan },
+          process.env.JWT_SECRET || 'secret',
+          { expiresIn: '7d' }
+        );
+
+        // Remove password from response
+        const { password: _, ...userWithoutPassword } = user;
+
+        return res.json({
+          success: true,
+          user: userWithoutPassword,
+          token,
+          message: 'Login successful'
+        });
+
+      } finally {
+        await client.end();
+      }
     }
+
+    return res.status(400).json({ error: 'Invalid action' });
 
   } catch (error) {
     console.error('Auth error:', error);
     return res.status(500).json({
-      error: `Authentication failed: ${error.message || 'Unknown error'}`
+      error: `Failed: ${error.message || 'Unknown'}`
     });
   }
 };
