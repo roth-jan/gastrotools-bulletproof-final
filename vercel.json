@@ -1,6 +1,0 @@
-{
-  "functions": {
-    "api/**/*.{js,ts}": { "runtime": "nodejs20.x" },
-    "app/**/route.{js,ts}": { "runtime": "nodejs20.x" }
-  }
-}
