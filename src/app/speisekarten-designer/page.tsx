@@ -332,11 +332,22 @@ export default function SpeisekartenDesignerPage() {
                     {/* Actions */}
                     {selectedCard.categories.length > 0 && (
                       <div className="flex gap-3 pt-4 border-t">
-                        <Button variant="outline" className="flex-1">
+                        <Button 
+                          variant="outline" 
+                          className="flex-1"
+                          onClick={() => {
+                            alert('Preview functionality - Menu card would open in new window');
+                          }}
+                        >
                           <Eye className="w-4 h-4 mr-2" />
                           Preview
                         </Button>
-                        <Button className="flex-1">
+                        <Button 
+                          className="flex-1"
+                          onClick={() => {
+                            alert('PDF Export functionality - Menu card PDF would download');
+                          }}
+                        >
                           <Download className="w-4 h-4 mr-2" />
                           Export PDF
                         </Button>
