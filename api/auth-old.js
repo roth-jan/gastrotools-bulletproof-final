@@ -1,21 +1,21 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const { Client } = require('pg');
+const { Pool } = require('pg');
+const { randomBytes } = require('crypto');
 
-// EXPERT FIX: URL normalization function  
-function normalizeConn(raw) {
-  const trimmed = raw.trim();
-  // Add schema if missing (common PROD issue)
-  const withScheme = /^[a-zA-Z]+:\/\//.test(trimmed) ? trimmed : `postgres://${trimmed}`;
-  return withScheme;
-}
+// PostgreSQL connection pool
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL_PROJECT || process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false },
+  max: 1,
+  connectionTimeoutMillis: 10000,
+});
 
 module.exports = async (req, res) => {
   // CORS headers
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');  
+  res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-  res.setHeader('Cache-Control', 'no-store'); // Expert fix: prevent caching
   
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
@@ -42,33 +42,9 @@ module.exports = async (req, res) => {
         });
       }
 
-      // EXPERT FIX: Safe database connection handling
-      const rawUrl = process.env.DATABASE_URL_PROJECT || process.env.DATABASE_URL;
-      console.log('DB_URL=', rawUrl ? `${rawUrl.substring(0, 20)}...` : 'missing');
-      
-      if (!rawUrl) {
-        return res.status(500).json({ error: 'Database not configured' });
-      }
-
-      const normalizedUrl = normalizeConn(rawUrl);
-      
-      // Safe URL handling with proper error checking
-      const url = new URL(normalizedUrl);
-      if (!url.searchParams.has("sslmode")) {
-        url.searchParams.set("sslmode", "require");
-      }
-
-      const client = new Client({
-        connectionString: url.toString(),
-        ssl: { rejectUnauthorized: false }
-      });
+      const client = await pool.connect();
 
       try {
-        await client.connect();
-
-        // Test database write capability
-        await client.query('SELECT 1 as test');
-
         // Check if user exists
         const existingUser = await client.query(
           'SELECT id FROM "User" WHERE email = $1',
@@ -84,11 +60,10 @@ module.exports = async (req, res) => {
         // Hash password
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        // EXPERT FIX: URL-safe user ID (no +, /, =)
-        const { randomBytes } = require('crypto');
+        // Generate URL-safe user ID
         const userId = `user_${Date.now()}_${randomBytes(8).toString('base64url')}`;
 
-        // Create user with explicit types
+        // Create user
         const result = await client.query(
           `INSERT INTO "User" (id, email, password, name, company, plan, "createdAt", "updatedAt") 
            VALUES ($1, $2, $3, $4, $5, $6, NOW(), NOW()) 
@@ -98,20 +73,18 @@ module.exports = async (req, res) => {
 
         const user = result.rows[0];
 
-        console.log(`✅ User registered successfully: ${email}`);
-
         return res.json({
           success: true,
           user,
-          message: 'Registration successful! You can now sign in.'
+          message: 'Registration successful!'
         });
 
       } finally {
-        await client.end();
+        client.release();
       }
 
     } else if (action === 'login') {
-      // Demo user (no database needed)
+      // Demo user
       if (email === 'demo@gastrotools.de' && password === 'demo123') {
         // URL-safe JWT token
         const token = jwt.sign(
@@ -128,6 +101,7 @@ module.exports = async (req, res) => {
         });
       }
 
+      // Regular user login logic here...
       return res.status(401).json({ error: 'Invalid credentials' });
 
     } else {
@@ -137,7 +111,7 @@ module.exports = async (req, res) => {
   } catch (error) {
     console.error('Auth error:', error);
     return res.status(500).json({
-      error: `Authentication failed: ${error.message || 'Unknown error'}`
+      error: `Failed: ${error.message || 'Unknown error'}`
     });
   }
 };
