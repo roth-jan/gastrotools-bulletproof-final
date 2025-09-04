@@ -73,10 +73,40 @@ module.exports = async (req, res) => {
 
         const user = result.rows[0];
 
+        // Send welcome email (if Resend configured)
+        if (process.env.RESEND_API_KEY && process.env.RESEND_API_KEY !== 'demo-email-service') {
+          try {
+            const { Resend } = require('resend');
+            const resend = new Resend(process.env.RESEND_API_KEY);
+            
+            await resend.emails.send({
+              from: 'GastroTools <welcome@gastrotools.de>',
+              to: email,
+              subject: 'Welcome to GastroTools!',
+              html: `
+                <h1>Welcome ${name}!</h1>
+                <p>Your GastroTools account has been created successfully.</p>
+                <p>You can now access all our professional restaurant management tools:</p>
+                <ul>
+                  <li>Nutrition Calculator</li>
+                  <li>Cost Control</li>
+                  <li>Inventory Management</li>
+                  <li>Menu Planner</li>
+                  <li>Menu Card Designer</li>
+                </ul>
+                <p><a href="https://gastrotools-bulletproof.vercel.app/login">Login to your account</a></p>
+              `
+            });
+            console.log('✅ Welcome email sent');
+          } catch (emailError) {
+            console.log('⚠️ Email failed:', emailError.message);
+          }
+        }
+
         return res.json({
           success: true,
           user,
-          message: 'Registration successful!'
+          message: 'Registration successful! Check your email for welcome message.'
         });
 
       } finally {
