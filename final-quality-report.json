@@ -1,0 +1,177 @@
+{
+  "timestamp": "2025-09-04T14:45:36.676Z",
+  "url": "https://gastrotools-bulletproof.vercel.app",
+  "testSuite": "Final Comprehensive Quality Test",
+  "results": {
+    "Homepage Loads": {
+      "status": "passed",
+      "startTime": 1756997136678,
+      "duration": 2676
+    },
+    "Language Switching": {
+      "status": "passed",
+      "startTime": 1756997139354,
+      "duration": 132
+    },
+    "Complete Registration Flow (UI)": {
+      "status": "failed",
+      "startTime": 1756997139486,
+      "error": "Registration UI did not show success",
+      "duration": 9259
+    },
+    "Complete Login Flow (UI)": {
+      "status": "failed",
+      "startTime": 1756997148851,
+      "error": "No test email from registration",
+      "duration": 0
+    },
+    "Demo Login Flow": {
+      "status": "passed",
+      "startTime": 1756997148940,
+      "duration": 7524
+    },
+    "Nutrition Calculator Access": {
+      "status": "passed",
+      "startTime": 1756997156464,
+      "duration": 1463
+    },
+    "Cost Control Access": {
+      "status": "passed",
+      "startTime": 1756997157927,
+      "duration": 1632
+    },
+    "Inventory Access": {
+      "status": "passed",
+      "startTime": 1756997159559,
+      "duration": 1451
+    },
+    "Menu Planner Access": {
+      "status": "passed",
+      "startTime": 1756997161010,
+      "duration": 1511
+    },
+    "Card Designer Access": {
+      "status": "passed",
+      "startTime": 1756997162521,
+      "duration": 1533
+    },
+    "Admin Access": {
+      "status": "passed",
+      "startTime": 1756997164054,
+      "duration": 1440
+    },
+    "Hackfleisch Functionality": {
+      "status": "failed",
+      "startTime": 1756997165494,
+      "error": "locator.isVisible: Error: strict mode violation: locator('.absolute') resolved to 2 elements:\n    1) <svg width=\"24\" height=\"24\" fill=\"none\" stroke-width=\"2\" viewBox=\"0 0 24 24\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" xmlns=\"http://www.w3.org/2000/svg\" class=\"lucide lucide-search absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400\">…</svg> aka locator('div').filter({ hasText: /^Search IngredientHackfleisch \\(Rind\\)🔥 254 kcal • 🥩 17\\.17g Protein$/ }).getByRole('img')\n    2) <div class=\"absolute top-full left-0 right-0 z-10 mt-1 bg-white border rounded-md shadow-lg max-h-60 overflow-y-auto\">…</div> aka locator('div').filter({ hasText: /^Hackfleisch \\(Rind\\)🔥 254 kcal • 🥩 17\\.17g Protein$/ }).nth(1)\n\nCall log:\n\u001b[2m    - checking visibility of locator('.absolute')\u001b[22m\n",
+      "duration": 6114
+    },
+    "Forgot Password Flow": {
+      "status": "passed",
+      "startTime": 1756997171707,
+      "duration": 6527
+    },
+    "Mobile Responsiveness": {
+      "status": "passed",
+      "startTime": 1756997178234,
+      "duration": 1186
+    }
+  },
+  "screenshots": [
+    {
+      "name": "01-homepage",
+      "filename": "final-test-1756997139175-01-homepage.png",
+      "description": "Homepage loaded"
+    },
+    {
+      "name": "02-language-switch",
+      "filename": "final-test-1756997139355-02-language-switch.png",
+      "description": "Language switching"
+    },
+    {
+      "name": "03-registration-form",
+      "filename": "final-test-1756997144588-03-registration-form.png",
+      "description": "Registration form filled"
+    },
+    {
+      "name": "error-Complete-Registration-Flow-(UI)",
+      "filename": "final-test-1756997148745-error-Complete-Registration-Flow-(UI).png",
+      "description": "Error: Complete Registration Flow (UI)"
+    },
+    {
+      "name": "error-Complete-Login-Flow-(UI)",
+      "filename": "final-test-1756997148851-error-Complete-Login-Flow-(UI).png",
+      "description": "Error: Complete Login Flow (UI)"
+    },
+    {
+      "name": "07-demo-login",
+      "filename": "final-test-1756997156352-07-demo-login.png",
+      "description": "Demo login successful"
+    },
+    {
+      "name": "08-nutrition-calculator",
+      "filename": "final-test-1756997157834-08-nutrition-calculator.png",
+      "description": "Nutrition Calculator loaded"
+    },
+    {
+      "name": "08-cost-control",
+      "filename": "final-test-1756997159288-08-cost-control.png",
+      "description": "Cost Control loaded"
+    },
+    {
+      "name": "08-inventory",
+      "filename": "final-test-1756997160918-08-inventory.png",
+      "description": "Inventory loaded"
+    },
+    {
+      "name": "08-menu-planner",
+      "filename": "final-test-1756997162433-08-menu-planner.png",
+      "description": "Menu Planner loaded"
+    },
+    {
+      "name": "08-card-designer",
+      "filename": "final-test-1756997163971-08-card-designer.png",
+      "description": "Card Designer loaded"
+    },
+    {
+      "name": "08-admin",
+      "filename": "final-test-1756997165403-08-admin.png",
+      "description": "Admin loaded"
+    },
+    {
+      "name": "error-Hackfleisch-Functionality",
+      "filename": "final-test-1756997171608-error-Hackfleisch-Functionality.png",
+      "description": "Error: Hackfleisch Functionality"
+    },
+    {
+      "name": "10-password-reset",
+      "filename": "final-test-1756997178133-10-password-reset.png",
+      "description": "Password reset flow"
+    },
+    {
+      "name": "11-mobile-responsive",
+      "filename": "final-test-1756997179319-11-mobile-responsive.png",
+      "description": "Mobile responsiveness"
+    }
+  ],
+  "errors": [
+    {
+      "test": "Complete Registration Flow (UI)",
+      "error": "Registration UI did not show success"
+    },
+    {
+      "test": "Complete Login Flow (UI)",
+      "error": "No test email from registration"
+    },
+    {
+      "test": "Hackfleisch Functionality",
+      "error": "locator.isVisible: Error: strict mode violation: locator('.absolute') resolved to 2 elements:\n    1) <svg width=\"24\" height=\"24\" fill=\"none\" stroke-width=\"2\" viewBox=\"0 0 24 24\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" xmlns=\"http://www.w3.org/2000/svg\" class=\"lucide lucide-search absolute right-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400\">…</svg> aka locator('div').filter({ hasText: /^Search IngredientHackfleisch \\(Rind\\)🔥 254 kcal • 🥩 17\\.17g Protein$/ }).getByRole('img')\n    2) <div class=\"absolute top-full left-0 right-0 z-10 mt-1 bg-white border rounded-md shadow-lg max-h-60 overflow-y-auto\">…</div> aka locator('div').filter({ hasText: /^Hackfleisch \\(Rind\\)🔥 254 kcal • 🥩 17\\.17g Protein$/ }).nth(1)\n\nCall log:\n\u001b[2m    - checking visibility of locator('.absolute')\u001b[22m\n"
+    }
+  ],
+  "summary": {
+    "passed": 11,
+    "failed": 3,
+    "total": 14
+  },
+  "verdict": "NEEDS ADDITIONAL WORK"
+}
