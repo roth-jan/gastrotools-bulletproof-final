@@ -85,7 +85,11 @@ module.exports = async (req, res) => {
       }
 
     } else if (action === 'login') {
-      // Demo user
+      if (!email || !password) {
+        return res.status(400).json({ error: 'Email and password required' });
+      }
+
+      // Demo user (priority)
       if (email === 'demo@gastrotools.de' && password === 'demo123') {
         const token = jwt.sign(
           { userId: 'demo-user-123', email, plan: 'free' },
@@ -101,7 +105,59 @@ module.exports = async (req, res) => {
         });
       }
 
-      return res.status(401).json({ error: 'Invalid credentials' });
+      // Regular user login with fresh database
+      const freshUrl = process.env.DATABASE_URL_FRESH;
+      
+      if (!freshUrl) {
+        return res.status(500).json({ error: 'Database not configured' });
+      }
+
+      const client = new Client({
+        connectionString: freshUrl,
+        ssl: { rejectUnauthorized: false }
+      });
+
+      try {
+        await client.connect();
+
+        // Find user
+        const result = await client.query(
+          'SELECT id, email, password, name, company, plan FROM "User" WHERE email = $1',
+          [email]
+        );
+
+        if (result.rows.length === 0) {
+          return res.status(401).json({ error: 'Invalid credentials' });
+        }
+
+        const user = result.rows[0];
+
+        // Check password
+        const validPassword = await bcrypt.compare(password, user.password);
+        if (!validPassword) {
+          return res.status(401).json({ error: 'Invalid credentials' });
+        }
+
+        // Generate token
+        const token = jwt.sign(
+          { userId: user.id, email: user.email, plan: user.plan },
+          process.env.JWT_SECRET || 'secret',
+          { expiresIn: '7d' }
+        );
+
+        // Remove password from response
+        const { password: _, ...userWithoutPassword } = user;
+
+        return res.json({
+          success: true,
+          user: userWithoutPassword,
+          token,
+          message: 'Login successful'
+        });
+
+      } finally {
+        await client.end();
+      }
     }
 
     return res.status(400).json({ error: 'Invalid action' });

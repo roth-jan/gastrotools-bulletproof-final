@@ -27,10 +27,10 @@ export default function LoginPage() {
     setIsLoading(true)
 
     try {
-      const response = await fetch('/api/auth/login', {
+      const response = await fetch('/api/auth-fresh', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
+        body: JSON.stringify({ action: 'login', ...formData })
       })
 
       const data = await response.json()
