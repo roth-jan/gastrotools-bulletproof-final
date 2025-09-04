@@ -1,6 +1,7 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { Pool } = require('pg');
+const { randomBytes } = require('crypto');
 
 // PostgreSQL connection pool
 const pool = new Pool({
@@ -59,8 +60,8 @@ module.exports = async (req, res) => {
         // Hash password
         const hashedPassword = await bcrypt.hash(password, 10);
 
-        // Generate user ID
-        const userId = `user_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+        // Generate URL-safe user ID
+        const userId = `user_${Date.now()}_${randomBytes(8).toString('base64url')}`;
 
         // Create user
         const result = await client.query(
@@ -85,10 +86,11 @@ module.exports = async (req, res) => {
     } else if (action === 'login') {
       // Demo user
       if (email === 'demo@gastrotools.de' && password === 'demo123') {
+        // URL-safe JWT token
         const token = jwt.sign(
           { userId: 'demo-user-123', email, plan: 'free' },
           process.env.JWT_SECRET || 'secret',
-          { expiresIn: '7d' }
+          { expiresIn: '7d', algorithm: 'HS256' }
         );
 
         return res.json({
