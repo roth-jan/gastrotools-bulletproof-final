@@ -80,7 +80,7 @@ module.exports = async (req, res) => {
             const resend = new Resend(process.env.RESEND_API_KEY);
             
             await resend.emails.send({
-              from: 'GastroTools <welcome@gastrotools.de>',
+              from: 'GastroTools <welcome@resend.dev>',
               to: email,
               subject: 'Welcome to GastroTools!',
               html: `
