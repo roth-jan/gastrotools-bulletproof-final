@@ -45,11 +45,42 @@ export default function KostenkontrollePage() {
     }
   }, [router])
 
+  const [errors, setErrors] = useState<{[key: string]: string}>({})
+
   const addEntry = () => {
-    if (!newEntry.product || !newEntry.category || newEntry.unitPrice <= 0) {
-      alert('Please fill all required fields')
+    // FIXED: Specific error validation instead of generic alert
+    const newErrors: {[key: string]: string} = {}
+    
+    if (!newEntry.product.trim()) {
+      newErrors.product = 'Product name is required'
+    }
+    
+    if (!newEntry.category) {
+      newErrors.category = 'Please select a category'
+    }
+    
+    if (newEntry.amount <= 0) {
+      newErrors.amount = 'Amount must be greater than 0'
+    }
+    
+    if (newEntry.unitPrice <= 0) {
+      newErrors.unitPrice = 'Unit price must be greater than 0'
+    }
+    
+    if (!newEntry.supplier.trim()) {
+      newErrors.supplier = 'Supplier name is required'
+    }
+    
+    setErrors(newErrors)
+    
+    // If there are errors, don't proceed
+    if (Object.keys(newErrors).length > 0) {
+      console.log('❌ Validation errors:', newErrors)
       return
     }
+    
+    // Clear any previous errors
+    setErrors({})
 
     const entry: CostEntry = {
       id: Date.now().toString(),
@@ -104,16 +135,29 @@ export default function KostenkontrollePage() {
                   <Label>Product Name</Label>
                   <Input
                     value={newEntry.product}
-                    onChange={(e) => setNewEntry({...newEntry, product: e.target.value})}
+                    onChange={(e) => {
+                      setNewEntry({...newEntry, product: e.target.value})
+                      // Clear error when user starts typing
+                      if (errors.product) {
+                        setErrors(prev => ({...prev, product: ''}))
+                      }
+                    }}
                     placeholder="e.g., Tomatoes, Beef, Olive Oil"
+                    className={errors.product ? 'border-red-500' : ''}
                   />
+                  {errors.product && (
+                    <p className="text-sm text-red-500 mt-1">{errors.product}</p>
+                  )}
                 </div>
 
                 <div className="grid grid-cols-2 gap-3">
                   <div>
                     <Label>Category</Label>
-                    <Select value={newEntry.category} onValueChange={(value) => setNewEntry({...newEntry, category: value})}>
-                      <SelectTrigger>
+                    <Select value={newEntry.category} onValueChange={(value) => {
+                      setNewEntry({...newEntry, category: value})
+                      if (errors.category) setErrors(prev => ({...prev, category: ''}))
+                    }}>
+                      <SelectTrigger className={errors.category ? 'border-red-500' : ''}>
                         <SelectValue placeholder="Select category" />
                       </SelectTrigger>
                       <SelectContent>
@@ -125,6 +169,9 @@ export default function KostenkontrollePage() {
                         <SelectItem value="beverages">Beverages</SelectItem>
                       </SelectContent>
                     </Select>
+                    {errors.category && (
+                      <p className="text-sm text-red-500 mt-1">{errors.category}</p>
+                    )}
                   </div>
 
                   <div>
