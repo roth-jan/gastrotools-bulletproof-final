@@ -9,6 +9,9 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Navigation } from "@/components/navigation"
 import { useLanguage } from "@/contexts/LanguageContext"
+import { LeadGateModal, LeadFormData } from "@/components/LeadGateModal"
+import { SegmentCTA } from "@/components/SegmentCTA"
+import { leadTracker } from "@/lib/lead-tracking"
 import { Calendar, Plus, ChefHat, Clock, Users } from "lucide-react"
 
 interface MenuItem {
@@ -46,6 +49,10 @@ export default function MenuplanerPage() {
     day: 'Monday',
     category: 'lunch' as const
   })
+
+  // PRO LEVEL: Lead Gate System
+  const [showLeadGate, setShowLeadGate] = useState(false)
+  const [showWebMenueCTA, setShowWebMenueCTA] = useState(false)
 
   useEffect(() => {
     const token = localStorage.getItem('token')
