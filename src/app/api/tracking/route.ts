@@ -16,7 +16,7 @@ export async function POST(request: NextRequest) {
     const enrichedData = {
       ...trackingData,
       timestamp: trackingData.timestamp || new Date().toISOString(),
-      ip: request.ip || 'unknown',
+      ip: request.headers.get('x-forwarded-for') || 'unknown',
       userAgent: request.headers.get('user-agent') || 'unknown',
       referer: request.headers.get('referer') || '',
       // Add Vercel-specific headers for debugging
