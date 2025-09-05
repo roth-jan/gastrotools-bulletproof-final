@@ -329,8 +329,8 @@ export default function SpeisekartenDesignerPage() {
                       )}
                     </div>
 
-                    {/* Actions */}
-                    {selectedCard.categories.length > 0 && (
+                    {/* Actions - FIXED: Always show buttons when card is selected */}
+                    {selectedCard && (
                       <div className="flex gap-3 pt-4 border-t">
                         <Button 
                           variant="outline" 
