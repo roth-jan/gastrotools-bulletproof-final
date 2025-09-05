@@ -16,7 +16,7 @@ export interface LeadSubmittedEvent extends TrackingEvent {
     interesse: string[]
     aha_moment: string // menu_created, cost_entries_3+, recipe_saved, etc.
     source: 'freeware'
-    export_type: 'pdf' | 'csv'
+    export_type: 'pdf' | 'csv' | 'preview'
   }
 }
 
@@ -104,7 +104,7 @@ export class LeadTracker {
     })
   }
 
-  async trackExportClick(tool: string, format: 'pdf' | 'csv', dataSize: number): Promise<boolean> {
+  async trackExportClick(tool: string, format: 'pdf' | 'csv' | 'preview', dataSize: number): Promise<boolean> {
     return this.track({
       event: 'export_clicked',
       timestamp: '',

@@ -159,7 +159,7 @@ export default function EARLanding() {
                 <CardContent>
                   <p className="text-sm text-gray-600 mb-3">{feature.description}</p>
                   <div className="bg-blue-50 p-2 rounded text-xs text-blue-800">
-                    💡 {feature.benefit}
+                    💡 Professional Lösung
                   </div>
                 </CardContent>
               </Card>
@@ -228,7 +228,7 @@ export default function EARLanding() {
                 className="max-w-64"
               />
               <Button 
-                onClick={handleStarterpaketInterest}
+                onClick={() => handleStarterpaketInterest('Beratung')}
                 className="bg-red-600 hover:bg-red-700"
               >
                 <Calendar className="w-4 h-4 mr-2" />

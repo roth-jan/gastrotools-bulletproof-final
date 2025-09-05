@@ -13,7 +13,7 @@ interface LeadGateModalProps {
   isOpen: boolean
   onClose: () => void
   onSubmit: (leadData: LeadFormData) => void
-  exportType: 'pdf' | 'csv'
+  exportType: 'pdf' | 'csv' | 'preview'
   toolName: string
   fileName: string
 }
