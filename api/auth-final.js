@@ -81,7 +81,7 @@ module.exports = async (req, res) => {
             
             await resend.emails.send({
               from: 'GastroTools <welcome@resend.dev>',
-              to: email,
+              to: 'jhroth@ntconsult.de', // Resend free limitation
               subject: 'Welcome to GastroTools!',
               html: `
                 <h1>Welcome ${name}!</h1>
