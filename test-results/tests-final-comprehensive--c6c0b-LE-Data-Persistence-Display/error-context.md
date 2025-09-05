@@ -1,0 +1,93 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e1]:
+  - generic [ref=e2]:
+    - navigation [ref=e3]:
+      - generic [ref=e5]:
+        - link "GastroTools" [ref=e7] [cursor=pointer]:
+          - /url: /dashboard
+        - generic [ref=e8]:
+          - link "Dashboard" [ref=e9] [cursor=pointer]:
+            - /url: /dashboard
+          - link "Nährwertrechner" [ref=e10] [cursor=pointer]:
+            - /url: /naehrwertrechner
+          - link "Kostenkontrolle" [ref=e11] [cursor=pointer]:
+            - /url: /kostenkontrolle
+          - link "Lagerverwaltung" [ref=e12] [cursor=pointer]:
+            - /url: /lagerverwaltung
+          - link "Menüplaner" [ref=e13] [cursor=pointer]:
+            - /url: /menueplaner
+          - link "Speisekarten-Designer" [ref=e14] [cursor=pointer]:
+            - /url: /speisekarten-designer
+        - generic [ref=e15]:
+          - button "EN" [ref=e16] [cursor=pointer]:
+            - img [ref=e17] [cursor=pointer]
+            - generic [ref=e20] [cursor=pointer]: EN
+          - generic [ref=e21]:
+            - img [ref=e22]
+            - generic [ref=e25]: Demo User
+          - button "Abmelden" [ref=e26] [cursor=pointer]:
+            - img [ref=e27] [cursor=pointer]
+            - text: Abmelden
+    - main [ref=e30]:
+      - generic [ref=e31]:
+        - generic [ref=e32]:
+          - heading "Cost Control" [level=1] [ref=e33]
+          - paragraph [ref=e34]: Keep track of your food costs and analyze spending trends
+        - generic [ref=e35]:
+          - generic [ref=e36]:
+            - generic [ref=e37]:
+              - heading "Add Cost Entry" [level=3] [ref=e38]:
+                - img [ref=e39]
+                - text: Add Cost Entry
+              - paragraph [ref=e40]: Record a new expense entry
+            - generic [ref=e41]:
+              - generic [ref=e42]:
+                - generic [ref=e43]: Product Name
+                - textbox "e.g., Tomatoes, Beef, Olive Oil" [ref=e44]: Playwright Persistence Test
+              - generic [ref=e45]:
+                - generic [ref=e46]:
+                  - generic [ref=e47]: Category
+                  - combobox [ref=e48] [cursor=pointer]:
+                    - generic: Select category
+                    - img [ref=e49] [cursor=pointer]
+                  - paragraph [ref=e51]: Please select a category
+                - generic [ref=e52]:
+                  - generic [ref=e53]: Supplier
+                  - textbox "Supplier name" [ref=e54]
+              - generic [ref=e55]:
+                - generic [ref=e56]:
+                  - generic [ref=e57]: Amount
+                  - spinbutton [ref=e58]: "99.99"
+                - generic [ref=e59]:
+                  - generic [ref=e60]: Unit
+                  - combobox [ref=e61] [cursor=pointer]:
+                    - generic: kg
+                    - img [ref=e62] [cursor=pointer]
+                - generic [ref=e64]:
+                  - generic [ref=e65]: Unit Price (€)
+                  - spinbutton [ref=e66]: "0"
+              - generic [ref=e67]:
+                - generic [ref=e68]: Date
+                - textbox [ref=e69]: 2025-09-05
+              - button "Add Entry" [active] [ref=e70] [cursor=pointer]:
+                - img [ref=e71] [cursor=pointer]
+                - text: Add Entry
+          - generic [ref=e72]:
+            - generic [ref=e73]:
+              - heading "Cost Overview" [level=3] [ref=e74]:
+                - img [ref=e75]
+                - text: Cost Overview
+              - paragraph [ref=e76]: Your spending summary
+            - generic [ref=e78]:
+              - generic [ref=e79]:
+                - generic [ref=e80]:
+                  - img [ref=e81]
+                  - generic [ref=e83]: Total Costs
+                - generic [ref=e84]: €0.00
+              - generic [ref=e85]:
+                - heading "Recent Entries" [level=3] [ref=e86]
+                - paragraph [ref=e87]: No entries yet. Add your first cost entry above.
+  - alert [ref=e88]
+```

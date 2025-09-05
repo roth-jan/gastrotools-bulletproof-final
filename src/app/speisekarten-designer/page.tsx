@@ -336,7 +336,54 @@ export default function SpeisekartenDesignerPage() {
                           variant="outline" 
                           className="flex-1"
                           onClick={() => {
-                            alert('Preview functionality - Menu card would open in new window');
+                            // FIXED: Real preview functionality
+                            if (!selectedCard) return;
+                            
+                            const previewWindow = window.open('', '_blank', 'width=800,height=1000,scrollbars=yes');
+                            if (previewWindow) {
+                              previewWindow.document.write(`
+                                <!DOCTYPE html>
+                                <html>
+                                <head>
+                                  <title>Preview: ${selectedCard.name}</title>
+                                  <style>
+                                    body { font-family: Georgia, serif; margin: 40px; line-height: 1.6; }
+                                    h1 { text-align: center; color: #2c1810; border-bottom: 3px solid #8b5a3c; padding-bottom: 20px; }
+                                    h2 { color: #8b5a3c; border-bottom: 1px solid #d4af37; padding-bottom: 8px; }
+                                    .item { display: flex; justify-content: space-between; margin-bottom: 16px; padding: 12px 0; border-bottom: 1px dotted #ccc; }
+                                    .price { font-weight: bold; color: #8b5a3c; }
+                                    .footer { text-align: center; margin-top: 40px; padding-top: 20px; border-top: 2px solid #8b5a3c; color: #666; font-size: 12px; }
+                                  </style>
+                                </head>
+                                <body>
+                                  <h1>${selectedCard.name}</h1>
+                                  <p style="text-align: center; font-style: italic; margin-bottom: 40px;">Speisekarte</p>
+                                  
+                                  ${selectedCard.categories.map(cat => `
+                                    <h2>${cat.name}</h2>
+                                    ${cat.items.map(item => `
+                                      <div class="item">
+                                        <div>
+                                          <strong>${item.name}</strong><br>
+                                          <em style="color: #666;">${item.description}</em>
+                                        </div>
+                                        <div class="price">€${item.price.toFixed(2)}</div>
+                                      </div>
+                                    `).join('')}
+                                  `).join('')}
+                                  
+                                  <div class="footer">
+                                    <p>Alle Preise verstehen sich inkl. MwSt.</p>
+                                    <p>Erstellt mit GastroTools • ${new Date().toLocaleDateString('de-DE')}</p>
+                                  </div>
+                                </body>
+                                </html>
+                              `);
+                              previewWindow.document.close();
+                              console.log(`✅ Preview opened: ${selectedCard.name}`);
+                            } else {
+                              alert('Preview blocked by popup blocker. Please allow popups for this site.');
+                            }
                           }}
                         >
                           <Eye className="w-4 h-4 mr-2" />

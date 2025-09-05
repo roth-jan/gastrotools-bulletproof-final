@@ -1,0 +1,62 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - navigation [ref=e3]:
+      - generic [ref=e5]:
+        - link "GastroTools" [ref=e7] [cursor=pointer]:
+          - /url: /dashboard
+        - button [ref=e9] [cursor=pointer]:
+          - img [ref=e10] [cursor=pointer]
+    - main [ref=e11]:
+      - generic [ref=e12]:
+        - generic [ref=e13]:
+          - heading "Nährwertrechner" [level=1] [ref=e14]
+          - paragraph [ref=e15]: EU-konforme Nährwertberechnung für Ihre Rezepte
+        - generic [ref=e16]:
+          - generic [ref=e17]:
+            - generic [ref=e18]:
+              - heading "Recipe Data" [level=3] [ref=e19]:
+                - img [ref=e20]
+                - text: Recipe Data
+              - paragraph [ref=e23]: Enter your recipe information
+            - generic [ref=e24]:
+              - generic [ref=e25]:
+                - generic [ref=e26]: Rezeptname
+                - textbox "Recipe Name" [ref=e27]
+              - generic [ref=e28]:
+                - generic [ref=e29]: Portionen
+                - spinbutton [ref=e30]: "1"
+              - generic [ref=e31]:
+                - generic [ref=e32]:
+                  - heading "Zutat hinzufügen" [level=3] [ref=e33]
+                  - button "🇺🇸 USDA (20,000+)" [ref=e34] [cursor=pointer]
+                - generic [ref=e35]:
+                  - generic [ref=e36]:
+                    - generic [ref=e37]: Search Ingredient
+                    - generic [ref=e38]:
+                      - textbox "Add ingredient (e.g., Hackfleisch)" [ref=e39]
+                      - img [ref=e40]
+                  - generic [ref=e43]:
+                    - generic [ref=e44]:
+                      - generic [ref=e45]: Menge
+                      - spinbutton [ref=e46]: "100"
+                    - generic [ref=e47]:
+                      - generic [ref=e48]: Einheit
+                      - combobox [ref=e49]:
+                        - option "g" [selected]
+                        - option "ml"
+                        - option "Stück"
+                  - button "Zutat hinzufügen" [ref=e50] [cursor=pointer]:
+                    - img [ref=e51] [cursor=pointer]
+                    - text: Zutat hinzufügen
+          - generic [ref=e52]:
+            - generic [ref=e53]:
+              - heading "Nutrition Facts per 100g" [level=3] [ref=e54]:
+                - img [ref=e55]
+                - text: Nutrition Facts per 100g
+              - paragraph [ref=e57]: EU-compliant nutrition table
+            - paragraph [ref=e59]: Add ingredients to calculate nutrition values
+  - alert [ref=e60]
+```

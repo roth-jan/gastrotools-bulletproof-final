@@ -73,6 +73,17 @@ export default function LagerverwaltungPage() {
       return
     }
 
+    // FIXED: Validate negative quantities
+    if (newItem.quantity < 0) {
+      alert('Quantity cannot be negative. Please enter a positive value.')
+      return
+    }
+
+    if (newItem.minStock < 0) {
+      alert('Minimum stock cannot be negative. Please enter a positive value.')
+      return
+    }
+
     const item: InventoryItem = {
       id: Date.now().toString(),
       ...newItem,

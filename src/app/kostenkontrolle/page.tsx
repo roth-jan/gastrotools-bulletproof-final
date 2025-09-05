@@ -190,10 +190,18 @@ export default function KostenkontrollePage() {
                     <Input
                       type="number"
                       value={newEntry.amount}
-                      onChange={(e) => setNewEntry({...newEntry, amount: parseFloat(e.target.value) || 0})}
+                      onChange={(e) => {
+                        setNewEntry({...newEntry, amount: parseFloat(e.target.value) || 0})
+                        if (errors.amount) setErrors(prev => ({...prev, amount: ''}))
+                      }}
                       placeholder="1"
                       step="0.1"
+                      min="0.01"
+                      className={errors.amount ? 'border-red-500' : ''}
                     />
+                    {errors.amount && (
+                      <p className="text-sm text-red-500 mt-1">{errors.amount}</p>
+                    )}
                   </div>
                   <div>
                     <Label>Unit</Label>
@@ -215,10 +223,18 @@ export default function KostenkontrollePage() {
                     <Input
                       type="number"
                       value={newEntry.unitPrice}
-                      onChange={(e) => setNewEntry({...newEntry, unitPrice: parseFloat(e.target.value) || 0})}
+                      onChange={(e) => {
+                        setNewEntry({...newEntry, unitPrice: parseFloat(e.target.value) || 0})
+                        if (errors.unitPrice) setErrors(prev => ({...prev, unitPrice: ''}))
+                      }}
                       placeholder="0.00"
                       step="0.01"
+                      min="0.01"
+                      className={errors.unitPrice ? 'border-red-500' : ''}
                     />
+                    {errors.unitPrice && (
+                      <p className="text-sm text-red-500 mt-1">{errors.unitPrice}</p>
+                    )}
                   </div>
                 </div>
 

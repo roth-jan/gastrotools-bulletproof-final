@@ -1,0 +1,80 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e1]:
+  - generic [ref=e2]:
+    - navigation [ref=e3]:
+      - generic [ref=e5]:
+        - link "GastroTools" [ref=e7] [cursor=pointer]:
+          - /url: /dashboard
+        - generic [ref=e8]:
+          - link "Dashboard" [ref=e9] [cursor=pointer]:
+            - /url: /dashboard
+          - link "Nährwertrechner" [ref=e10] [cursor=pointer]:
+            - /url: /naehrwertrechner
+          - link "Kostenkontrolle" [ref=e11] [cursor=pointer]:
+            - /url: /kostenkontrolle
+          - link "Lagerverwaltung" [ref=e12] [cursor=pointer]:
+            - /url: /lagerverwaltung
+          - link "Menüplaner" [ref=e13] [cursor=pointer]:
+            - /url: /menueplaner
+          - link "Speisekarten-Designer" [ref=e14] [cursor=pointer]:
+            - /url: /speisekarten-designer
+        - generic [ref=e15]:
+          - button "EN" [ref=e16] [cursor=pointer]:
+            - img [ref=e17] [cursor=pointer]
+            - generic [ref=e20] [cursor=pointer]: EN
+          - generic [ref=e21]:
+            - img [ref=e22]
+            - generic [ref=e25]: Demo User
+          - button "Abmelden" [ref=e26] [cursor=pointer]:
+            - img [ref=e27] [cursor=pointer]
+            - text: Abmelden
+    - main [ref=e30]:
+      - generic [ref=e31]:
+        - generic [ref=e32]:
+          - heading "Menu Card Designer" [level=1] [ref=e33]
+          - paragraph [ref=e34]: Create professional menu cards with beautiful templates
+        - generic [ref=e35]:
+          - generic [ref=e36]:
+            - generic [ref=e37]:
+              - heading "Menu Cards (1)" [level=3] [ref=e38]:
+                - img [ref=e39]
+                - text: Menu Cards (1)
+              - paragraph [ref=e42]: Your menu card collection
+            - generic [ref=e43]:
+              - generic [ref=e44]:
+                - generic [ref=e45]:
+                  - generic [ref=e46]: Card Name
+                  - textbox "e.g., Summer Menu 2024" [ref=e47]
+                - generic [ref=e48]:
+                  - generic [ref=e49]: Template
+                  - combobox [ref=e50]:
+                    - option "Modern Minimal" [selected]
+                    - option "Classic Elegant"
+                    - option "Rustic Charm"
+                    - option "Fast Casual"
+                - button "Create New Card" [active] [ref=e51] [cursor=pointer]:
+                  - img [ref=e52] [cursor=pointer]
+                  - text: Create New Card
+              - generic [ref=e55] [cursor=pointer]:
+                - generic [ref=e56] [cursor=pointer]:
+                  - generic [ref=e57] [cursor=pointer]: Playwright PDF Test
+                  - generic [ref=e58] [cursor=pointer]: 0 categories
+                - generic [ref=e59] [cursor=pointer]: Draft
+          - generic [ref=e60]:
+            - generic [ref=e61]:
+              - 'heading "Editing: Playwright PDF Test" [level=3] [ref=e62]':
+                - img [ref=e63]
+                - text: "Editing: Playwright PDF Test"
+              - paragraph [ref=e69]: Add categories and menu items
+            - generic [ref=e71]:
+              - generic [ref=e72]:
+                - heading "Add Category" [level=3] [ref=e73]
+                - generic [ref=e74]:
+                  - textbox "e.g., Appetizers, Main Courses" [ref=e75]
+                  - button [ref=e76] [cursor=pointer]:
+                    - img [ref=e77] [cursor=pointer]
+              - paragraph [ref=e79]: No categories yet. Add your first category above.
+  - alert [ref=e80]
+```

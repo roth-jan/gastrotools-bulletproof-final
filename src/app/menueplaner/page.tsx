@@ -61,6 +61,18 @@ export default function MenuplanerPage() {
       return
     }
 
+    // FIXED: Validate servings > 0
+    if (newItem.servings <= 0) {
+      alert('Servings must be greater than 0. Please enter a valid portion size.')
+      return
+    }
+
+    // FIXED: Validate prep time > 0  
+    if (newItem.prepTime <= 0) {
+      alert('Preparation time must be greater than 0 minutes.')
+      return
+    }
+
     const menuItem: MenuItem = {
       id: Date.now().toString(),
       ...newItem
