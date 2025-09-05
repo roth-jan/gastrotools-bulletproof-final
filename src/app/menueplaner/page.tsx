@@ -89,6 +89,46 @@ export default function MenuplanerPage() {
     }))
   }
 
+  // ADDED: Drag & Drop functionality
+  const moveMenuItem = (itemId: string, fromDay: string, toDay: string) => {
+    setWeekMenu(prev => {
+      const item = prev[fromDay].find(item => item.id === itemId)
+      if (!item) return prev
+
+      return {
+        ...prev,
+        [fromDay]: prev[fromDay].filter(item => item.id !== itemId),
+        [toDay]: [...prev[toDay], { ...item, day: toDay }]
+      }
+    })
+  }
+
+  const handleDragStart = (e: React.DragEvent, itemId: string, fromDay: string) => {
+    e.dataTransfer.setData('text/plain', JSON.stringify({ itemId, fromDay }))
+    e.dataTransfer.effectAllowed = 'move'
+  }
+
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault()
+    e.dataTransfer.dropEffect = 'move'
+  }
+
+  const handleDrop = (e: React.DragEvent, toDay: string) => {
+    e.preventDefault()
+    
+    try {
+      const data = JSON.parse(e.dataTransfer.getData('text/plain'))
+      const { itemId, fromDay } = data
+      
+      if (fromDay !== toDay) {
+        moveMenuItem(itemId, fromDay, toDay)
+        console.log(`✅ Moved item ${itemId} from ${fromDay} to ${toDay}`)
+      }
+    } catch (error) {
+      console.error('Drop error:', error)
+    }
+  }
+
   const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
 
   const getTotalItems = () => {
@@ -210,19 +250,34 @@ export default function MenuplanerPage() {
               <CardContent>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-7 gap-4">
                   {days.map(day => (
-                    <div key={day} className="space-y-2">
+                    <div 
+                      key={day} 
+                      className="space-y-2"
+                      onDragOver={handleDragOver}
+                      onDrop={(e) => handleDrop(e, day)}
+                    >
                       <h3 className="font-semibold text-center p-2 bg-orange-100 rounded">
                         {day}
                       </h3>
-                      <div className="space-y-2 min-h-40">
+                      <div className="space-y-2 min-h-40 border-2 border-dashed border-gray-200 rounded-lg p-2 transition-colors hover:border-orange-300 hover:bg-orange-50/50">
                         {weekMenu[day].length === 0 ? (
-                          <div className="text-gray-400 text-sm text-center py-4">
-                            No items planned
+                          <div className="text-gray-400 text-sm text-center py-8 select-none">
+                            <ChefHat className="w-6 h-6 mx-auto mb-2 opacity-50" />
+                            Drop items here or add above
                           </div>
                         ) : (
                           weekMenu[day].map(item => (
-                            <div key={item.id} className="p-2 bg-white rounded border text-sm">
-                              <div className="font-medium">{item.name}</div>
+                            <div 
+                              key={item.id} 
+                              draggable
+                              onDragStart={(e) => handleDragStart(e, item.id, day)}
+                              className="p-2 bg-white rounded border text-sm cursor-move hover:shadow-md transition-shadow select-none hover:border-orange-300"
+                              title="Drag to move to another day"
+                            >
+                              <div className="font-medium flex items-center justify-between">
+                                <span>{item.name}</span>
+                                <span className="text-gray-400 text-xs">⋮⋮</span>
+                              </div>
                               <div className="text-gray-600 text-xs">
                                 {item.category} • <Clock className="w-3 h-3 inline" /> {item.prepTime}min
                               </div>
