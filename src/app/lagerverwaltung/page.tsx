@@ -65,6 +65,8 @@ export default function LagerverwaltungPage() {
     }
   }
 
+  const [editingItem, setEditingItem] = useState<string | null>(null)
+
   const addItem = () => {
     if (!newItem.name || !newItem.category) {
       alert('Please fill in name and category')
@@ -80,6 +82,69 @@ export default function LagerverwaltungPage() {
     setItems([...items, item])
     
     // Reset form
+    setNewItem({
+      name: '',
+      category: '',
+      quantity: 0,
+      unit: 'kg',
+      minStock: 1,
+      maxStock: 100,
+      location: '',
+      expiryDate: ''
+    })
+  }
+
+  // ADDED: Edit & Delete functionality
+  const deleteItem = (itemId: string) => {
+    if (confirm('Are you sure you want to delete this item?')) {
+      setItems(prev => prev.filter(item => item.id !== itemId))
+      console.log(`✅ Deleted inventory item: ${itemId}`)
+    }
+  }
+
+  const startEdit = (item: InventoryItem) => {
+    setEditingItem(item.id)
+    setNewItem({
+      name: item.name,
+      category: item.category,
+      quantity: item.quantity,
+      unit: item.unit,
+      minStock: item.minStock,
+      maxStock: item.maxStock || 100,
+      location: item.location,
+      expiryDate: item.expiryDate || ''
+    })
+  }
+
+  const saveEdit = () => {
+    if (!editingItem) return
+
+    setItems(prev => prev.map(item => 
+      item.id === editingItem ? {
+        ...item,
+        ...newItem,
+        status: getStockStatus(newItem.quantity, newItem.minStock)
+      } : item
+    ))
+
+    // Reset editing state
+    setEditingItem(null)
+    setNewItem({
+      name: '',
+      category: '',
+      quantity: 0,
+      unit: 'kg',
+      minStock: 1,
+      maxStock: 100,
+      location: '',
+      expiryDate: ''
+    })
+
+    console.log(`✅ Updated inventory item: ${editingItem}`)
+  }
+
+  const cancelEdit = () => {
+    setEditingItem(null)
     setNewItem({
       name: '',
       category: '',
@@ -223,10 +288,22 @@ export default function LagerverwaltungPage() {
                   />
                 </div>
 
-                <Button onClick={addItem} className="w-full">
-                  <Plus className="w-4 h-4 mr-2" />
-                  Add to Inventory
-                </Button>
+                {/* ADDED: Dynamic Add/Edit button */}
+                {editingItem ? (
+                  <div className="flex gap-2">
+                    <Button onClick={saveEdit} className="flex-1">
+                      ✅ Save Changes
+                    </Button>
+                    <Button onClick={cancelEdit} variant="outline" className="flex-1">
+                      Cancel
+                    </Button>
+                  </div>
+                ) : (
+                  <Button onClick={addItem} className="w-full">
+                    <Plus className="w-4 h-4 mr-2" />
+                    Add to Inventory
+                  </Button>
+                )}
               </CardContent>
             </Card>
 
@@ -301,6 +378,25 @@ export default function LagerverwaltungPage() {
                                item.status === 'low_stock' ? '⚠️ Low' : 
                                '🚫 Out'}
                             </Badge>
+                            {/* ADDED: Edit & Delete buttons */}
+                            <div className="flex gap-2 ml-3">
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                onClick={() => startEdit(item)}
+                                className="text-xs"
+                              >
+                                Edit
+                              </Button>
+                              <Button
+                                variant="outline"
+                                size="sm"
+                                onClick={() => deleteItem(item.id)}
+                                className="text-xs text-red-600 hover:text-red-700"
+                              >
+                                Delete
+                              </Button>
+                            </div>
                           </div>
                         </div>
                       ))}

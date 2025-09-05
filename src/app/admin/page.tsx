@@ -37,6 +37,7 @@ export default function AdminPage() {
   })
   const [leads, setLeads] = useState<Lead[]>([])
   const [loading, setLoading] = useState(true)
+  const [selectedLead, setSelectedLead] = useState<Lead | null>(null) // ADDED: Lead detail modal
 
   useEffect(() => {
     const token = localStorage.getItem('token')
@@ -209,7 +210,11 @@ export default function AdminPage() {
                         <Badge className={getStatusColor(lead.status)}>
                           {lead.status}
                         </Badge>
-                        <Button variant="outline" size="sm">
+                        <Button 
+                          variant="outline" 
+                          size="sm"
+                          onClick={() => setSelectedLead(lead)}
+                        >
                           <Eye className="w-4 h-4" />
                         </Button>
                       </div>
@@ -221,6 +226,85 @@ export default function AdminPage() {
           </Card>
         </div>
       </main>
+
+      {/* ADDED: Lead Details Modal */}
+      {selectedLead && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+          <div className="bg-white rounded-lg shadow-xl max-w-md w-full max-h-96 overflow-y-auto">
+            <div className="p-6">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-xl font-semibold">Lead Details</h3>
+                <button
+                  onClick={() => setSelectedLead(null)}
+                  className="text-gray-500 hover:text-gray-700 text-xl"
+                >
+                  ×
+                </button>
+              </div>
+              
+              <div className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-600">Name</label>
+                  <p className="font-medium">{selectedLead.name}</p>
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-gray-600">Email</label>
+                  <p className="font-medium">{selectedLead.email}</p>
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-gray-600">Company</label>
+                  <p className="font-medium">{selectedLead.company || 'Not specified'}</p>
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-gray-600">Tool Interest</label>
+                  <p className="font-medium">{selectedLead.toolInterest}</p>
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-gray-600">Status</label>
+                  <Badge className={getStatusColor(selectedLead.status)}>
+                    {selectedLead.status}
+                  </Badge>
+                </div>
+                
+                <div>
+                  <label className="block text-sm font-medium text-gray-600">Created</label>
+                  <p className="font-medium">{selectedLead.createdAt}</p>
+                </div>
+              </div>
+              
+              <div className="flex gap-2 mt-6">
+                <Button
+                  className="flex-1"
+                  onClick={() => {
+                    // Mark as contacted
+                    setLeads(prev => prev.map(lead =>
+                      lead.id === selectedLead.id 
+                        ? { ...lead, status: 'contacted' }
+                        : lead
+                    ))
+                    setSelectedLead(null)
+                    console.log(`✅ Marked lead ${selectedLead.name} as contacted`)
+                  }}
+                >
+                  <Mail className="w-4 h-4 mr-2" />
+                  Mark Contacted
+                </Button>
+                
+                <Button
+                  variant="outline"
+                  onClick={() => setSelectedLead(null)}
+                >
+                  Close
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
