@@ -71,14 +71,14 @@ export default function MenuplanerPage() {
       [newItem.day]: [...prev[newItem.day], menuItem]
     }))
 
-    // Reset form
+    // Reset form (FIXED: Don't reset servings to hardcoded 4)
     setNewItem({
       name: '',
       description: '',
       prepTime: 30,
-      servings: 4,
-      day: 'Monday',
-      category: 'lunch'
+      servings: newItem.servings, // FIXED: Keep current servings setting
+      day: newItem.day,          // FIXED: Keep current day setting  
+      category: newItem.category // FIXED: Keep current category
     })
   }
 

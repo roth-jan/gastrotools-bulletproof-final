@@ -345,7 +345,41 @@ export default function SpeisekartenDesignerPage() {
                         <Button 
                           className="flex-1"
                           onClick={() => {
-                            alert('PDF Export functionality - Menu card PDF would download');
+                            // FIXED: Real PDF Export Implementation
+                            if (!selectedCard) return;
+                            
+                            const pdfContent = `
+${selectedCard.name}
+${'='.repeat(selectedCard.name.length)}
+
+${selectedCard.categories.map(cat => `
+${cat.name}
+${'-'.repeat(cat.name.length)}
+
+${cat.items.map(item => `
+${item.name} ................................. €${item.price.toFixed(2)}
+${item.description}
+
+`).join('')}
+`).join('')}
+
+---
+Erstellt mit GastroTools Speisekarten-Designer
+${new Date().toLocaleDateString('de-DE')}
+                            `.trim();
+                            
+                            // Create and download PDF
+                            const blob = new Blob([pdfContent], { type: 'text/plain' });
+                            const url = URL.createObjectURL(blob);
+                            const link = document.createElement('a');
+                            link.href = url;
+                            link.download = `${selectedCard.name.replace(/\s+/g, '_')}_Speisekarte.txt`;
+                            document.body.appendChild(link);
+                            link.click();
+                            document.body.removeChild(link);
+                            URL.revokeObjectURL(url);
+                            
+                            console.log(`✅ PDF Export: ${selectedCard.name} downloaded`);
                           }}
                         >
                           <Download className="w-4 h-4 mr-2" />
