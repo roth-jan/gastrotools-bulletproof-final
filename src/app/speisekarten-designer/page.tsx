@@ -85,7 +85,16 @@ export default function SpeisekartenDesignerPage() {
     const userData = localStorage.getItem('user')
     if (userData) {
       try {
-        setCurrentUser(JSON.parse(userData))
+        const user = JSON.parse(userData)
+        
+        // TESTING: Enhance demo user with mock data for Smart Upselling
+        if (user.email === 'demo@gastrotools.de') {
+          user.company = 'Demo Restaurant GmbH'
+          user.role = 'Geschäftsführung'
+          user.orgType = 'Restaurant'
+        }
+        
+        setCurrentUser(user)
       } catch (e) {
         console.log('User data parsing error:', e)
       }
@@ -462,14 +471,14 @@ ${new Date().toLocaleDateString('de-DE')} • Ihre professionelle Gastronomie-So
                               // SUCCESS: PDF downloaded
                               buttonElement.textContent = '✅ PDF exportiert!';
                               
-                              // SMART: Trigger upselling after successful export
+                              // SMART: Trigger upselling after successful export  
                               const user = JSON.parse(localStorage.getItem('user') || '{}');
-                              if (user.email && user.email !== 'demo@gastrotools.de') {
-                                // Real user - show smart upselling after 2 seconds
-                                setTimeout(() => {
-                                  setShowSmartUpsell(true);
-                                }, 2000);
-                              }
+                              
+                              // Show for all users (including demo for testing)
+                              setTimeout(() => {
+                                setShowSmartUpsell(true);
+                                console.log('🎯 Smart Upsell triggered for:', user.email || 'demo');
+                              }, 2000);
                               
                               console.log(`✅ Smart PDF exported: ${selectedCard.name}`);
                               

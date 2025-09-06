@@ -36,8 +36,11 @@ export function SmartUpsellV2({ user, behavior, context, onDismiss, onInterest }
                     user.orgType?.toLowerCase().includes('kita') ||
                     user.orgType?.toLowerCase().includes('restaurant')
     
+    // TESTING: Show for demo user OR real users with role/org match
+    const isDemoUser = user.email === 'demo@gastrotools.de'
+    
     return (triggers.export_succeeded || triggers.menu_items_created || triggers.value_proven) &&
-           (roleMatch || orgMatch)
+           (roleMatch || orgMatch || isDemoUser)
   }
 
   // Auto-dismiss on mobile
