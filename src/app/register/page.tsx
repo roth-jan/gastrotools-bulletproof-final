@@ -20,8 +20,7 @@ export default function RegisterPage() {
     password: '',
     company: '',
     role: '',
-    orgType: '', // ADDED: For smart segmentation
-    company: ''
+    orgType: '' // ADDED: For smart segmentation
   })
   const [error, setError] = useState('')
   const [success, setSuccess] = useState('')
