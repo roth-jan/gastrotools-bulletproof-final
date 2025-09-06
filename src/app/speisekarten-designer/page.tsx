@@ -2,8 +2,6 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { SmartUpsellV2 } from "@/components/SmartUpsell-v2"  
-import { generateProfessionalMenuHTML } from "@/lib/pdf-template"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -13,6 +11,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Badge } from "@/components/ui/badge"
 import { Navigation } from "@/components/navigation"
 import { useLanguage } from "@/contexts/LanguageContext"
+import { SmartUpsellV2 } from "@/components/SmartUpsell-v2"
 import { FileText, Plus, Eye, Download, Palette } from "lucide-react"
 
 interface MenuCategory {
@@ -43,6 +42,9 @@ export default function SpeisekartenDesignerPage() {
   const { t } = useLanguage()
   const [menuCards, setMenuCards] = useState<MenuCard[]>([])
   const [selectedCard, setSelectedCard] = useState<MenuCard | null>(null)
+  const [currentUser, setCurrentUser] = useState<any>(null)
+  const [showSmartUpsell, setShowSmartUpsell] = useState(false)
+  
   const [newCard, setNewCard] = useState({
     name: '',
     template: 'modern-minimal'
@@ -60,33 +62,20 @@ export default function SpeisekartenDesignerPage() {
     allergens: [] as string[]
   })
 
-  // SMART: User Intelligence System (no gates needed)
-  const [currentUser, setCurrentUser] = useState<any>(null)
-  const [showSmartUpsell, setShowSmartUpsell] = useState(false)
-
   useEffect(() => {
     const token = localStorage.getItem('token')
     if (!token) {
       router.push('/login?redirect=/speisekarten-designer')
       return
     }
-  }, [router])
-
-  const templates = [
-    { id: 'modern-minimal', name: 'Modern Minimal', description: 'Clean and contemporary design' },
-    { id: 'classic-elegant', name: 'Classic Elegant', description: 'Traditional fine dining style' },
-    { id: 'rustic-charm', name: 'Rustic Charm', description: 'Warm and welcoming bistro style' },
-    { id: 'fast-casual', name: 'Fast Casual', description: 'Quick service restaurant style' }
-  ]
-
-  // SMART: User context for intelligent business model
-  useEffect(() => {
+    
+    // Load user data for smart upselling
     const userData = localStorage.getItem('user')
     if (userData) {
       try {
         const user = JSON.parse(userData)
         
-        // TESTING: Enhance demo user with mock data for Smart Upselling
+        // Enhance demo user with mock data for testing
         if (user.email === 'demo@gastrotools.de') {
           user.company = 'Demo Restaurant GmbH'
           user.role = 'Geschäftsführung'
@@ -98,7 +87,14 @@ export default function SpeisekartenDesignerPage() {
         console.log('User data parsing error:', e)
       }
     }
-  }, [])
+  }, [router])
+
+  const templates = [
+    { id: 'modern-minimal', name: 'Modern Minimal', description: 'Clean and contemporary design' },
+    { id: 'classic-elegant', name: 'Classic Elegant', description: 'Traditional fine dining style' },
+    { id: 'rustic-charm', name: 'Rustic Charm', description: 'Warm and welcoming bistro style' },
+    { id: 'fast-casual', name: 'Fast Casual', description: 'Quick service restaurant style' }
+  ]
 
   const createNewCard = () => {
     if (!newCard.name) {
@@ -132,21 +128,23 @@ export default function SpeisekartenDesignerPage() {
       items: []
     }
 
-    const updatedCard = {
+    setSelectedCard({
       ...selectedCard,
       categories: [...selectedCard.categories, category]
-    }
+    })
 
-    setSelectedCard(updatedCard)
     setMenuCards(prev => prev.map(card => 
-      card.id === selectedCard.id ? updatedCard : card
+      card.id === selectedCard.id 
+        ? { ...card, categories: [...card.categories, category] }
+        : card
     ))
+
     setNewCategory({ name: '', items: [] })
   }
 
   const addMenuItem = (categoryId: string) => {
-    if (!selectedCard || !newMenuItem.name) {
-      alert('Please enter an item name')
+    if (!selectedCard || !newMenuItem.name || newMenuItem.price <= 0) {
+      alert('Please fill in item name and price')
       return
     }
 
@@ -155,20 +153,87 @@ export default function SpeisekartenDesignerPage() {
       ...newMenuItem
     }
 
-    const updatedCard = {
+    setSelectedCard({
       ...selectedCard,
-      categories: selectedCard.categories.map(cat => 
+      categories: selectedCard.categories.map(cat =>
         cat.id === categoryId 
           ? { ...cat, items: [...cat.items, item] }
           : cat
       )
-    }
+    })
 
-    setSelectedCard(updatedCard)
     setMenuCards(prev => prev.map(card => 
-      card.id === selectedCard.id ? updatedCard : card
+      card.id === selectedCard.id
+        ? {
+            ...card,
+            categories: card.categories.map(cat =>
+              cat.id === categoryId 
+                ? { ...cat, items: [...cat.items, item] }
+                : cat
+            )
+          }
+        : card
     ))
+
     setNewMenuItem({ name: '', description: '', price: 0, allergens: [] })
+  }
+
+  const handlePDFExport = async () => {
+    if (!selectedCard) return
+
+    try {
+      // Generate professional menu content
+      const menuContent = `${selectedCard.name}
+${'='.repeat(selectedCard.name.length)}
+
+PROFESSIONELLE SPEISEKARTE
+${new Date().toLocaleDateString('de-DE')}
+
+${selectedCard.categories.map(cat => `
+${cat.name.toUpperCase()}
+${'-'.repeat(cat.name.length)}
+
+${cat.items.map(item => `${item.name} ................................. €${item.price.toFixed(2)}
+${item.description}
+
+`).join('')}`).join('')}
+
+────────────────────────────────────────────────────────
+Erstellt mit GastroTools Speisekarten-Designer
+Professional Restaurant Management Suite
+
+✅ Alle Preise verstehen sich inkl. MwSt.
+✅ Bei Allergien fragen Sie bitte unser Personal
+
+💡 FÜR PDF: Text kopieren → Word/Google Docs einfügen → Als PDF speichern
+
+${new Date().toLocaleDateString('de-DE')} • Ihre professionelle Gastronomie-Software
+      `
+
+      // Simple working download
+      const blob = new Blob([menuContent], { type: 'text/plain' })
+      const url = URL.createObjectURL(blob)
+      const link = document.createElement('a')
+      link.href = url
+      link.download = `${selectedCard.name.replace(/\s+/g, '_')}_Speisekarte.txt`
+      
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+      URL.revokeObjectURL(url)
+
+      // Trigger Smart Upselling after successful export
+      setTimeout(() => {
+        setShowSmartUpsell(true)
+        console.log('🎯 Smart Upsell triggered for:', currentUser?.email || 'unknown')
+      }, 2000)
+
+      console.log(`✅ Menu exported: ${selectedCard.name}`)
+
+    } catch (error) {
+      console.error('Export error:', error)
+      alert('Export failed. Please try again.')
+    }
   }
 
   return (
@@ -228,188 +293,124 @@ export default function SpeisekartenDesignerPage() {
                   </Button>
                 </div>
 
-                <div className="border-t pt-4 space-y-2">
-                  {menuCards.length === 0 ? (
-                    <p className="text-gray-500 text-center py-4 text-sm">
-                      No menu cards yet
-                    </p>
-                  ) : (
-                    menuCards.map(card => (
-                      <div 
+                {menuCards.length > 0 && (
+                  <div className="space-y-2">
+                    {menuCards.map((card) => (
+                      <button
                         key={card.id}
                         onClick={() => setSelectedCard(card)}
-                        className={`p-3 rounded border cursor-pointer transition-colors ${
+                        className={`w-full text-left p-3 rounded border transition-colors ${
                           selectedCard?.id === card.id 
-                            ? 'bg-pink-50 border-pink-300' 
-                            : 'bg-white hover:bg-gray-50'
+                            ? 'bg-purple-50 border-purple-200' 
+                            : 'hover:bg-gray-50'
                         }`}
                       >
-                        <div className="flex items-center justify-between">
-                          <div>
-                            <div className="font-medium">{card.name}</div>
-                            <div className="text-sm text-gray-600">
-                              {card.categories.length} categories
-                            </div>
-                          </div>
-                          <Badge variant={card.published ? 'default' : 'secondary'}>
-                            {card.published ? 'Published' : 'Draft'}
-                          </Badge>
+                        <div className="font-medium">{card.name}</div>
+                        <div className="text-sm text-gray-500">
+                          {card.categories.length} categories
                         </div>
-                      </div>
-                    ))
-                  )}
-                </div>
+                      </button>
+                    ))}
+                  </div>
+                )}
               </CardContent>
             </Card>
 
-            {/* Menu Editor */}
+            {/* Menu Card Editor */}
             <Card className="lg:col-span-2 glass">
               <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Palette className="w-5 h-5 text-pink-600" />
-                  {selectedCard ? `Editing: ${selectedCard.name}` : 'Menu Editor'}
+                <CardTitle>
+                  {selectedCard ? selectedCard.name : 'Select a menu card to edit'}
                 </CardTitle>
-                <CardDescription>
-                  {selectedCard ? 'Add categories and menu items' : 'Select a menu card to edit'}
-                </CardDescription>
               </CardHeader>
               <CardContent>
-                {!selectedCard ? (
-                  <div className="text-center py-12">
-                    <FileText className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-                    <p className="text-gray-500">
-                      Create or select a menu card to start editing
-                    </p>
-                  </div>
-                ) : (
+                {selectedCard ? (
                   <div className="space-y-6">
                     {/* Add Category */}
-                    <div className="border-b pb-4">
-                      <h3 className="font-semibold mb-3">Add Category</h3>
-                      <div className="flex gap-3">
+                    <div>
+                      <div className="flex gap-3 mb-4">
                         <Input
                           value={newCategory.name}
                           onChange={(e) => setNewCategory({...newCategory, name: e.target.value})}
-                          placeholder="e.g., Appetizers, Main Courses"
+                          placeholder="Category name (e.g., Appetizers)"
                           className="flex-1"
                         />
                         <Button onClick={addCategory}>
-                          <Plus className="w-4 h-4" />
+                          <Plus className="w-4 h-4 mr-2" />
+                          Add Category
                         </Button>
                       </div>
                     </div>
 
-                    {/* Categories and Items */}
+                    {/* Categories */}
                     <div className="space-y-6">
-                      {selectedCard.categories.length === 0 ? (
-                        <p className="text-gray-500 text-center py-8">
-                          No categories yet. Add your first category above.
-                        </p>
-                      ) : (
-                        selectedCard.categories.map(category => (
-                          <Card key={category.id} className="border-2">
-                            <CardHeader className="pb-3">
-                              <CardTitle className="text-lg">{category.name}</CardTitle>
-                            </CardHeader>
-                            <CardContent>
-                              {/* Add Menu Item */}
-                              <div className="grid grid-cols-1 md:grid-cols-4 gap-2 mb-4">
-                                <Input
-                                  value={newMenuItem.name}
-                                  onChange={(e) => setNewMenuItem({...newMenuItem, name: e.target.value})}
-                                  placeholder="Dish name"
-                                />
-                                <Input
-                                  value={newMenuItem.description}
-                                  onChange={(e) => setNewMenuItem({...newMenuItem, description: e.target.value})}
-                                  placeholder="Description"
-                                />
-                                <Input
-                                  type="number"
-                                  value={newMenuItem.price}
-                                  onChange={(e) => setNewMenuItem({...newMenuItem, price: parseFloat(e.target.value) || 0})}
-                                  placeholder="Price"
-                                  step="0.50"
-                                />
-                                <Button onClick={() => addMenuItem(category.id)} size="sm">
-                                  <Plus className="w-4 h-4" />
-                                </Button>
-                              </div>
+                      {selectedCard.categories.map((category) => (
+                        <Card key={category.id}>
+                          <CardHeader>
+                            <CardTitle className="text-lg">{category.name}</CardTitle>
+                          </CardHeader>
+                          <CardContent>
+                            {/* Add Menu Item */}
+                            <div className="grid grid-cols-2 gap-3 mb-4">
+                              <Input
+                                value={newMenuItem.name}
+                                onChange={(e) => setNewMenuItem({...newMenuItem, name: e.target.value})}
+                                placeholder="Item name"
+                              />
+                              <Input
+                                type="number"
+                                step="0.01"
+                                value={newMenuItem.price}
+                                onChange={(e) => setNewMenuItem({...newMenuItem, price: parseFloat(e.target.value) || 0})}
+                                placeholder="Price (€)"
+                              />
+                              <Textarea
+                                value={newMenuItem.description}
+                                onChange={(e) => setNewMenuItem({...newMenuItem, description: e.target.value})}
+                                placeholder="Description"
+                                className="col-span-2"
+                                rows={2}
+                              />
+                              <Button 
+                                onClick={() => addMenuItem(category.id)}
+                                className="col-span-2"
+                              >
+                                <Plus className="w-4 h-4 mr-2" />
+                                Add Item
+                              </Button>
+                            </div>
 
-                              {/* Menu Items */}
-                              <div className="space-y-2">
-                                {category.items.map(item => (
-                                  <div key={item.id} className="flex items-center justify-between p-2 bg-gray-50 rounded">
-                                    <div className="flex-1">
-                                      <div className="font-medium">{item.name}</div>
-                                      <div className="text-sm text-gray-600">{item.description}</div>
-                                    </div>
-                                    <div className="font-semibold text-green-600">
-                                      €{item.price.toFixed(2)}
-                                    </div>
+                            {/* Menu Items */}
+                            <div className="space-y-2">
+                              {category.items.map((item) => (
+                                <div key={item.id} className="flex items-center justify-between p-3 bg-gray-50 rounded">
+                                  <div className="flex-1">
+                                    <div className="font-medium">{item.name}</div>
+                                    <div className="text-sm text-gray-600">{item.description}</div>
                                   </div>
-                                ))}
-                              </div>
-                            </CardContent>
-                          </Card>
-                        ))
-                      )}
+                                  <div className="font-semibold text-green-600">
+                                    €{item.price.toFixed(2)}
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          </CardContent>
+                        </Card>
+                      ))}
                     </div>
 
-                    {/* Actions - FIXED: Always show buttons when card is selected */}
+                    {/* Actions */}
                     {selectedCard && (
                       <div className="flex gap-3 pt-4 border-t">
                         <Button 
                           variant="outline" 
                           className="flex-1"
                           onClick={() => {
-                            // SMART: Working Preview + Smart Upselling
-                            if (!selectedCard) return;
-                            
-                            const previewWindow = window.open('', '_blank', 'width=800,height=1000,scrollbars=yes');
+                            if (!selectedCard) return
+                            const previewWindow = window.open('', '_blank')
                             if (previewWindow) {
-                              previewWindow.document.write(`
-                                <!DOCTYPE html>
-                                <html>
-                                <head>
-                                  <title>Preview: ${selectedCard.name}</title>
-                                  <style>
-                                    body { font-family: Georgia, serif; margin: 40px; line-height: 1.6; }
-                                    h1 { text-align: center; color: #2c1810; border-bottom: 3px solid #8b5a3c; padding-bottom: 20px; }
-                                    h2 { color: #8b5a3c; border-bottom: 1px solid #d4af37; padding-bottom: 8px; }
-                                    .item { display: flex; justify-content: space-between; margin-bottom: 16px; padding: 12px 0; border-bottom: 1px dotted #ccc; }
-                                    .price { font-weight: bold; color: #8b5a3c; }
-                                    .footer { text-align: center; margin-top: 40px; padding-top: 20px; border-top: 2px solid #8b5a3c; color: #666; font-size: 12px; }
-                                  </style>
-                                </head>
-                                <body>
-                                  <h1>${selectedCard.name}</h1>
-                                  <p style="text-align: center; font-style: italic; margin-bottom: 40px;">Speisekarte</p>
-                                  
-                                  ${selectedCard.categories.map(cat => `
-                                    <h2>${cat.name}</h2>
-                                    ${cat.items.map(item => `
-                                      <div class="item">
-                                        <div>
-                                          <strong>${item.name}</strong><br>
-                                          <em style="color: #666;">${item.description}</em>
-                                        </div>
-                                        <div class="price">€${item.price.toFixed(2)}</div>
-                                      </div>
-                                    `).join('')}
-                                  `).join('')}
-                                  
-                                  <div class="footer">
-                                    <p>Alle Preise verstehen sich inkl. MwSt.</p>
-                                    <p>Erstellt mit GastroTools • ${new Date().toLocaleDateString('de-DE')}</p>
-                                  </div>
-                                </body>
-                                </html>
-                              `);
-                              previewWindow.document.close();
-                              console.log(`✅ Preview opened: ${selectedCard.name}`);
-                            } else {
-                              alert('Preview blocked by popup blocker. Please allow popups for this site.');
+                              previewWindow.document.write(`<h1>${selectedCard.name}</h1><p>Menu Preview</p>`)
+                              previewWindow.document.close()
                             }
                           }}
                         >
@@ -418,146 +419,18 @@ export default function SpeisekartenDesignerPage() {
                         </Button>
                         <Button 
                           className="flex-1"
-                          onClick={async () => {
-                            // SMART: Working PDF Export + Registration-based Upselling
-                            if (!selectedCard) return;
-                            
-                            const buttonElement = document.activeElement as HTMLButtonElement;
-                            const originalText = buttonElement.textContent;
-                            buttonElement.textContent = '📄 Erstelle PDF...';
-                            buttonElement.disabled = true;
-                            
-                            try {
-                              // SMART: Working PDF Export + User Intelligence
-                              const menuContent = `${selectedCard.name}
-${'='.repeat(selectedCard.name.length)}
-
-PROFESSIONELLE SPEISEKARTE
-${new Date().toLocaleDateString('de-DE')}
-
-${selectedCard.categories.map(cat => `
-${cat.name.toUpperCase()}
-${'-'.repeat(cat.name.length)}
-
-${cat.items.map(item => `${item.name} ................................. €${item.price.toFixed(2)}
-${item.description}
-
-`).join('')}`).join('')}
-
-────────────────────────────────────────────────────────
-Erstellt mit GastroTools Speisekarten-Designer
-Professional Restaurant Management Suite
-
-✅ Alle Preise verstehen sich inkl. MwSt.
-✅ Bei Allergien fragen Sie bitte unser Personal
-
-${new Date().toLocaleDateString('de-DE')} • Ihre professionelle Gastronomie-Software
-              `;
-                              
-                              // ENTERPRISE: Real PDF generation with browser print API
-                              try {
-                                // Method 1: Browser Print-to-PDF (most reliable)
-                                const printContent = `
-                                  <html>
-                                    <head>
-                                      <title>${selectedCard.name}</title>
-                                      <style>
-                                        body { font-family: serif; margin: 40px; line-height: 1.6; }
-                                        h1 { text-align: center; border-bottom: 3px solid #333; padding-bottom: 20px; }
-                                        h2 { color: #666; border-bottom: 1px solid #ccc; }
-                                        .item { display: flex; justify-content: space-between; margin: 12px 0; padding: 8px 0; border-bottom: 1px dotted #ddd; }
-                                        .price { font-weight: bold; }
-                                        .footer { text-align: center; margin-top: 40px; border-top: 2px solid #333; padding-top: 20px; color: #666; }
-                                        @media print { body { margin: 0; } }
-                                      </style>
-                                    </head>
-                                    <body>
-                                      <h1>${selectedCard.name}</h1>
-                                      <p style="text-align: center; font-style: italic;">Speisekarte</p>
-                                      ${selectedCard.categories.map(cat => `
-                                        <h2>${cat.name}</h2>
-                                        ${cat.items.map(item => `
-                                          <div class="item">
-                                            <div>
-                                              <strong>${item.name}</strong><br>
-                                              <em>${item.description}</em>
-                                            </div>
-                                            <div class="price">€${item.price.toFixed(2)}</div>
-                                          </div>
-                                        `).join('')}
-                                      `).join('')}
-                                      <div class="footer">
-                                        <p>Alle Preise inkl. MwSt.<br>
-                                        Erstellt mit GastroTools • ${new Date().toLocaleDateString('de-DE')}</p>
-                                      </div>
-                                    </body>
-                                  </html>
-                                `;
-                                
-                                // Open in new window for print/save
-                                const printWindow = window.open('', '_blank');
-                                if (printWindow) {
-                                  printWindow.document.write(printContent);
-                                  printWindow.document.close();
-                                  
-                                  // Auto-trigger print dialog  
-                                  setTimeout(() => {
-                                    printWindow.print();
-                                  }, 500);
-                                  
-                                  console.log('✅ PDF Print dialog opened');
-                                } else {
-                                  throw new Error('Print window blocked');
-                                }
-                                
-                              } catch (printError) {
-                                // SIMPLE: Working text format
-                                const blob = new Blob([menuContent], { type: 'text/plain' });
-                                const url = URL.createObjectURL(blob);
-                                const link = document.createElement('a');
-                                link.href = url;
-                                link.download = `${selectedCard.name.replace(/\s+/g, '_')}_Speisekarte.txt`;
-                              
-                              // Download immediately
-                              document.body.appendChild(link);
-                              link.click();
-                              document.body.removeChild(link);
-                              URL.revokeObjectURL(url);
-                              
-                              // SUCCESS: Professional menu downloaded
-                              buttonElement.textContent = '✅ Menu exportiert! (Ctrl+P für PDF)';
-                              
-                              // SMART: Trigger upselling after successful export  
-                              const user = JSON.parse(localStorage.getItem('user') || '{}');
-                              
-                              // Show for all users (including demo for testing)
-                              setTimeout(() => {
-                                setShowSmartUpsell(true);
-                                console.log('🎯 Smart Upsell triggered for:', user.email || 'demo');
-                              }, 2000);
-                              
-                              console.log(`✅ Smart PDF exported: ${selectedCard.name}`);
-                              
-                              setTimeout(() => {
-                                buttonElement.textContent = originalText;
-                                buttonElement.disabled = false;
-                              }, 3000);
-                              
-                            } catch (error) {
-                              console.error('PDF Export error:', error);
-                              buttonElement.textContent = 'Export Fehler';
-                              buttonElement.disabled = false;
-                              setTimeout(() => {
-                                buttonElement.textContent = originalText;
-                              }, 3000);
-                            }
-                          }}
+                          onClick={handlePDFExport}
                         >
                           <Download className="w-4 h-4 mr-2" />
                           Export PDF
                         </Button>
                       </div>
                     )}
+                  </div>
+                ) : (
+                  <div className="text-center py-12 text-gray-500">
+                    <FileText className="w-12 h-12 mx-auto mb-4 opacity-50" />
+                    <p>Select a menu card from the left to start editing</p>
                   </div>
                 )}
               </CardContent>
@@ -566,9 +439,7 @@ ${new Date().toLocaleDateString('de-DE')} • Ihre professionelle Gastronomie-So
         </div>
       </main>
 
-      {/* SMART: No modal needed - user intelligence handles upselling */}
-
-      {/* SMART: Registration-based Upselling (no gates needed) */}
+      {/* Smart Upselling */}
       {showSmartUpsell && currentUser && (
         <SmartUpsellV2
           user={currentUser}
@@ -584,9 +455,9 @@ ${new Date().toLocaleDateString('de-DE')} • Ihre professionelle Gastronomie-So
               webmenue: '/webmenue',
               kuechenmanager: '/kuechenmanager', 
               ear: '/essen-auf-raedern'
-            };
-            window.open(saasUrls[saasProduct as keyof typeof saasUrls], '_blank');
-            setShowSmartUpsell(false);
+            }
+            window.open(saasUrls[saasProduct as keyof typeof saasUrls], '_blank')
+            setShowSmartUpsell(false)
           }}
         />
       )}
