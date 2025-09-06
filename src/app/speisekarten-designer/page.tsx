@@ -79,57 +79,17 @@ export default function SpeisekartenDesignerPage() {
     { id: 'fast-casual', name: 'Fast Casual', description: 'Quick service restaurant style' }
   ]
 
-  // ADDED: Lead Gate System Functions
-  const handleLeadSubmission = async (leadData: LeadFormData) => {
-    try {
-      // Track lead submission
-      await leadTracker.trackLeadSubmitted({
-        tool: 'speisekarten-designer',
-        lead_segment: detectSegment(leadData.orgTyp, leadData.interesse) as any,
-        rolle: leadData.rolle,
-        org_typ: leadData.orgTyp,
-        interesse: leadData.interesse,
-        aha_moment: 'pdf_requested',
-        source: 'freeware',
-        export_type: pendingExport?.type || 'pdf'
-      })
-
-      // Execute the pending export immediately 
-      if (pendingExport?.type === 'pdf') {
-        await executePDFExport()
-      } else if (pendingExport?.type === 'preview') {
-        executePreview()
+  // SMART: User context for intelligent business model
+  useEffect(() => {
+    const userData = localStorage.getItem('user')
+    if (userData) {
+      try {
+        setCurrentUser(JSON.parse(userData))
+      } catch (e) {
+        console.log('User data parsing error:', e)
       }
-      
-      setShowLeadGate(false)
-      setPendingExport(null)
-      
-      console.log('✅ Lead submitted and export delivered')
-      
-    } catch (error) {
-      console.error('Lead submission error:', error)
     }
-  }
-
-  const executePDFExport = async () => {
-    // Simplified PDF export for lead gate
-    if (!selectedCard) return
-    
-    const pdfContent = `${selectedCard.name}\nSpeisekarte\n\nErstellt mit GastroTools\n${new Date().toLocaleDateString('de-DE')}`
-    const blob = new Blob([pdfContent], { type: 'text/plain' })
-    const url = URL.createObjectURL(blob)
-    const link = document.createElement('a')
-    link.href = url
-    link.download = `${selectedCard.name.replace(/\s+/g, '_')}_Speisekarte.pdf`
-    link.click()
-    URL.revokeObjectURL(url)
-  }
-
-  const executePreview = () => {
-    if (!selectedCard) return
-    const previewWindow = window.open('data:text/html,<h1>' + selectedCard.name + '</h1><p>Speisekarte Preview</p>', '_blank')
-    console.log('✅ Preview opened')
-  }
+  }, [])
 
   const createNewCard = () => {
     if (!newCard.name) {
@@ -394,10 +354,8 @@ export default function SpeisekartenDesignerPage() {
                           variant="outline" 
                           className="flex-1"
                           onClick={() => {
-                            // PRO LEVEL: Preview via Lead-Gate
-                            leadTracker.trackExportClick('speisekarten-designer', 'preview', selectedCard?.categories.length || 0);
-                            setPendingExport({ type: 'preview', data: selectedCard });
-                            setShowLeadGate(true);
+                            // SMART: Working Preview + Smart Upselling
+                            if (!selectedCard) return;
                             
                             const previewWindow = window.open('', '_blank', 'width=800,height=1000,scrollbars=yes');
                             if (previewWindow) {
@@ -542,15 +500,7 @@ ${new Date().toLocaleDateString('de-DE')} • Ihre professionelle Gastronomie-So
         </div>
       </main>
 
-      {/* PRO LEVEL: Lead Gate Modal */}
-      <LeadGateModal
-        isOpen={showLeadGate}
-        onClose={() => setShowLeadGate(false)}
-        onSubmit={handleLeadSubmission}
-        exportType={pendingExport?.type || 'pdf'}
-        toolName="speisekarten-designer"
-        fileName={selectedCard?.name || 'Speisekarte'}
-      />
+      {/* SMART: No modal needed - user intelligence handles upselling */}
 
       {/* SMART: Registration-based Upselling (no gates needed) */}
       {showSmartUpsell && currentUser && (
