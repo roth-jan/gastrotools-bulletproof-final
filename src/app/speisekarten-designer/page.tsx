@@ -455,12 +455,70 @@ Professional Restaurant Management Suite
 ${new Date().toLocaleDateString('de-DE')} • Ihre professionelle Gastronomie-Software
               `;
                               
-                              // SIMPLE: Direct download (works everywhere)
-                              const blob = new Blob([menuContent], { type: 'text/plain' });
-                              const url = URL.createObjectURL(blob);
-                              const link = document.createElement('a');
-                              link.href = url;
-                              link.download = `${selectedCard.name.replace(/\s+/g, '_')}_Speisekarte.pdf`;
+                              // ENTERPRISE: Real PDF generation with browser print API
+                              try {
+                                // Method 1: Browser Print-to-PDF (most reliable)
+                                const printContent = `
+                                  <html>
+                                    <head>
+                                      <title>${selectedCard.name}</title>
+                                      <style>
+                                        body { font-family: serif; margin: 40px; line-height: 1.6; }
+                                        h1 { text-align: center; border-bottom: 3px solid #333; padding-bottom: 20px; }
+                                        h2 { color: #666; border-bottom: 1px solid #ccc; }
+                                        .item { display: flex; justify-content: space-between; margin: 12px 0; padding: 8px 0; border-bottom: 1px dotted #ddd; }
+                                        .price { font-weight: bold; }
+                                        .footer { text-align: center; margin-top: 40px; border-top: 2px solid #333; padding-top: 20px; color: #666; }
+                                        @media print { body { margin: 0; } }
+                                      </style>
+                                    </head>
+                                    <body>
+                                      <h1>${selectedCard.name}</h1>
+                                      <p style="text-align: center; font-style: italic;">Speisekarte</p>
+                                      ${selectedCard.categories.map(cat => `
+                                        <h2>${cat.name}</h2>
+                                        ${cat.items.map(item => `
+                                          <div class="item">
+                                            <div>
+                                              <strong>${item.name}</strong><br>
+                                              <em>${item.description}</em>
+                                            </div>
+                                            <div class="price">€${item.price.toFixed(2)}</div>
+                                          </div>
+                                        `).join('')}
+                                      `).join('')}
+                                      <div class="footer">
+                                        <p>Alle Preise inkl. MwSt.<br>
+                                        Erstellt mit GastroTools • ${new Date().toLocaleDateString('de-DE')}</p>
+                                      </div>
+                                    </body>
+                                  </html>
+                                `;
+                                
+                                // Open in new window for print/save
+                                const printWindow = window.open('', '_blank');
+                                if (printWindow) {
+                                  printWindow.document.write(printContent);
+                                  printWindow.document.close();
+                                  
+                                  // Auto-trigger print dialog  
+                                  setTimeout(() => {
+                                    printWindow.print();
+                                  }, 500);
+                                  
+                                  console.log('✅ PDF Print dialog opened');
+                                } else {
+                                  throw new Error('Print window blocked');
+                                }
+                                
+                              } catch (printError) {
+                                // Fallback: Text download  
+                                console.warn('Print method failed, using text fallback:', printError);
+                                const blob = new Blob([menuContent], { type: 'text/plain' });
+                                const url = URL.createObjectURL(blob);
+                                const link = document.createElement('a');
+                                link.href = url;
+                                link.download = `${selectedCard.name.replace(/\s+/g, '_')}_Speisekarte.txt`;
                               
                               // Download immediately
                               document.body.appendChild(link);
