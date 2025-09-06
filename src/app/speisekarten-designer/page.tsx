@@ -2,8 +2,9 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { SmartUpsell } from "@/components/SmartUpsell"
-import { UserIntelligence } from "@/lib/user-intelligence"
+import { SmartUpsellV2 } from "@/components/SmartUpsell-v2"  
+import { PDFExportGuarantee } from "@/lib/pdf-export-guarantee"
+import { SmartTriggers } from "@/lib/smart-triggers"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"

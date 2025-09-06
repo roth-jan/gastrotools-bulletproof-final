@@ -88,7 +88,12 @@ export function SmartUpsell({ user, behavior, context, onDismiss, onInterest }: 
   const config = saasConfig[suggestion.saasProduct]
 
   return (
-    <div className="fixed bottom-4 right-4 max-w-sm z-50 animate-in slide-in-from-bottom-2">
+    <div 
+      className="fixed z-50 animate-in slide-in-from-bottom-2 max-w-sm md:bottom-4 md:right-4 top-4 left-1/2 transform -translate-x-1/2 md:transform-none md:left-auto md:top-auto"
+      role="alert"
+      aria-live="polite"
+      aria-label="Smart business recommendation"
+    >
       <Card className={`border-l-4 border-l-blue-500 shadow-lg bg-gradient-to-r ${config.color} text-white`}>
         <CardHeader className="pb-3">
           <div className="flex items-center justify-between">
@@ -143,7 +148,11 @@ export function SmartUpsell({ user, behavior, context, onDismiss, onInterest }: 
               Später
             </Button>
             <Button
-              onClick={handleInterest}
+              onClick={() => {
+                // Track frequency capping
+                localStorage.setItem(`upsell_shown_${user.email}`, Date.now().toString());
+                handleInterest();
+              }}
               className="bg-white text-gray-900 hover:bg-white/90 text-xs flex-1 font-semibold"
             >
               <ArrowRight className="w-3 h-3 mr-1" />
