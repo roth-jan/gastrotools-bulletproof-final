@@ -42,7 +42,7 @@ export async function middleware(request: NextRequest) {
           blocked: rateResult.blocked,
           userAgent,
           ip
-        }, userId)
+        }, userId || undefined)
         
         const response = NextResponse.json(
           { 

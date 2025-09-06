@@ -514,7 +514,7 @@ ${new Date().toLocaleDateString('de-DE')} • Ihre professionelle Gastronomie-So
           }}
           context="pdf_export_success"
           onDismiss={() => setShowSmartUpsell(false)}
-          onInterest={(saasProduct) => {
+          onInterest={(saasProduct: string) => {
             const saasUrls = {
               webmenue: '/webmenue',
               kuechenmanager: '/kuechenmanager', 
