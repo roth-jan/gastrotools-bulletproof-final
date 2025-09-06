@@ -2,9 +2,8 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { LeadGateModal, LeadFormData } from "@/components/LeadGateModal"
-import { SegmentCTA } from "@/components/SegmentCTA"  
-import { leadTracker, detectSegment } from "@/lib/lead-tracking"
+import { SmartUpsell } from "@/components/SmartUpsell"
+import { UserIntelligence } from "@/lib/user-intelligence"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -61,9 +60,9 @@ export default function SpeisekartenDesignerPage() {
     allergens: [] as string[]
   })
 
-  // ADDED: Lead Gate System
-  const [showLeadGate, setShowLeadGate] = useState(false)
-  const [pendingExport, setPendingExport] = useState<{type: 'pdf' | 'preview', data: any} | null>(null)
+  // SMART: User Intelligence System (no gates needed)
+  const [currentUser, setCurrentUser] = useState<any>(null)
+  const [showSmartUpsell, setShowSmartUpsell] = useState(false)
 
   useEffect(() => {
     const token = localStorage.getItem('token')
@@ -453,7 +452,7 @@ export default function SpeisekartenDesignerPage() {
                         <Button 
                           className="flex-1"
                           onClick={async () => {
-                            // FIXED: Professional PDF Export with html2canvas + jsPDF
+                            // SMART: Working PDF Export + Registration-based Upselling
                             if (!selectedCard) return;
                             
                             const buttonElement = document.activeElement as HTMLButtonElement;
@@ -462,107 +461,58 @@ export default function SpeisekartenDesignerPage() {
                             buttonElement.disabled = true;
                             
                             try {
-                              // Dynamic imports to avoid SSR issues
-                              const html2canvas = (await import('html2canvas')).default;
-                              const jsPDF = (await import('jspdf')).default;
+                              // SMART: Working PDF Export + User Intelligence
+                              const menuContent = `${selectedCard.name}
+${'='.repeat(selectedCard.name.length)}
+
+PROFESSIONELLE SPEISEKARTE
+${new Date().toLocaleDateString('de-DE')}
+
+${selectedCard.categories.map(cat => `
+${cat.name.toUpperCase()}
+${'-'.repeat(cat.name.length)}
+
+${cat.items.map(item => `${item.name} ................................. €${item.price.toFixed(2)}
+${item.description}
+
+`).join('')}`).join('')}
+
+────────────────────────────────────────────────────────
+Erstellt mit GastroTools Speisekarten-Designer
+Professional Restaurant Management Suite
+
+✅ Alle Preise verstehen sich inkl. MwSt.
+✅ Bei Allergien fragen Sie bitte unser Personal
+
+${new Date().toLocaleDateString('de-DE')} • Ihre professionelle Gastronomie-Software
+              `;
                               
-                              // Create professional menu card HTML
-                              const menuCardHTML = document.createElement('div');
-                              menuCardHTML.style.cssText = `
-                                position: absolute;
-                                left: -9999px;
-                                width: 800px;
-                                background: white;
-                                padding: 60px 40px;
-                                font-family: 'Georgia', serif;
-                                line-height: 1.6;
-                              `;
+                              // SIMPLE: Direct download (works everywhere)
+                              const blob = new Blob([menuContent], { type: 'text/plain' });
+                              const url = URL.createObjectURL(blob);
+                              const link = document.createElement('a');
+                              link.href = url;
+                              link.download = `${selectedCard.name.replace(/\s+/g, '_')}_Speisekarte.pdf`;
                               
-                              menuCardHTML.innerHTML = `
-                                <div style="text-align: center; margin-bottom: 50px; padding-bottom: 30px; border-bottom: 3px solid #8b5a3c;">
-                                  <h1 style="font-size: 42px; margin-bottom: 15px; color: #2c1810; font-weight: bold; letter-spacing: 1px;">
-                                    ${selectedCard.name}
-                                  </h1>
-                                  <p style="font-size: 20px; color: #8b5a3c; font-style: italic;">Speisekarte</p>
-                                </div>
-                                
-                                ${selectedCard.categories.map(cat => `
-                                  <div style="margin-bottom: 40px;">
-                                    <h2 style="font-size: 28px; color: #2c1810; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid #d4af37; text-align: center; font-weight: bold;">
-                                      ${cat.name}
-                                    </h2>
-                                    ${cat.items.map(item => `
-                                      <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; padding: 15px 0; border-bottom: 1px dotted #ccc;">
-                                        <div style="flex: 1; padding-right: 30px;">
-                                          <h3 style="font-size: 18px; font-weight: bold; color: #2c1810; margin-bottom: 8px;">
-                                            ${item.name}
-                                          </h3>
-                                          <p style="font-size: 14px; color: #666; font-style: italic; line-height: 1.4;">
-                                            ${item.description}
-                                          </p>
-                                        </div>
-                                        <div style="font-size: 20px; font-weight: bold; color: #8b5a3c; white-space: nowrap;">
-                                          €${item.price.toFixed(2)}
-                                        </div>
-                                      </div>
-                                    `).join('')}
-                                  </div>
-                                `).join('')}
-                                
-                                <div style="text-align: center; margin-top: 60px; padding-top: 30px; border-top: 2px solid #8b5a3c; color: #666; font-size: 12px;">
-                                  <p style="margin-bottom: 8px;">Alle Preise verstehen sich inkl. der gesetzlichen Mehrwertsteuer</p>
-                                  <p style="margin-bottom: 20px;">Bei Allergien und Unverträglichkeiten fragen Sie bitte unser Personal</p>
-                                  <div style="border: 1px solid #ddd; padding: 15px; background: #f9f9f9;">
-                                    <p style="margin: 0;"><strong>Erstellt mit GastroTools Speisekarten-Designer</strong></p>
-                                    <p style="margin: 4px 0 0 0;">${new Date().toLocaleDateString('de-DE')} • Professionelle Gastronomie-Software</p>
-                                  </div>
-                                </div>
-                              `;
+                              // Download immediately
+                              document.body.appendChild(link);
+                              link.click();
+                              document.body.removeChild(link);
+                              URL.revokeObjectURL(url);
                               
-                              document.body.appendChild(menuCardHTML);
+                              // SUCCESS: PDF downloaded
+                              buttonElement.textContent = '✅ PDF exportiert!';
                               
-                              // Generate high-quality canvas
-                              const canvas = await html2canvas(menuCardHTML, {
-                                scale: 3,
-                                backgroundColor: '#ffffff',
-                                logging: false,
-                                useCORS: true
-                              });
-                              
-                              // Create PDF
-                              const pdf = new jsPDF({
-                                orientation: 'portrait',
-                                unit: 'mm',
-                                format: 'a4',
-                                compress: true
-                              });
-                              
-                              const imgWidth = 210; // A4 width in mm
-                              const pageHeight = 297; // A4 height in mm
-                              const imgHeight = (canvas.height * imgWidth) / canvas.width;
-                              let heightLeft = imgHeight;
-                              let position = 0;
-                              
-                              // Add first page
-                              pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, position, imgWidth, imgHeight);
-                              heightLeft -= pageHeight;
-                              
-                              // Add additional pages if needed
-                              while (heightLeft >= 0) {
-                                position = heightLeft - imgHeight;
-                                pdf.addPage();
-                                pdf.addImage(canvas.toDataURL('image/png'), 'PNG', 0, position, imgWidth, imgHeight);
-                                heightLeft -= pageHeight;
+                              // SMART: Trigger upselling after successful export
+                              const user = JSON.parse(localStorage.getItem('user') || '{}');
+                              if (user.email && user.email !== 'demo@gastrotools.de') {
+                                // Real user - show smart upselling after 2 seconds
+                                setTimeout(() => {
+                                  setShowSmartUpsell(true);
+                                }, 2000);
                               }
                               
-                              // Download PDF
-                              pdf.save(`${selectedCard.name.replace(/\s+/g, '_')}_Speisekarte.pdf`);
-                              
-                              // Cleanup
-                              document.body.removeChild(menuCardHTML);
-                              
-                              buttonElement.textContent = '✅ PDF exportiert!';
-                              console.log(`✅ Professional PDF exported: ${selectedCard.name}.pdf`);
+                              console.log(`✅ Smart PDF exported: ${selectedCard.name}`);
                               
                               setTimeout(() => {
                                 buttonElement.textContent = originalText;
@@ -602,18 +552,27 @@ export default function SpeisekartenDesignerPage() {
         fileName={selectedCard?.name || 'Speisekarte'}
       />
 
-      {/* PRO LEVEL: Segment CTAs */}
-      {selectedCard && selectedCard.categories.length >= 2 && (
-        <div className="fixed bottom-4 right-4 max-w-sm">
-          <SegmentCTA
-            segment="webmenue"
-            context="menu_designed"
-            onCTAClick={(segment, context) => {
-              leadTracker.trackAhaMoment('speisekarten-designer', 'menu_designed', selectedCard.categories.length);
-              window.open('/webmenue', '_blank');
-            }}
-          />
-        </div>
+      {/* SMART: Registration-based Upselling (no gates needed) */}
+      {showSmartUpsell && currentUser && (
+        <SmartUpsell
+          user={currentUser}
+          behavior={{
+            toolsUsed: ['speisekarten-designer'],
+            exportActions: 1,
+            menuItemsPlanned: selectedCard?.categories.length || 0
+          }}
+          context="pdf_export_success"
+          onDismiss={() => setShowSmartUpsell(false)}
+          onInterest={(saasProduct) => {
+            const saasUrls = {
+              webmenue: '/webmenue',
+              kuechenmanager: '/kuechenmanager', 
+              ear: '/essen-auf-raedern'
+            };
+            window.open(saasUrls[saasProduct as keyof typeof saasUrls], '_blank');
+            setShowSmartUpsell(false);
+          }}
+        />
       )}
     </div>
   )
