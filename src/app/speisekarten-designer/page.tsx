@@ -505,7 +505,7 @@ ${new Date().toLocaleDateString('de-DE')} • Ihre professionelle Gastronomie-So
 
       {/* SMART: Registration-based Upselling (no gates needed) */}
       {showSmartUpsell && currentUser && (
-        <SmartUpsell
+        <SmartUpsellV2
           user={currentUser}
           behavior={{
             toolsUsed: ['speisekarten-designer'],
