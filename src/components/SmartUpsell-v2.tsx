@@ -70,9 +70,10 @@ export function SmartUpsellV2({ user, behavior, context, onDismiss, onInterest }
       className="fixed z-50 animate-in slide-in-from-bottom-2 max-w-sm
                  top-4 left-1/2 transform -translate-x-1/2
                  md:bottom-4 md:right-4 md:left-auto md:top-auto md:transform-none"
-      role="alert"
+      role="status"
       aria-live="polite"
       aria-label="Smart business recommendation"
+      data-testid="smart-upsell-toast"
     >
       <Card className="border-l-4 border-l-blue-500 shadow-xl bg-gradient-to-r from-blue-500 to-blue-600 text-white">
         <CardHeader className="pb-3">

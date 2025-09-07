@@ -182,57 +182,53 @@ export default function SpeisekartenDesignerPage() {
     if (!selectedCard) return
 
     try {
-      // Generate professional menu content
-      const menuContent = `${selectedCard.name}
-${'='.repeat(selectedCard.name.length)}
+      // P0: Real PDF export with proper headers
+      const response = await fetch('/api/export/pdf', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          menuCard: selectedCard,
+          userId: currentUser?.id || 'demo'
+        })
+      })
 
-PROFESSIONELLE SPEISEKARTE
-${new Date().toLocaleDateString('de-DE')}
+      if (response.ok) {
+        // Get proper filename from response headers
+        const contentDisposition = response.headers.get('Content-Disposition')
+        const filename = contentDisposition?.match(/filename="([^"]+)"/)?.[1] || 
+                        `MENU_${selectedCard.name.replace(/\s+/g, '-')}_${Date.now()}.pdf`
+        
+        // Download real PDF
+        const blob = await response.blob()
+        const url = URL.createObjectURL(blob)
+        const link = document.createElement('a')
+        link.href = url
+        link.download = filename
+        
+        document.body.appendChild(link)
+        link.click()
+        document.body.removeChild(link)
+        URL.revokeObjectURL(url)
 
-${selectedCard.categories.map(cat => `
-${cat.name.toUpperCase()}
-${'-'.repeat(cat.name.length)}
+        console.log(`✅ Real PDF exported: ${filename}`)
 
-${cat.items.map(item => `${item.name} ................................. €${item.price.toFixed(2)}
-${item.description}
+        // Trigger Smart Upselling with E2E support
+        const upsellDelay = (window as any).E2E_MODE ? 200 : 2000
+        setTimeout(() => {
+          setShowSmartUpsell(true)
+          console.log('🎯 Smart Upsell triggered for:', currentUser?.email || 'unknown')
+        }, upsellDelay)
 
-`).join('')}`).join('')}
-
-────────────────────────────────────────────────────────
-Erstellt mit GastroTools Speisekarten-Designer
-Professional Restaurant Management Suite
-
-✅ Alle Preise verstehen sich inkl. MwSt.
-✅ Bei Allergien fragen Sie bitte unser Personal
-
-💡 FÜR PDF: Text kopieren → Word/Google Docs einfügen → Als PDF speichern
-
-${new Date().toLocaleDateString('de-DE')} • Ihre professionelle Gastronomie-Software
-      `
-
-      // Simple working download
-      const blob = new Blob([menuContent], { type: 'text/plain' })
-      const url = URL.createObjectURL(blob)
-      const link = document.createElement('a')
-      link.href = url
-      link.download = `${selectedCard.name.replace(/\s+/g, '_')}_Speisekarte.txt`
-      
-      document.body.appendChild(link)
-      link.click()
-      document.body.removeChild(link)
-      URL.revokeObjectURL(url)
-
-      // Trigger Smart Upselling after successful export
-      setTimeout(() => {
-        setShowSmartUpsell(true)
-        console.log('🎯 Smart Upsell triggered for:', currentUser?.email || 'unknown')
-      }, 2000)
-
-      console.log(`✅ Menu exported: ${selectedCard.name}`)
+      } else {
+        const errorData = await response.json()
+        alert(errorData.fallback || 'PDF-Export fehlgeschlagen. Bitte versuchen Sie es erneut.')
+      }
 
     } catch (error) {
-      console.error('Export error:', error)
-      alert('Export failed. Please try again.')
+      console.error('PDF Export error:', error)
+      alert('PDF-Download blockiert oder fehlgeschlagen. Per E-Mail senden?')
     }
   }
 
@@ -420,6 +416,8 @@ ${new Date().toLocaleDateString('de-DE')} • Ihre professionelle Gastronomie-So
                         <Button 
                           className="flex-1"
                           onClick={handlePDFExport}
+                          data-testid="export-pdf-btn"
+                          aria-label="Export menu card as PDF"
                         >
                           <Download className="w-4 h-4 mr-2" />
                           Export PDF
