@@ -23,7 +23,7 @@ export default function HomePage() {
               {t('home.subtitle')}
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <Link href="/register" className="btn-primary">
+              <Link href="/signup-light" className="btn-primary">
                 {t('home.get_started')}
               </Link>
               <Link href="/login" className="btn-secondary">

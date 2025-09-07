@@ -121,7 +121,7 @@ export default function LoginPage() {
                 </Link>
                 <div className="text-sm text-gray-600">
                   Don't have an account?{' '}
-                  <Link href="/register" className="text-purple-600 hover:underline">
+                  <Link href="/signup-light" className="text-purple-600 hover:underline">
                     {t('auth.create_account')}
                   </Link>
                 </div>
