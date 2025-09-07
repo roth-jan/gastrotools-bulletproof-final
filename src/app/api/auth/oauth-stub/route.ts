@@ -91,20 +91,21 @@ export async function GET(request: NextRequest) {
       </head>
       <body>
         <div class="container">
-          <div class="banner">
+          <div class="banner" data-testid="oauth-stub-banner">
             <strong>⚠️ OAuth-Stub aktiv</strong><br>
             <small>Staging-Modus für E2E-Tests</small>
+            <span style="display: none;" id="oauth-stub-active">OAuth-Stub aktiv</span>
           </div>
           
           <h2>Anmelden mit <span class="provider">${provider.charAt(0).toUpperCase() + provider.slice(1)}</span></h2>
           <p>Möchten Sie <strong>${email}</strong> für GastroTools autorisieren?</p>
           
           <div style="margin: 30px 0;">
-            <button class="approve" onclick="submitAction('approve')">
+            <button class="approve" onclick="submitAction('approve')" data-testid="oauth-approve-btn">
               ✅ Autorisieren
             </button>
-            <button class="deny" onclick="submitAction('deny')">
-              ❌ Ablehnen
+            <button class="deny" onclick="submitAction('deny')" data-testid="oauth-deny-btn">
+              ❌ Ablehnen  
             </button>
           </div>
           
