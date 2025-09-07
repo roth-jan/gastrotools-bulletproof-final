@@ -29,7 +29,7 @@ export async function POST(request: NextRequest) {
     })
 
     // Return proper PDF response
-    const response = new NextResponse(pdfContent, {
+    const response = new NextResponse(pdfContent.toString(), {
       status: 200,
       headers: {
         'Content-Type': 'application/pdf',
