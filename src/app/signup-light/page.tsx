@@ -69,13 +69,9 @@ export default function LightSignupPage() {
   }
 
   const handleSocialLogin = (provider: 'google' | 'microsoft') => {
-    // STAGING: Redirect to OAuth stub for testing  
-    if (process.env.NODE_ENV === 'development' || window.location.hostname.includes('vercel.app')) {
-      window.open(`/api/auth/oauth-stub?provider=${provider}&email=${email || 'test@example.com'}`, '_blank')
-    } else {
-      // Production: Real OAuth (when implemented)
-      window.location.href = `/api/auth/${provider}?redirect=/dashboard`
-    }
+    // REAL OAUTH: Always redirect to real OAuth APIs
+    console.log(`🔐 Starting ${provider} OAuth flow...`)
+    window.location.href = `/api/auth/${provider}?redirect=/dashboard`
   }
 
   if (magicLinkSent) {
