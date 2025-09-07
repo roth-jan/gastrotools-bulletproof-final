@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -9,7 +9,7 @@ import { Label } from "@/components/ui/label"
 import { Badge } from "@/components/ui/badge"
 import { CheckCircle, ArrowRight, User } from "lucide-react"
 
-export default function OAuthDevPage() {
+function OAuthDevContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const provider = searchParams.get('provider') || 'google'
@@ -136,5 +136,13 @@ export default function OAuthDevPage() {
         </CardContent>
       </Card>
     </div>
+  )
+}
+
+export default function OAuthDevPage() {
+  return (
+    <Suspense fallback={<div>Loading OAuth...</div>}>
+      <OAuthDevContent />
+    </Suspense>
   )
 }
