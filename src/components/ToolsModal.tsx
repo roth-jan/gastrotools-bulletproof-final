@@ -71,8 +71,8 @@ export function ToolsModal({ isOpen, onClose, type }: ToolsModalProps) {
   ]
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
-      <div className="bg-white rounded-xl shadow-2xl max-w-5xl w-full h-[85vh] flex flex-col">
+    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 p-4 sm:p-8">
+      <div className="bg-white rounded-xl shadow-2xl w-full h-full flex flex-col">
         {/* Header */}
         <div className="sticky top-0 bg-white border-b px-6 py-4 flex items-center justify-between rounded-t-xl">
           <div>
@@ -93,7 +93,7 @@ export function ToolsModal({ isOpen, onClose, type }: ToolsModalProps) {
         {/* Content */}
         <div className="flex-1 p-6 overflow-y-auto">
           {type === 'tools' ? (
-            <div className="grid sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
               {tools.map((tool, index) => (
                 <Card key={index} className="hover:shadow-lg transition-shadow">
                   <CardHeader>
