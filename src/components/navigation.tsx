@@ -67,10 +67,10 @@ export function Navigation() {
               </>
             ) : (
               <>
-                <Link href="#tools" className="text-sm font-medium hover:text-purple-600 transition-colors">
+                <Link href="/#tools" className="text-sm font-medium hover:text-purple-600 transition-colors">
                   Tools
                 </Link>
-                <Link href="#features" className="text-sm font-medium hover:text-purple-600 transition-colors">
+                <Link href="/#features" className="text-sm font-medium hover:text-purple-600 transition-colors">
                   Features
                 </Link>
               </>
@@ -109,7 +109,7 @@ export function Navigation() {
                     {t('auth.login')}
                   </Button>
                 </Link>
-                <Link href="/register">
+                <Link href="/signup-light">
                   <Button className="bg-purple-600 hover:bg-purple-700">
                     {t('auth.register')}
                   </Button>
@@ -171,7 +171,7 @@ export function Navigation() {
                   <Link href="/login" className="block px-4 py-2 text-sm font-medium hover:bg-purple-50 rounded">
                     {t('auth.login')}
                   </Link>
-                  <Link href="/register" className="block px-4 py-2 text-sm font-medium hover:bg-purple-50 rounded">
+                  <Link href="/signup-light" className="block px-4 py-2 text-sm font-medium hover:bg-purple-50 rounded">
                     {t('auth.register')}
                   </Link>
                 </>
