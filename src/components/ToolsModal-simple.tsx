@@ -68,9 +68,9 @@ Touch-optimierte Interfaces und perfekte Mobile-Experience.
       onClick={onClose}
     >
       <div 
-        className="bg-white rounded-lg shadow-xl p-8 max-w-4xl w-full max-h-[90vh] overflow-y-auto"
+        className="bg-white rounded-lg shadow-xl p-8 max-w-5xl w-full flex flex-col"
         onClick={(e) => e.stopPropagation()}
-        style={{ minHeight: '600px' }}
+        style={{ height: '90vh', minHeight: '600px' }}
       >
         {/* Header */}
         <div className="flex items-center justify-between mb-6">
@@ -93,11 +93,13 @@ Touch-optimierte Interfaces und perfekte Mobile-Experience.
           </button>
         </div>
 
-        {/* Content */}
-        <div className="prose prose-lg max-w-none">
-          <pre className="whitespace-pre-line font-sans text-base leading-relaxed text-gray-700 bg-gray-50 p-6 rounded-lg">
-            {type === 'tools' ? toolsContent : featuresContent}
-          </pre>
+        {/* Content - SCROLLABLE */}
+        <div className="flex-1 overflow-y-auto mb-6">
+          <div className="prose prose-lg max-w-none">
+            <pre className="whitespace-pre-line font-sans text-base leading-relaxed text-gray-700 bg-gray-50 p-6 rounded-lg">
+              {type === 'tools' ? toolsContent : featuresContent}
+            </pre>
+          </div>
         </div>
 
         {/* Footer CTA */}
