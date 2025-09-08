@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
-import { ToolsModal } from "@/components/ToolsModal"
+import { ToolsModalSimple } from "@/components/ToolsModal-simple"
 import { Menu, X, LogOut, User, Globe } from "lucide-react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
@@ -205,7 +205,7 @@ export function Navigation() {
       </div>
       
       {/* Tools/Features Modal */}
-      <ToolsModal
+      <ToolsModalSimple
         isOpen={showToolsModal}
         onClose={() => setShowToolsModal(false)}
         type={modalType}
