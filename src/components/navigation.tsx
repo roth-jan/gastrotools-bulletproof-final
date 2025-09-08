@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
-import { ToolsModalSimple } from "@/components/ToolsModal-simple"
+// Removed: Modal system replaced with inline content
 import { Menu, X, LogOut, User, Globe } from "lucide-react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
@@ -71,19 +71,13 @@ export function Navigation() {
             ) : (
               <>
                 <button
-                  onClick={() => {
-                    setModalType('tools')
-                    setShowToolsModal(true)
-                  }}
+                  onClick={() => window.dispatchEvent(new CustomEvent('toggleTools'))}
                   className="text-sm font-medium hover:text-purple-600 transition-colors"
                 >
                   Tools
                 </button>
                 <button
-                  onClick={() => {
-                    setModalType('features')
-                    setShowToolsModal(true)
-                  }}
+                  onClick={() => window.dispatchEvent(new CustomEvent('toggleFeatures'))}
                   className="text-sm font-medium hover:text-purple-600 transition-colors"
                 >
                   Features
@@ -204,12 +198,7 @@ export function Navigation() {
         )}
       </div>
       
-      {/* Tools/Features Modal */}
-      <ToolsModalSimple
-        isOpen={showToolsModal}
-        onClose={() => setShowToolsModal(false)}
-        type={modalType}
-      />
+      {/* No modal needed - inline content on signup-light */}
     </nav>
   )
 }

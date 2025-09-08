@@ -15,6 +15,8 @@ export default function LightSignupPage() {
   const [email, setEmail] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [magicLinkSent, setMagicLinkSent] = useState(false)
+  const [showTools, setShowTools] = useState(false)
+  const [showFeatures, setShowFeatures] = useState(false)
 
   const handleMagicLinkSignup = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -68,7 +70,19 @@ export default function LightSignupPage() {
     }
   }
 
-  // REMOVED: OAuth functionality (focus on Magic-Link)
+  // INLINE: Listen to navigation events for Tools/Features
+  useEffect(() => {
+    const handleToggleTools = () => setShowTools(!showTools)
+    const handleToggleFeatures = () => setShowFeatures(!showFeatures)
+    
+    window.addEventListener('toggleTools', handleToggleTools)
+    window.addEventListener('toggleFeatures', handleToggleFeatures)
+    
+    return () => {
+      window.removeEventListener('toggleTools', handleToggleTools)
+      window.removeEventListener('toggleFeatures', handleToggleFeatures)
+    }
+  }, [showTools, showFeatures])
 
   if (magicLinkSent) {
     return (
@@ -180,6 +194,74 @@ export default function LightSignupPage() {
             </div>
           </CardContent>
         </Card>
+
+        {/* INLINE CONTENT: Tools Section */}
+        {showTools && (
+          <Card className="mt-6">
+            <CardHeader>
+              <CardTitle className="flex items-center justify-between">
+                🔧 Professional Tools
+                <Button variant="ghost" size="sm" onClick={() => setShowTools(false)}>×</Button>
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4 text-sm">
+                <div className="border-l-4 border-l-blue-500 pl-4">
+                  <h4 className="font-semibold">🧮 Nährwertrechner</h4>
+                  <p>20.000+ Zutaten (USDA) • Deutsche Zutatenerkennung • EU-konform • PDF Export</p>
+                </div>
+                <div className="border-l-4 border-l-green-500 pl-4">
+                  <h4 className="font-semibold">💰 Kostenkontrolle</h4>
+                  <p>Kategorie-Analytics • Lieferanten-Tracking • Budget-Überwachung • CSV Export</p>
+                </div>
+                <div className="border-l-4 border-l-purple-500 pl-4">
+                  <h4 className="font-semibold">📦 Lagerverwaltung</h4>
+                  <p>Stock-Monitoring • Mindestbestand-Alerts • Lieferanten-Integration • Inventur</p>
+                </div>
+                <div className="border-l-4 border-l-orange-500 pl-4">
+                  <h4 className="font-semibold">📅 Menüplaner</h4>
+                  <p>Drag & Drop Planung • 7-Tage-Übersicht • Portionsberechnung • Export</p>
+                </div>
+                <div className="border-l-4 border-l-red-500 pl-4">
+                  <h4 className="font-semibold">🍽️ Speisekarten-Designer</h4>
+                  <p>4 Templates • Kategorie-Management • PDF Export • Print-optimiert</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
+        {/* INLINE CONTENT: Features Section */}
+        {showFeatures && (
+          <Card className="mt-6">
+            <CardHeader>
+              <CardTitle className="flex items-center justify-between">
+                ✨ Enterprise Features
+                <Button variant="ghost" size="sm" onClick={() => setShowFeatures(false)}>×</Button>
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4 text-sm">
+                <div className="border-l-4 border-l-blue-500 pl-4">
+                  <h4 className="font-semibold">🧠 Smart Business Intelligence</h4>
+                  <p>Automatische Segmentierung basierend auf Unternehmen und Nutzungsverhalten. Personalisierte SaaS-Empfehlungen zur richtigen Zeit.</p>
+                </div>
+                <div className="border-l-4 border-l-green-500 pl-4">
+                  <h4 className="font-semibold">📊 Analytics & ROI-Tracking</h4>
+                  <p>Vollständige Business-Intelligence mit Lead-Attribution. Conversion-Tracking und Revenue-Analytics für datengetriebene Entscheidungen.</p>
+                </div>
+                <div className="border-l-4 border-l-purple-500 pl-4">
+                  <h4 className="font-semibold">🔐 Enterprise Security</h4>
+                  <p>DSGVO-konform mit Rate-Limiting und Production-Monitoring. Enterprise-Grade Sicherheit und Compliance.</p>
+                </div>
+                <div className="border-l-4 border-l-orange-500 pl-4">
+                  <h4 className="font-semibold">📱 Mobile-First Design</h4>
+                  <p>Responsive Design für alle Geräte optimiert. Touch-optimierte Interfaces und perfekte Mobile-Experience.</p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        )}
       </div>
     </div>
   )
