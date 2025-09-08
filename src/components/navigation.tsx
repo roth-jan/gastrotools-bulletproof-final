@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
+import { ToolsModal } from "@/components/ToolsModal"
 import { Menu, X, LogOut, User, Globe } from "lucide-react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
@@ -10,6 +11,8 @@ import { useLanguage } from "@/contexts/LanguageContext"
 export function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [user, setUser] = useState<any>(null)
+  const [showToolsModal, setShowToolsModal] = useState(false)
+  const [modalType, setModalType] = useState<'tools' | 'features'>('tools')
   const router = useRouter()
   const { language, setLanguage, t } = useLanguage()
 
@@ -67,12 +70,24 @@ export function Navigation() {
               </>
             ) : (
               <>
-                <Link href="/#tools" className="text-sm font-medium hover:text-purple-600 transition-colors">
+                <button
+                  onClick={() => {
+                    setModalType('tools')
+                    setShowToolsModal(true)
+                  }}
+                  className="text-sm font-medium hover:text-purple-600 transition-colors"
+                >
                   Tools
-                </Link>
-                <Link href="/#features" className="text-sm font-medium hover:text-purple-600 transition-colors">
+                </button>
+                <button
+                  onClick={() => {
+                    setModalType('features')
+                    setShowToolsModal(true)
+                  }}
+                  className="text-sm font-medium hover:text-purple-600 transition-colors"
+                >
                   Features
-                </Link>
+                </button>
               </>
             )}
           </div>
@@ -188,6 +203,13 @@ export function Navigation() {
           </div>
         )}
       </div>
+      
+      {/* Tools/Features Modal */}
+      <ToolsModal
+        isOpen={showToolsModal}
+        onClose={() => setShowToolsModal(false)}
+        type={modalType}
+      />
     </nav>
   )
 }
