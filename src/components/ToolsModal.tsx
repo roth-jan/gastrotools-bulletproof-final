@@ -71,9 +71,8 @@ export function ToolsModal({ isOpen, onClose, type }: ToolsModalProps) {
   ]
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-start justify-center p-2 sm:p-4 z-50 overflow-y-auto">
-      <div className="bg-white rounded-xl shadow-2xl max-w-7xl w-full my-4 sm:my-8 min-h-fit"
-           style={{ maxHeight: 'calc(100vh - 2rem)' }}>
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+      <div className="bg-white rounded-xl shadow-2xl max-w-5xl w-full h-[85vh] flex flex-col">
         {/* Header */}
         <div className="sticky top-0 bg-white border-b px-6 py-4 flex items-center justify-between rounded-t-xl">
           <div>
@@ -92,7 +91,7 @@ export function ToolsModal({ isOpen, onClose, type }: ToolsModalProps) {
         </div>
 
         {/* Content */}
-        <div className="p-4 sm:p-6 overflow-y-auto" style={{ maxHeight: 'calc(100vh - 12rem)' }}>
+        <div className="flex-1 p-6 overflow-y-auto">
           {type === 'tools' ? (
             <div className="grid sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6">
               {tools.map((tool, index) => (
@@ -135,7 +134,7 @@ export function ToolsModal({ isOpen, onClose, type }: ToolsModalProps) {
         </div>
 
         {/* Footer CTA */}
-        <div className="sticky bottom-0 bg-gray-50 border-t px-6 py-4 rounded-b-xl">
+        <div className="bg-gray-50 border-t px-6 py-4 rounded-b-xl flex-shrink-0">
           <div className="flex items-center justify-between">
             <div>
               <p className="font-medium text-gray-900">
