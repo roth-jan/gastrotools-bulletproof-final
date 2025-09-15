@@ -92,3 +92,9 @@ export class EmailService {
 }
 
 export const emailService = new EmailService();
+
+export async function sendLeadNotification(leadData: any): Promise<boolean> {
+  // Stub implementation for lead notifications
+  console.log('Would send lead notification:', leadData)
+  return true
+}
