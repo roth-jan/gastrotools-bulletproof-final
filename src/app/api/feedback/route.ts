@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { logger } from '@/lib/logger';
+import { getTranslation } from '@/lib/translations';
 
 export async function POST(request: NextRequest) {
   try {
@@ -8,7 +9,7 @@ export async function POST(request: NextRequest) {
     // Validate required fields
     if (!feedback.message || !feedback.type) {
       return NextResponse.json(
-        { error: 'Message and type are required' },
+        { error: getTranslation('api.errors.message_type_required', 'en') },
         { status: 400 }
       );
     }
@@ -58,7 +59,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({
       success: true,
-      message: 'Feedback received successfully',
+      message: getTranslation('api.success.feedback_received', 'en'),
       id: `feedback_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
     });
 
@@ -66,7 +67,7 @@ export async function POST(request: NextRequest) {
     logger.error('Feedback API error', error, { component: 'feedback-api' });
     
     return NextResponse.json(
-      { error: 'Failed to process feedback' },
+      { error: getTranslation('api.errors.failed_process_feedback', 'en') },
       { status: 500 }
     );
   }

@@ -1,4 +1,5 @@
 import { Resend } from 'resend';
+import { getTranslation } from './translations';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -36,56 +37,30 @@ export class EmailService {
 
   async sendPasswordResetEmail(email: string, resetToken: string, language: 'de' | 'en' = 'de'): Promise<boolean> {
     const resetUrl = `${process.env.NEXT_PUBLIC_API_URL}/reset-password?token=${resetToken}`;
-    
-    const templates = {
-      de: {
-        subject: 'GastroTools - Passwort zurücksetzen',
-        html: `
-          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-            <h1 style="color: #7c3aed;">Passwort zurücksetzen</h1>
-            <p>Sie haben eine Passwort-Zurücksetzung für Ihr GastroTools-Konto angefordert.</p>
-            <p>Klicken Sie auf den folgenden Link, um Ihr Passwort zurückzusetzen:</p>
-            <a href="${resetUrl}" style="background: #7c3aed; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; display: inline-block; margin: 20px 0;">
-              Passwort zurücksetzen
-            </a>
-            <p>Dieser Link ist 1 Stunde gültig.</p>
-            <p>Falls Sie diese Anfrage nicht gestellt haben, ignorieren Sie diese E-Mail.</p>
-            <hr style="margin: 30px 0; border: none; border-top: 1px solid #eee;">
-            <p style="color: #666; font-size: 14px;">
-              GastroTools - Professionelle Restaurant-Management-Tools<br>
-              Diese E-Mail wurde automatisch generiert.
-            </p>
-          </div>
-        `
-      },
-      en: {
-        subject: 'GastroTools - Reset Password',
-        html: `
-          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-            <h1 style="color: #7c3aed;">Reset Password</h1>
-            <p>You have requested a password reset for your GastroTools account.</p>
-            <p>Click the following link to reset your password:</p>
-            <a href="${resetUrl}" style="background: #7c3aed; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; display: inline-block; margin: 20px 0;">
-              Reset Password
-            </a>
-            <p>This link is valid for 1 hour.</p>
-            <p>If you did not request this, please ignore this email.</p>
-            <hr style="margin: 30px 0; border: none; border-top: 1px solid #eee;">
-            <p style="color: #666; font-size: 14px;">
-              GastroTools - Professional Restaurant Management Tools<br>
-              This email was automatically generated.
-            </p>
-          </div>
-        `
-      }
-    };
 
-    const template = templates[language];
-    
+    const subject = `GastroTools - ${getTranslation('auth.reset_password.subject', language)}`;
+    const html = `
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+        <h1 style="color: #7c3aed;">${getTranslation('auth.reset_password.title', language)}</h1>
+        <p>${getTranslation('auth.reset_password.request_message', language)}</p>
+        <p>${getTranslation('auth.reset_password.click_link', language)}</p>
+        <a href="${resetUrl}" style="background: #7c3aed; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; display: inline-block; margin: 20px 0;">
+          ${getTranslation('auth.reset_password.button', language)}
+        </a>
+        <p>${getTranslation('auth.reset_password.validity', language)}</p>
+        <p>${getTranslation('auth.reset_password.ignore_message', language)}</p>
+        <hr style="margin: 30px 0; border: none; border-top: 1px solid #eee;">
+        <p style="color: #666; font-size: 14px;">
+          GastroTools - ${getTranslation('email.footer.tagline', language)}<br>
+          ${getTranslation('email.footer.auto_generated', language)}
+        </p>
+      </div>
+    `;
+
     return this.sendEmail({
       to: email,
-      subject: template.subject,
-      html: template.html
+      subject: subject,
+      html: html
     });
   }
 

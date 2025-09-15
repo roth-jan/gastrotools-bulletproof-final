@@ -1,0 +1,76 @@
+{
+  "auth": {
+    "login": {
+      "failed": "Anmeldung fehlgeschlagen",
+      "demo_user": "Demo Benutzer"
+    },
+    "forgot_password": {
+      "email_required": "E-Mail ist erforderlich",
+      "account_exists_message": "Falls ein Konto mit dieser E-Mail existiert, erhalten Sie eine E-Mail zum Zurücksetzen des Passworts.",
+      "email_sent": "E-Mail zum Zurücksetzen des Passworts gesendet. Prüfen Sie Ihren Posteingang.",
+      "email_service_error": "E-Mail-Service-Fehler"
+    },
+    "reset_password": {
+      "subject": "Passwort zurücksetzen",
+      "title": "Passwort zurücksetzen",
+      "request_message": "Sie haben ein Zurücksetzen des Passworts für Ihr GastroTools-Konto angefordert.",
+      "click_link": "Klicken Sie auf den folgenden Link, um Ihr Passwort zurückzusetzen:",
+      "button": "Passwort zurücksetzen",
+      "validity": "Dieser Link ist 1 Stunde gültig.",
+      "ignore_message": "Falls Sie dies nicht angefordert haben, ignorieren Sie diese E-Mail bitte."
+    }
+  },
+  "api": {
+    "errors": {
+      "unauthorized": "Nicht autorisiert",
+      "unknown_error": "Unbekannter Fehler",
+      "internal_server_error": "Interner Server-Fehler",
+      "invalid_analytics_data": "Ungültige Analysedaten",
+      "failed_process_analytics": "Fehler beim Verarbeiten der Analyse",
+      "events_must_be_array": "Events müssen ein Array sein",
+      "failed_process_batch": "Fehler beim Verarbeiten des Batches",
+      "message_type_required": "Nachricht und Typ sind erforderlich",
+      "failed_process_feedback": "Fehler beim Verarbeiten des Feedbacks"
+    },
+    "success": {
+      "feedback_received": "Feedback erfolgreich erhalten"
+    }
+  },
+  "nutrition": {
+    "usda_source": "USDA Food Data Central"
+  },
+  "menu": {
+    "editor": {
+      "no_menu_id": "Keine Menü-ID angegeben",
+      "invalid_response": "Ungültige API-Antwortstruktur",
+      "restaurant_name_placeholder": "Restaurant Name"
+    },
+    "demo": {
+      "dry_aged_ribeye": "Dry Aged Ribeye Steak",
+      "eggs_benedict": "Eggs Benedict",
+      "pancakes": "Pancakes",
+      "flat_white": "Flat White",
+      "cold_brew": "Cold Brew",
+      "cheesecake_ny": "Cheesecake New York Style"
+    }
+  },
+  "common": {
+    "qr_code": "QR-Code",
+    "normal": "Normal",
+    "optional": "Optional"
+  },
+  "ui": {
+    "export": {
+      "pdf": "PDF exportieren"
+    }
+  },
+  "email": {
+    "footer": {
+      "tagline": "Professionelle Restaurant-Management-Tools",
+      "auto_generated": "Diese E-Mail wurde automatisch generiert."
+    }
+  },
+  "package": {
+    "description": "Professionelle Restaurant-Management-Suite - Produktionsbereit"
+  }
+}

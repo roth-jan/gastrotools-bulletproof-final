@@ -8,6 +8,7 @@ import { Download, ArrowLeft } from "lucide-react"
 import html2canvas from 'html2canvas'
 import jsPDF from 'jspdf'
 import Link from 'next/link'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 interface MenuItem {
   id: string
@@ -47,7 +48,7 @@ const DEMO_MENUS: MenuData[] = [
         id: "2", 
         name: "Hauptgerichte",
         items: [
-          { id: "4", name: "Dry Aged Ribeye Steak", description: "300g, mit Rosmarin-Kartoffeln und Gemüse", price: 42.00 },
+          { id: "4", name: t('menu.demo.dry_aged_ribeye'), description: "300g, mit Rosmarin-Kartoffeln und Gemüse", price: 42.00 },
           { id: "5", name: "Wolfsbarsch-Filet", description: "Auf mediterranem Gemüse mit Olivenöl-Kartoffeln", price: 28.50 },
           { id: "6", name: "Lammkeule", description: "Rosa gebraten, mit Thymian-Jus und Ratatouille", price: 35.80 }
         ]
@@ -70,9 +71,9 @@ const DEMO_MENUS: MenuData[] = [
         id: "1",
         name: "Frühstück",
         items: [
-          { id: "1", name: "Eggs Benedict", description: "Pochierte Eier, Schinken, Hollandaise auf English Muffin", price: 12.90 },
+          { id: "1", name: t('menu.demo.eggs_benedict'), description: "Pochierte Eier, Schinken, Hollandaise auf English Muffin", price: 12.90 },
           { id: "2", name: "Avocado Toast", description: "Mit Kirschtomaten, Feta und Kürbiskernen", price: 9.80 },
-          { id: "3", name: "Pancakes", description: "Mit Ahornsirup, Beeren und Schlagsahne", price: 8.50 }
+          { id: "3", name: t('menu.demo.pancakes'), description: "Mit Ahornsirup, Beeren und Schlagsahne", price: 8.50 }
         ]
       },
       {
@@ -80,15 +81,15 @@ const DEMO_MENUS: MenuData[] = [
         name: "Kaffeespezialitäten",
         items: [
           { id: "4", name: "Cappuccino", description: "Doppelter Espresso mit aufgeschäumter Milch", price: 3.80 },
-          { id: "5", name: "Flat White", description: "Samtige Mikroschaumtextur", price: 4.20 },
-          { id: "6", name: "Cold Brew", description: "12h kalt extrahiert, mit Eiswürfeln", price: 4.50 }
+          { id: "5", name: t('menu.demo.flat_white'), description: "Samtige Mikroschaumtextur", price: 4.20 },
+          { id: "6", name: t('menu.demo.cold_brew'), description: "12h kalt extrahiert, mit Eiswürfeln", price: 4.50 }
         ]
       },
       {
         id: "3",
         name: "Hausgemachte Kuchen",
         items: [
-          { id: "7", name: "Cheesecake New York Style", description: "Mit Beerenkompott", price: 6.90 },
+          { id: "7", name: t('menu.demo.cheesecake_ny'), description: "Mit Beerenkompott", price: 6.90 },
           { id: "8", name: "Apfelstrudel", description: "Mit Vanillesauce", price: 5.80 }
         ]
       }
@@ -129,6 +130,7 @@ const DEMO_MENUS: MenuData[] = [
 ]
 
 export default function SpeisekartenDemo() {
+  const { t } = useLanguage()
   const [selectedMenu, setSelectedMenu] = useState(0)
   const menuRef = useRef<HTMLDivElement>(null)
   const [isExporting, setIsExporting] = useState(false)

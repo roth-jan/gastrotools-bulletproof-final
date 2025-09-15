@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { logger } from '@/lib/logger';
+import { getTranslation } from '@/lib/translations';
 
 export async function POST(request: NextRequest) {
   try {
@@ -7,7 +8,7 @@ export async function POST(request: NextRequest) {
     
     // Basic validation
     if (!analyticsData.event || !analyticsData.timestamp) {
-      return NextResponse.json({ error: 'Invalid analytics data' }, { status: 400 });
+      return NextResponse.json({ error: getTranslation('api.errors.invalid_analytics_data', 'en') }, { status: 400 });
     }
 
     // Extract useful information
@@ -81,7 +82,7 @@ export async function POST(request: NextRequest) {
 
   } catch (error) {
     logger.error('Analytics API error', error, { component: 'analytics-api' });
-    return NextResponse.json({ error: 'Failed to process analytics' }, { status: 500 });
+    return NextResponse.json({ error: getTranslation('api.errors.failed_process_analytics', 'en') }, { status: 500 });
   }
 }
 
@@ -91,7 +92,7 @@ export async function PUT(request: NextRequest) {
     const { events } = await request.json();
     
     if (!Array.isArray(events)) {
-      return NextResponse.json({ error: 'Events must be an array' }, { status: 400 });
+      return NextResponse.json({ error: getTranslation('api.errors.events_must_be_array', 'en') }, { status: 400 });
     }
 
     // Process each event
@@ -117,6 +118,6 @@ export async function PUT(request: NextRequest) {
 
   } catch (error) {
     logger.error('Analytics batch API error', error, { component: 'analytics-batch-api' });
-    return NextResponse.json({ error: 'Failed to process batch' }, { status: 500 });
+    return NextResponse.json({ error: getTranslation('api.errors.failed_process_batch', 'en') }, { status: 500 });
   }
 }

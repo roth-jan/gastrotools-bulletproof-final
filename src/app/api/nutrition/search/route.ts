@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { usdaService } from '@/lib/usda-nutrition';
 import { verifyAuth } from '@/lib/auth-utils';
+import { getTranslation } from '@/lib/translations';
 
 // POST /api/nutrition/search
 export async function POST(request: NextRequest) {
@@ -8,7 +9,7 @@ export async function POST(request: NextRequest) {
     // Auth-Check
     const user = await verifyAuth(request);
     if (!user) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+      return NextResponse.json({ error: getTranslation('api.errors.unauthorized', 'en') }, { status: 401 });
     }
 
     const { query, limit = 5 } = await request.json();
@@ -28,7 +29,7 @@ export async function POST(request: NextRequest) {
       query,
       results,
       count: results.length,
-      source: 'USDA Food Data Central',
+      source: getTranslation('nutrition.usda_source', 'en'),
       disclaimer: 'Nährwerte basieren auf USDA Food Data Central. Restaurant ist für finale Überprüfung verantwortlich.',
       legal_notice: 'Bei Allergien oder speziellen Diäten ärztlichen Rat einholen.'
     });
@@ -39,7 +40,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(
       { 
         error: 'Fehler bei der Nährwert-Suche',
-        details: error instanceof Error ? error.message : 'Unknown error'
+        details: error instanceof Error ? error.message : getTranslation('api.errors.unknown_error', 'en')
       },
       { status: 500 }
     );
@@ -52,7 +53,7 @@ export async function GET(request: NextRequest) {
     // Auth-Check
     const user = await verifyAuth(request);
     if (!user) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+      return NextResponse.json({ error: getTranslation('api.errors.unauthorized', 'en') }, { status: 401 });
     }
 
     const { searchParams } = new URL(request.url);
@@ -74,7 +75,7 @@ export async function GET(request: NextRequest) {
       query,
       results,
       count: results.length,
-      source: 'USDA Food Data Central',
+      source: getTranslation('nutrition.usda_source', 'en'),
       api_status: await usdaService.validateApiKey() ? 'live' : 'demo',
       disclaimer: 'Nährwerte basieren auf USDA Food Data Central. Restaurant ist für finale Überprüfung verantwortlich.'
     });
@@ -85,7 +86,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(
       { 
         error: 'Fehler bei der Nährwert-Suche',
-        details: error instanceof Error ? error.message : 'Unknown error'
+        details: error instanceof Error ? error.message : getTranslation('api.errors.unknown_error', 'en')
       },
       { status: 500 }
     );

@@ -513,7 +513,7 @@ export default function MenuEditor() {
                     <div className="text-center mt-8">
                       <img
                         src={menuData.qrCode}
-                        alt="QR Code"
+                        alt={t('common.qr_code')}
                         className="mx-auto w-32 h-32"
                       />
                       <p className="text-sm text-gray-600 mt-2">

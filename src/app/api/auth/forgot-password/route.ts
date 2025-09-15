@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
 import jwt from 'jsonwebtoken';
 import { emailService } from '@/lib/email-service';
+import { getTranslation } from '@/lib/translations';
 
 const prisma = new PrismaClient();
 
@@ -12,7 +13,7 @@ export async function POST(request: NextRequest) {
     // Validation
     if (!email) {
       return NextResponse.json(
-        { error: language === 'en' ? 'Email is required' : 'E-Mail ist erforderlich' },
+        { error: getTranslation('auth.forgot_password.email_required', language as 'en' | 'de') },
         { status: 400 }
       );
     }
@@ -26,9 +27,7 @@ export async function POST(request: NextRequest) {
       // Don't reveal if email exists (security)
       return NextResponse.json({
         success: true,
-        message: language === 'en' 
-          ? 'If an account with this email exists, you will receive a password reset email.'
-          : 'Falls ein Konto mit dieser E-Mail existiert, erhalten Sie eine E-Mail zum Zurücksetzen des Passworts.'
+        message: getTranslation('auth.forgot_password.account_exists_message', language as 'en' | 'de')
       });
     }
 
@@ -53,13 +52,11 @@ export async function POST(request: NextRequest) {
     if (emailSent) {
       return NextResponse.json({
         success: true,
-        message: language === 'en'
-          ? 'Password reset email sent. Check your inbox.'
-          : 'E-Mail zum Zurücksetzen wurde gesendet. Prüfen Sie Ihr Postfach.'
+        message: getTranslation('auth.forgot_password.email_sent', language as 'en' | 'de')
       });
     } else {
       return NextResponse.json(
-        { error: language === 'en' ? 'Email service error' : 'E-Mail-Service-Fehler' },
+        { error: getTranslation('auth.forgot_password.email_service_error', language as 'en' | 'de') },
         { status: 500 }
       );
     }
@@ -67,7 +64,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('Forgot password error:', error);
     return NextResponse.json(
-      { error: 'Internal server error' },
+      { error: getTranslation('api.errors.internal_server_error', 'en') },
       { status: 500 }
     );
   }

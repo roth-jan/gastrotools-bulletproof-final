@@ -2,6 +2,7 @@
 
 import { useState, useRef } from "react"
 import { generateQRCode, generateMenuPDF, getMenuPreviewUrl } from "@/lib/menu-utils"
+import { useLanguage } from "@/contexts/LanguageContext"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { 
@@ -62,6 +63,7 @@ const INITIAL_MENU_DATA: MenuSection[] = [
 ]
 
 export default function MenuEditor() {
+  const { t } = useLanguage()
   const [menuData, setMenuData] = useState<MenuSection[]>(INITIAL_MENU_DATA)
   const [selectedElement, setSelectedElement] = useState<string | null>(null)
   const [draggedItem, setDraggedItem] = useState<string | null>(null)
@@ -230,7 +232,7 @@ export default function MenuEditor() {
                 disabled={isExporting}
               >
                 <Download className="h-4 w-4 mr-2" />
-                PDF Export
+                {t('ui.export.pdf')}
               </Button>
               <Button size="sm">
                 <Save className="h-4 w-4 mr-2" />
@@ -298,7 +300,7 @@ export default function MenuEditor() {
                     value={menuTitle}
                     onChange={(e) => setMenuTitle(e.target.value)}
                     className="text-3xl font-bold text-center bg-transparent border-none outline-none w-full mb-2"
-                    placeholder="Restaurant Name"
+                    placeholder={t('menu.editor.restaurant_name_placeholder')}
                   />
                   <input
                     type="text"
@@ -427,7 +429,7 @@ export default function MenuEditor() {
                       <label className="text-sm font-medium mb-2 block">Schriftgröße</label>
                       <select className="w-full p-2 border rounded-md">
                         <option>Klein</option>
-                        <option>Normal</option>
+                        <option>{t('common.normal')}</option>
                         <option>Groß</option>
                       </select>
                     </div>

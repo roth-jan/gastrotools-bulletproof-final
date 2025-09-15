@@ -1,7 +1,7 @@
 {
   "name": "gastrotools-professional",
   "version": "1.0.0",
-  "description": "Professional Restaurant Management Suite - Production Ready",
+  "description": "Professionelle Restaurant-Management-Suite - Produktionsbereit",
   "private": true,
   "scripts": {
     "dev": "next dev",

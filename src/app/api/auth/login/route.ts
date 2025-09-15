@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import jwt from 'jsonwebtoken';
+import { getTranslation } from '@/lib/translations';
 
 export async function POST(request: NextRequest) {
   try {
@@ -22,7 +23,7 @@ export async function POST(request: NextRequest) {
         user: {
           id: 'demo-user-123',
           email: email,
-          name: 'Demo User',
+          name: getTranslation('auth.login.demo_user', 'en'),
           plan: 'free'
         },
         token
@@ -46,7 +47,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('Login error:', error);
     return NextResponse.json(
-      { error: 'Login failed', details: error instanceof Error ? error.message : 'Unknown error' },
+      { error: getTranslation('auth.login.failed', 'en'), details: error instanceof Error ? error.message : getTranslation('api.errors.unknown_error', 'en') },
       { status: 500 }
     );
   }

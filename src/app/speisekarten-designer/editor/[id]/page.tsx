@@ -10,6 +10,7 @@ import { Navigation } from "@/components/navigation"
 import { ErrorBoundary } from "@/components/error-boundary"
 import { generateQRCode, generateMenuPDF, getMenuPreviewUrl } from "@/lib/menu-utils"
 import { Save, Download, Plus, Trash2, ArrowLeft, QrCode, FileText, Edit2 } from "lucide-react"
+import { useLanguage } from '@/contexts/LanguageContext'
 
 interface MenuItem {
   id: string
@@ -41,6 +42,7 @@ const SAFE_DEFAULT_MENU: MenuData = {
 }
 
 export default function MenuEditorBulletproof() {
+  const { t } = useLanguage()
   const router = useRouter()
   const params = useParams()
   const menuRef = useRef<HTMLDivElement>(null)
@@ -64,7 +66,7 @@ export default function MenuEditorBulletproof() {
         
         // Ensure params exist
         if (!params?.id) {
-          throw new Error('No menu ID provided')
+          throw new Error(t('menu.editor.no_menu_id'))
         }
         
         const menuId = Array.isArray(params.id) ? params.id[0] : params.id
@@ -98,7 +100,7 @@ export default function MenuEditorBulletproof() {
             const data = await response.json()
             
             if (!data || !data.menu) {
-              throw new Error('Invalid API response structure')
+              throw new Error(t('menu.editor.invalid_response'))
             }
             
             // TRIPLE-SAFE DATA EXTRACTION
@@ -378,7 +380,7 @@ export default function MenuEditorBulletproof() {
                         ...prev, 
                         subtitle: e.target.value 
                       }))}
-                      placeholder="Optional"
+                      placeholder={t('common.optional')}
                     />
                   </div>
                 </CardContent>

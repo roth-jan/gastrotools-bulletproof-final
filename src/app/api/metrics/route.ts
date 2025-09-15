@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { PrismaClient } from '@prisma/client';
+import { getTranslation } from '@/lib/translations';
 
 const prisma = new PrismaClient();
 
@@ -10,7 +11,7 @@ export async function GET(request: NextRequest) {
     const expectedAuth = `Bearer ${process.env.METRICS_API_KEY || 'change-this-key'}`;
     
     if (authHeader !== expectedAuth) {
-      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+      return NextResponse.json({ error: getTranslation('api.errors.unauthorized', 'en') }, { status: 401 });
     }
 
     // Get application metrics
@@ -98,7 +99,7 @@ export async function GET(request: NextRequest) {
   } catch (error) {
     console.error('Metrics endpoint error:', error);
     return NextResponse.json(
-      { error: 'Internal server error' },
+      { error: getTranslation('api.errors.internal_server_error', 'en') },
       { status: 500 }
     );
   }

@@ -1,0 +1,76 @@
+{
+  "auth": {
+    "login": {
+      "failed": "Login failed",
+      "demo_user": "Demo User"
+    },
+    "forgot_password": {
+      "email_required": "Email is required",
+      "account_exists_message": "If an account with this email exists, you will receive a password reset email.",
+      "email_sent": "Password reset email sent. Check your inbox.",
+      "email_service_error": "Email service error"
+    },
+    "reset_password": {
+      "subject": "Reset Password",
+      "title": "Reset Password",
+      "request_message": "You have requested a password reset for your GastroTools account.",
+      "click_link": "Click the following link to reset your password:",
+      "button": "Reset Password",
+      "validity": "This link is valid for 1 hour.",
+      "ignore_message": "If you did not request this, please ignore this email."
+    }
+  },
+  "api": {
+    "errors": {
+      "unauthorized": "Unauthorized",
+      "unknown_error": "Unknown error",
+      "internal_server_error": "Internal server error",
+      "invalid_analytics_data": "Invalid analytics data",
+      "failed_process_analytics": "Failed to process analytics",
+      "events_must_be_array": "Events must be an array",
+      "failed_process_batch": "Failed to process batch",
+      "message_type_required": "Message and type are required",
+      "failed_process_feedback": "Failed to process feedback"
+    },
+    "success": {
+      "feedback_received": "Feedback received successfully"
+    }
+  },
+  "nutrition": {
+    "usda_source": "USDA Food Data Central"
+  },
+  "menu": {
+    "editor": {
+      "no_menu_id": "No menu ID provided",
+      "invalid_response": "Invalid API response structure",
+      "restaurant_name_placeholder": "Restaurant Name"
+    },
+    "demo": {
+      "dry_aged_ribeye": "Dry Aged Ribeye Steak",
+      "eggs_benedict": "Eggs Benedict",
+      "pancakes": "Pancakes",
+      "flat_white": "Flat White",
+      "cold_brew": "Cold Brew",
+      "cheesecake_ny": "Cheesecake New York Style"
+    }
+  },
+  "common": {
+    "qr_code": "QR Code",
+    "normal": "Normal",
+    "optional": "Optional"
+  },
+  "ui": {
+    "export": {
+      "pdf": "PDF Export"
+    }
+  },
+  "email": {
+    "footer": {
+      "tagline": "Professional Restaurant Management Tools",
+      "auto_generated": "This email was automatically generated."
+    }
+  },
+  "package": {
+    "description": "Professional Restaurant Management Suite - Production Ready"
+  }
+}
