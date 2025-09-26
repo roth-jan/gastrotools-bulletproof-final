@@ -1,0 +1,182 @@
+=== /Users/jhrothntconsult.de/Desktop/GASTROTOOLS-BULLETPROOF-FINAL/src/app/layout.tsx ===
+Metadata
+Inter
+Inter
+Metadata
+Professionelle
+Restaurant
+Management
+Suite
+Professioneller
+Kostenkontrolle
+=== /Users/jhrothntconsult.de/Desktop/GASTROTOOLS-BULLETPROOF-FINAL/src/app/page.tsx ===
+Button
+Card
+Navigation
+Calculator
+Calendar
+Package
+Users
+Link
+Navigation
+Hero
+=== /Users/jhrothntconsult.de/Desktop/GASTROTOOLS-BULLETPROOF-FINAL/src/app/admin/layout.tsx ===
+React
+=== /Users/jhrothntconsult.de/Desktop/GASTROTOOLS-BULLETPROOF-FINAL/src/app/admin/page.tsx ===
+Button
+Card
+Badge
+Navigation
+Users
+Activity
+Settings
+Eye
+Mail
+Lead
+=== /Users/jhrothntconsult.de/Desktop/GASTROTOOLS-BULLETPROOF-FINAL/src/app/analytics/page.tsx ===
+Card
+Badge
+Navigation
+Users
+Target
+Mail
+Calendar
+Simulate
+Object
+Navigation
+=== /Users/jhrothntconsult.de/Desktop/GASTROTOOLS-BULLETPROOF-FINAL/src/app/dashboard/page.tsx ===
+Link
+Button
+Card
+Navigation
+Calculator
+Calendar
+Package
+Users
+User
+string
+=== /Users/jhrothntconsult.de/Desktop/GASTROTOOLS-BULLETPROOF-FINAL/src/app/essen-auf-raedern/page.tsx ===
+Button
+Card
+Input
+Badge
+Navigation
+tracking
+Truck
+Database
+Calendar
+Heart
+=== /Users/jhrothntconsult.de/Desktop/GASTROTOOLS-BULLETPROOF-FINAL/src/app/forgot-password/page.tsx ===
+Link
+Button
+Card
+Input
+Label
+Navigation
+Mail
+React
+Content
+Type
+=== /Users/jhrothntconsult.de/Desktop/GASTROTOOLS-BULLETPROOF-FINAL/src/app/kostenkontrolle/page.tsx ===
+Button
+Card
+Input
+Label
+Select
+Navigation
+Plus
+Euro
+Calendar
+string
+=== /Users/jhrothntconsult.de/Desktop/GASTROTOOLS-BULLETPROOF-FINAL/src/app/kuechenmanager/page.tsx ===
+Button
+Card
+Input
+Badge
+Navigation
+tracking
+Calculator
+Printer
+Package
+Euro
+=== /Users/jhrothntconsult.de/Desktop/GASTROTOOLS-BULLETPROOF-FINAL/src/app/lagerverwaltung/page.tsx ===
+Button
+Card
+Input
+Label
+Select
+Badge
+Navigation
+Package
+Plus
+Search
+=== /Users/jhrothntconsult.de/Desktop/GASTROTOOLS-BULLETPROOF-FINAL/src/app/login/page.tsx ===
+Link
+Button
+Card
+Input
+Label
+Navigation
+Mail
+Lock
+React
+Content
+=== /Users/jhrothntconsult.de/Desktop/GASTROTOOLS-BULLETPROOF-FINAL/src/app/menueplaner/page.tsx ===
+Button
+Card
+Input
+Label
+Textarea
+Navigation
+tracking
+Calendar
+Plus
+Clock
+=== /Users/jhrothntconsult.de/Desktop/GASTROTOOLS-BULLETPROOF-FINAL/src/app/naehrwertrechner/page.tsx ===
+Navigation
+Button
+Card
+Input
+Label
+Plus
+Calculator
+Search
+Ingredient
+string
+=== /Users/jhrothntconsult.de/Desktop/GASTROTOOLS-BULLETPROOF-FINAL/src/app/register/page.tsx ===
+Immediate
+Weiterleitung
+Anmeldung
+=== /Users/jhrothntconsult.de/Desktop/GASTROTOOLS-BULLETPROOF-FINAL/src/app/signup-light/page.tsx ===
+Button
+Card
+Input
+Label
+Badge
+Navigation
+Mail
+Zap
+Shield
+Clock
+=== /Users/jhrothntconsult.de/Desktop/GASTROTOOLS-BULLETPROOF-FINAL/src/app/speisekarten-designer/page.tsx ===
+Button
+Card
+Input
+Label
+Textarea
+Select
+Badge
+Navigation
+Plus
+Eye
+=== /Users/jhrothntconsult.de/Desktop/GASTROTOOLS-BULLETPROOF-FINAL/src/app/webmenue/page.tsx ===
+Button
+Card
+Input
+Badge
+Navigation
+tracking
+School
+Smartphone
+Calendar
+Demo

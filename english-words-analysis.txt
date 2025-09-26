@@ -1,0 +1,712 @@
+ 142 Button
+ 128 Card
+  90 string
+  86 Label
+  70 Link
+  64 React
+  46 Input
+  42 Badge
+  34 Navigation
+  32 Mail
+  27 ring
+  24 Select
+  20 Export
+  17 Date
+  17 Calendar
+  15 Plus
+  15 Lead
+  12 Checkbox
+  11 Users
+  11 Sie
+  11 Integration
+  11 Content
+  10 Management
+   9 Tools
+   9 Please
+   9 loading
+   9 Item
+   9 Demo
+   9 Calculator
+   8 Zap
+   8 Warenwirtschaft
+   8 Textarea
+   8 Reset
+   8 Package
+   7 Speisekarten
+   7 Profi
+   7 Online
+   7 Monat
+   7 Math
+   7 Controlling
+   7 Bitte
+   7 Bestellung
+   6 Trigger
+   6 tracking
+   6 Track
+   6 Tourenplanung
+   6 System
+   6 Speiseplandruck
+   6 Search
+   6 marketing
+   6 Ihre
+   6 Eye
+   6 Download
+   6 Dashboard
+   6 Analytics
+   6 Add
+   6 Abrechnung
+   5 User
+   5 Type
+   5 Toast
+   5 Shield
+   5 Root
+   5 Rechnungen
+   5 Passwort
+   5 Lieferanten
+   5 Lagerverwaltung
+   5 Kostenkontrolle
+   5 Alles
+   4 Web
+   4 Truck
+   4 Tool
+   4 Star
+   4 Sofort
+   4 Smart
+   4 Separator
+   4 School
+   4 Object
+   4 Magic Link
+   4 Magic
+   4 Leads
+   4 leading
+   4 Language
+   4 Kostenlose Demo
+   4 Interesse
+   4 Ingredient
+   4 Euro
+   4 Etiketten
+   4 Essen
+   4 Email
+   4 Edit
+   4 Designer
+   4 Consent
+   4 Clock
+   4 Check
+   4 Category
+   4 Building
+   4 Budget
+   4 Adresse
+   3 Your
+   3 Wir
+   3 Verwaltung
+   3 verifying
+   3 Verfolgung
+   3 Vegetables
+   3 Validate
+   3 upselling
+   3 Unit
+   3 Tracking
+   3 Target
+   3 Suspense
+   3 Supplier
+   3 Starterpakete
+   3 Spices
+   3 Sie Ihren
+   3 Sicher
+   3 Setup
+   3 Schulen
+   3 Rolle
+   3 Rezeptverwaltung
+   3 Rezepte
+   3 Restaurant
+   3 Professionelle Restaurant
+   3 Portal
+   3 Monday
+   3 Menu
+   3 Meat
+   3 Manage
+   3 Login
+   3 Lieferservice
+   3 Lager
+   3 Kosten
+   3 Keep
+   3 Ihnen
+   3 Grains
+   3 Fish
+   3 Fehler
+   3 Features
+   3 Eltern
+   3 Drop
+   3 Drag
+   3 Disposition
+   3 Details
+   3 Delete
+   3 Dairy
+   3 Cookie
+   3 Compliance
+   3 Business
+   3 Beverages
+   3 Bestellungen
+   3 Auto
+   3 Anmeldung
+   3 Anmelden
+   3 Admin
+   2 Zutaten
+   2 Zutat
+   2 Zugang
+   2 Zentral
+   2 Zeit
+   2 Willkommen
+   2 Wednesday
+   2 warning
+   2 Vorlagen
+   2 Von
+   2 Viewport
+   2 Tuesday
+   2 Touren
+   2 Tools Section
+   2 Thursday
+   2 targeting
+   2 Tage
+   2 Sunday
+   2 Suite
+   2 Starten Sie
+   2 Smartphone
+   2 Smart Upselling
+   2 Slot
+   2 Simulate
+   2 Sie Ihre
+   2 Show
+   2 Shop Integration
+   2 Shop
+   2 setting
+   2 Servings
+   2 Send
+   2 Segment
+   2 Saturday
+   2 Revenue
+   2 Restaurants
+   2 Recipe
+   2 Real
+   2 Provider
+   2 Protein
+   2 Profis
+   2 Professionelle Warenwirtschaft
+   2 Professional
+   2 Produktname
+   2 Printer
+   2 Per
+   2 Password
+   2 parsing
+   2 Paket
+   2 Optional
+   2 Nutzung
+   2 Noch
+   2 No
+   2 Network
+   2 Name
+   2 Multi
+   2 Monitoring
+   2 Mobile Menu
+   2 Mobile
+   2 Mindestbestand
+   2 Metadata
+   2 Menu Cards
+   2 Match
+   2 logging
+   2 Lock
+   2 Load
+   2 Light
+   2 Lastschrift
+   2 Kunden
+   2 Kostenstellen
+   2 Kostenberechnungen
+   2 Konto
+   2 Kitas
+   2 Kategorien
+   2 Kategorie
+   2 Jetzt
+   2 Jederzeit
+   2 Inter
+   2 Intelligence
+   2 Informationen
+   2 Ihren
+   2 Icon
+   2 Hero Section
+   2 Hero
+   2 Heart
+   2 Guthaben
+   2 German
+   2 Gastro
+   2 Funktionen
+   2 Friday
+   2 Erstellen Sie
+   2 Error
+   2 Enterprise
+   2 Enter
+   2 End
+   2 Empfehlungen
+   2 Einstellungen
+   2 Einrichtung
+   2 Einnahmen
+   2 editing
+   2 Druck
+   2 Don
+   2 Digital
+   2 Deutsche Zutatenerkennung
+   2 Description
+   2 Datenschutz
+   2 Daten
+   2 Database
+   2 Cookies
+   2 Conversion
+   2 Comp
+   2 Clear
+   2 Case Zusammenfassung
+   2 capping
+   2 calculating
+   2 Business Case
+   2 Budgets
+   2 Bis
+   2 Betriebskantine
+   2 Bereich
+   2 Beratung
+   2 Benutzer
+   2 Bargeldlose Abrechnung
+   2 Bargeld
+   2 Ausgaben
+   2 Ansehen
+   2 Anfrage
+   2 Analytik
+   2 Amount
+   2 Allergenkennzeichnung
+   2 Alarmen
+   2 Add Menu
+   2 Add Category
+   2 Activity
+   2 Ablaufdatum
+   2 Abbrechen
+   1 Zuweisung
+   1 Zusendung
+   1 Zur Anmeldung
+   1 Zufriedene Schulen
+   1 Zubereitungszeit
+   1 working
+   1 Wochenplanung
+   1 Wird
+   1 Werkzeuge
+   1 Weniger Aufwand
+   1 welcoming
+   1 Weiterleitung
+   1 Weekly Menu
+   1 Waste
+   1 Warm
+   1 Vorschau
+   1 Vormonat
+   1 Verwalten Sie
+   1 Vertrauen
+   1 Verordnung
+   1 Verbesserungen
+   1 Value
+   1 Validation
+   1 Validated
+   1 Upselling Dismissed
+   1 Upselling
+   1 Updates
+   1 Updated
+   1 Unternehmen
+   1 Unlimited Kunden
+   1 typing
+   1 Trigger Smart
+   1 Trends
+   1 Transparente Preise
+   1 Traditional
+   1 Touch
+   1 Total Leads
+   1 Total
+   1 Top
+   1 Tool Features
+   1 Tomatoes
+   1 testing
+   1 Testen Sie
+   1 Templates
+   1 Template
+   1 Teilhabepaket
+   1 Tag
+   1 Summer Menu
+   1 Suchen
+   1 Success
+   1 Submit
+   1 Store
+   1 Stock
+   1 Status
+   1 Stats Cards
+   1 Starter
+   1 Standort
+   1 spending
+   1 Speiseplan
+   1 Speichern Ihrer
+   1 Speichern
+   1 Specific
+   1 Spam
+   1 Sonstiges
+   1 Software
+   1 Sofortiger Zugang
+   1 Social Proof
+   1 So
+   1 Snack
+   1 Smart Upsell
+   1 Smart Business
+   1 Simple Banner
+   1 Signup
+   1 Signing
+   1 Siehe
+   1 Sie Ausgabentrends
+   1 Sicherheit
+   1 Share
+   1 Settings
+   1 Senioreneinrichtung
+   1 Senioren
+   1 Sending
+   1 Sendet Magic
+   1 Sende
+   1 Send Reset
+   1 Segment Performance
+   1 Schulverwaltung
+   1 Schulung
+   1 Schule
+   1 Schritte
+   1 Schnittstelle
+   1 Schluss
+   1 Save Changes
+   1 Save
+   1 Salt
+   1 Rutsch
+   1 Rustic Charm
+   1 Rollen
+   1 Role
+   1 Rezeptname
+   1 Rezept
+   1 restocking
+   1 Restaurantmanagement
+   1 Restaurant Milano
+   1 Responsive Website
+   1 Responsive Design
+   1 Reset Password
+   1 Removed
+   1 Remove
+   1 Registrieren
+   1 Record
+   1 Recipe Name
+   1 Recipe Data
+   1 Rechtssichere Kennzeichnung
+   1 Ready
+   1 Readonly
+   1 Rate
+   1 Quick
+   1 Quantity
+   1 Projected
+   1 Prognose
+   1 profiling
+   1 Professioneller Druck
+   1 Professioneller
+   1 Professionelle Vorlagen
+   1 Professionelle Tools
+   1 Professionelle Speisekarten
+   1 Professionelle Gastro
+   1 Professional Tools
+   1 Professional Templates
+   1 Production
+   1 Product
+   1 Priority Support
+   1 Print
+   1 Pricing Modules
+   1 Price
+   1 Preview
+   1 Preparation
+   1 Portionskalierung
+   1 Portionsberechnung
+   1 Portions
+   1 Portionen
+   1 Planen Sie
+   1 Pipeline
+   1 Personalisierung
+   1 Personalisierte
+   1 Performance Dashboard
+   1 Perfekt
+   1 Partial
+   1 Pantry
+   1 Palette
+   1 Overview
+   1 Out
+   1 Organisation Type
+   1 Org
+   1 Ordner
+   1 Optimierung
+   1 Optimierte Routen
+   1 Opt
+   1 Open Tool
+   1 Olive Oil
+   1 Nutzungsverhalten
+   1 Nutzererfahrung
+   1 Nutrition Tool
+   1 Nutrition Facts
+   1 Nutrition
+   1 Nur Notwendige
+   1 Notwendige Cookies
+   1 Not
+   1 Netzwerk
+   1 Nach Bedarf
+   1 Multiple
+   1 Moved
+   1 Monitor
+   1 Monatliche Anmeldungen
+   1 Monatlich
+   1 Module
+   1 Modulares System
+   1 Modulare Preisgestaltung
+   1 Modular
+   1 Modern Minimal
+   1 Modal
+   1 Mitarbeiter
+   1 Missing German
+   1 Minimum
+   1 Min
+   1 Milano Restaurant
+   1 Menu Items
+   1 Menu Card
+   1 Mensaverpflegung
+   1 Menge
+   1 Melden Sie
+   1 Mehrsprachiger Support
+   1 Marketing
+   1 Marked
+   1 Mark Contacted
+   1 Mark
+   1 Mandant
+   1 Lunch
+   1 Low
+   1 Logo
+   1 Log
+   1 Location
+   1 Local
+   1 Loading
+   1 Listen
+   1 List
+   1 Limiting
+   1 Lieferdienste
+   1 Lieferantenintegration
+   1 Letzte
+   1 Leistung
+   1 Leads Management
+   1 Leads Gesamt
+   1 Lead Management
+   1 Lead Gate
+   1 Lagerartikel
+   1 Laden
+   1 Kundenverwaltung
+   1 Kunde Trichter
+   1 Kostenloses Konto
+   1 Kosteneintrag
+   1 Konversionsrate
+   1 Konversion
+   1 Kontrolle
+   1 Kontakt
+   1 Kommissionierlisten
+   1 Kitaverpflegung
+   1 Kita Sonnenschein
+   1 Kita
+   1 Kinder
+   1 Key Metrics
+   1 Keine Kreditkarte
+   1 Keine Artikel
+   1 Keine
+   1 Kein Link
+   1 Kartenname
+   1 Jetzt Demo
+   1 Inventur
+   1 Inventory Overview
+   1 Inventory
+   1 Interfaces
+   1 Interested
+   1 Inhaber
+   1 Ingredients
+   1 Infos
+   1 Info
+   1 Individuelles Branding
+   1 Individuelle Konfiguration
+   1 In Stock
+   1 In
+   1 Impressum
+   1 Immediate
+   1 Ihrer Nutzung
+   1 Ihren Suchkriterien
+   1 Ihren Daten
+   1 Ihren Bereich
+   1 Ihrem Restaurant
+   1 Ihre Tools
+   1 Ihre Rolle
+   1 Ihre Rezepte
+   1 Ihre Lebensmittelkosten
+   1 Ihre Daten
+   1 Ihr Bereich
+   1 If
+   1 Ich
+   1 Homepage
+   1 Holen Sie
+   1 Herbs
+   1 Hackfleisch
+   1 Gymnasium Nord
+   1 Grundschule Musterstadt
+   1 Grundschule
+   1 Group
+   1 Ground Beef
+   1 Grade Sicherheit
+   1 Get
+   1 Gestartete Testversionen
+   1 Gesamtkosten
+   1 Gerichtname
+   1 Generierte Leads
+   1 Generation
+   1 Generate
+   1 Gebuchte Demos
+   1 Geben Sie
+   1 Gastronomiebetriebe
+   1 Fresh Tomatoes
+   1 Frequency
+   1 Freezer
+   1 Freeware
+   1 Food
+   1 Focus
+   1 Fixed
+   1 First Design
+   1 Firma
+   1 Fibu
+   1 Features Section
+   1 Fat
+   1 Fast Casual
+   1 Failed
+   1 Facility Management
+   1 Exports
+   1 Experience
+   1 existing
+   1 Exakte Bedarfsmengen
+   1 Erweiterte Touren
+   1 Erkennung
+   1 Erfolgreich
+   1 Entscheidungen
+   1 Entry
+   1 Enterprise Security
+   1 Enterprise Features
+   1 Enhance
+   1 Energy
+   1 Einkaufsmengen
+   1 Einkauf
+   1 Einheit
+   1 Einfache Rechnungen
+   1 Editor
+   1 Dynamic Add
+   1 Durchschnittliche
+   1 Druckfertiger Export
+   1 Drop Planung
+   1 Double
+   1 Disabled
+   1 Dinner
+   1 dining
+   1 Digitalisierung
+   1 Digitale Schulverpflegung
+   1 Digitale Schul
+   1 Details Modal
+   1 Detaillierte Infos
+   1 Detailed Preferences
+   1 Desktop Navigation
+   1 Desktop Actions
+   1 Design
+   1 Demo Restaurant
+   1 Demo Login
+   1 Deleted
+   1 Default
+   1 Day
+   1 Datenverarbeitung
+   1 Datenschutz Einstellungen
+   1 Datenbank
+   1 Customers
+   1 Created
+   1 Create New
+   1 Cost Overview
+   1 Conversion Funnel
+   1 Company
+   1 Common
+   1 Code
+   1 Close
+   1 Clean
+   1 Classic Elegant
+   1 Catering
+   1 Caterer
+   1 Categories
+   1 Carbohydrates
+   1 Cancel
+   1 Calculate
+   1 Brief
+   1 Breakfast
+   1 Bread
+   1 Blick
+   1 Bildungseinrichtungen
+   1 Bildungs
+   1 Betriebsverpflegung
+   1 Betreuer
+   1 Bestellmengen
+   1 Bestandsverfolgung
+   1 Bestandsalarm
+   1 Bereit
+   1 Berechnungen
+   1 Berechne
+   1 Benutzer Gesamt
+   1 Benefits Section
+   1 Beliebtestes Paket
+   1 Behalten Sie
+   1 Beef Bolognese
+   1 Beef
+   1 Bedarfsmengen
+   1 Bearbeiten
+   1 Basis
+   1 Bargeldlos
+   1 Back
+   1 Automatische Segmentierung
+   1 Automatische Buchungen
+   1 Automatische Abbuchung
+   1 Automatische
+   1 Autocomplete Results
+   1 Autocomplete
+   1 Auth
+   1 Aufwand
+   1 Attribution
+   1 Artikel
+   1 Array
+   1 Are
+   1 Appetizers
+   1 App
+   1 Anmelde
+   1 Android Apps
+   1 Analyse
+   1 Always
+   1 Allergenen
+   1 Allergene
+   1 Alle Pakete
+   1 Alle Kategorien
+   1 Alle
+   1 Alerts
+   1 Aktueller Bestand
+   1 Aktive Benutzer
+   1 Aktion
+   1 Administration
+   1 Admin Dashboard
+   1 Add Item
+   1 Add Inventory
+   1 Add Entry
+   1 Add Cost
+   1 Actions
+   1 Action Buttons
+   1 Abwicklung
+   1 Absenden
+   1 Abmelden

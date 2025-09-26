@@ -1,0 +1,40 @@
+Zeile,Englisches Wort/Text,Deutsche Übersetzung,Datei,Status,Repariert
+1,Willkommen,Willkommen,dashboard/page.tsx,DEUTSCH - OK,✅
+2,zurück,zurück,dashboard/page.tsx,DEUTSCH - OK,✅
+3,Demo,Demo,dashboard/page.tsx,DEUTSCH - OK,✅
+4,User,Benutzer,dashboard/page.tsx,ZU REPARIEREN,❌
+5,Wählen,Wählen,dashboard/page.tsx,DEUTSCH - OK,✅
+6,Sie,Sie,dashboard/page.tsx,DEUTSCH - OK,✅
+7,ein,ein,dashboard/page.tsx,DEUTSCH - OK,✅
+8,Tool,Werkzeug,dashboard/page.tsx,ENGLISCH,❌
+9,um,um,dashboard/page.tsx,DEUTSCH - OK,✅
+10,mit,mit,dashboard/page.tsx,DEUTSCH - OK,✅
+11,Ihrem,Ihrem,dashboard/page.tsx,DEUTSCH - OK,✅
+12,Restaurant,Restaurant,dashboard/page.tsx,DEUTSCH - OK,✅
+13,Management,Management,dashboard/page.tsx,FACHBEGRIFF - OK,✅
+14,zu,zu,dashboard/page.tsx,DEUTSCH - OK,✅
+15,beginnen,beginnen,dashboard/page.tsx,DEUTSCH - OK,✅
+16,Nährwertrechner,Nährwertrechner,dashboard/page.tsx,DEUTSCH - OK,✅
+17,EU-compliant,EU-konform,dashboard/page.tsx,ENGLISCH,✅ REPARIERT
+18,nutrition,Nährwert,dashboard/page.tsx,ENGLISCH,✅ REPARIERT
+19,calculation,Berechnung,dashboard/page.tsx,ENGLISCH,✅ REPARIERT
+20,with,mit,dashboard/page.tsx,ENGLISCH,✅ REPARIERT
+21,USDA,USDA,dashboard/page.tsx,ABKÜRZUNG - OK,✅
+22,integration,Integration,dashboard/page.tsx,FACHBEGRIFF - OK,✅
+23,Open,Öffnen,dashboard/page.tsx,ENGLISCH,✅ REPARIERT
+24,Tool,Werkzeug,dashboard/page.tsx,ENGLISCH,✅ REPARIERT
+25,Kostenkontrolle,Kostenkontrolle,dashboard/page.tsx,DEUTSCH - OK,✅
+26,Track,Verfolgen,dashboard/page.tsx,ENGLISCH,✅ REPARIERT
+27,expenses,Ausgaben,dashboard/page.tsx,ENGLISCH,✅ REPARIERT
+28,budgets,Budgets,dashboard/page.tsx,ENGLISCH,✅ REPARIERT
+29,and,und,dashboard/page.tsx,ENGLISCH,✅ REPARIERT
+30,analyze,analysieren,dashboard/page.tsx,ENGLISCH,✅ REPARIERT
+31,cost,Kosten,dashboard/page.tsx,ENGLISCH,✅ REPARIERT
+32,trends,Trends,dashboard/page.tsx,ENGLISCH,✅ REPARIERT
+33,Lagerverwaltung,Lagerverwaltung,dashboard/page.tsx,DEUTSCH - OK,✅
+34,Manage,Verwalten,dashboard/page.tsx,ENGLISCH,✅ REPARIERT
+35,stock,Lager,dashboard/page.tsx,ENGLISCH,✅ REPARIERT
+36,levels,Bestände,dashboard/page.tsx,ENGLISCH,✅ REPARIERT
+37,with,mit,dashboard/page.tsx,ENGLISCH,✅ REPARIERT
+38,automated,automatischen,dashboard/page.tsx,ENGLISCH,✅ REPARIERT
+39,alerts,Alarmen,dashboard/page.tsx,ENGLISCH,✅ REPARIERT

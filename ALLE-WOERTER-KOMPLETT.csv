@@ -1,0 +1,69 @@
+Seite,Englisches Wort,Deutsche Übersetzung,Kontext,Status,Priorität,Datei,Zeile
+Homepage,Demo,Demo,Button Text,OK - Fachbegriff,Niedrig,page.tsx,33
+Homepage,Tools,Werkzeuge,Navigation,REPARIERT,Hoch,navigation.tsx,73
+Homepage,Features,Funktionen,Navigation,REPARIERT,Hoch,navigation.tsx,79
+Homepage,Professional,Professionell,Adjektiv,ZU REPARIEREN,Mittel,Verschiedene,?
+Dashboard,User,Benutzer,Willkommen Text,ZU REPARIEREN,Hoch,dashboard/page.tsx,114
+Dashboard,Tool,Werkzeug,Button/Beschreibung,ZU REPARIEREN,Hoch,dashboard/page.tsx,Multiple
+Dashboard,Management,Management,Fachbegriff,OK - Fachbegriff,Niedrig,dashboard/page.tsx,Multiple
+Dashboard,EU-compliant,EU-konform,Beschreibung,REPARIERT,Hoch,dashboard/page.tsx,64
+Dashboard,nutrition,Nährwert,Beschreibung,REPARIERT,Hoch,dashboard/page.tsx,64
+Dashboard,calculation,Berechnung,Beschreibung,REPARIERT,Hoch,dashboard/page.tsx,64
+Dashboard,USDA,USDA,Datenbank-Name,OK - Abkürzung,Niedrig,dashboard/page.tsx,64
+Dashboard,integration,Integration,Fachbegriff,OK - Fachbegriff,Niedrig,dashboard/page.tsx,64
+Dashboard,Track,Verfolgen,Beschreibung,REPARIERT,Hoch,dashboard/page.tsx,71
+Dashboard,expenses,Ausgaben,Beschreibung,REPARIERT,Hoch,dashboard/page.tsx,71
+Dashboard,budgets,Budgets,Beschreibung,REPARIERT,Hoch,dashboard/page.tsx,71
+Dashboard,analyze,analysieren,Beschreibung,REPARIERT,Hoch,dashboard/page.tsx,71
+Dashboard,cost,Kosten,Beschreibung,REPARIERT,Hoch,dashboard/page.tsx,71
+Dashboard,trends,Trends,Beschreibung,REPARIERT,Hoch,dashboard/page.tsx,71
+Dashboard,Manage,Verwalten,Beschreibung,REPARIERT,Hoch,dashboard/page.tsx,78
+Dashboard,stock,Lager,Beschreibung,REPARIERT,Hoch,dashboard/page.tsx,78
+Dashboard,levels,Bestände,Beschreibung,REPARIERT,Hoch,dashboard/page.tsx,78
+Dashboard,automated,automatischen,Beschreibung,REPARIERT,Hoch,dashboard/page.tsx,78
+Dashboard,alerts,Alarmen,Beschreibung,REPARIERT,Hoch,dashboard/page.tsx,78
+Dashboard,Open,Öffnen,Button,REPARIERT,Hoch,dashboard/page.tsx,138
+Login,Demo,Demo,Info-Text,OK - Fachbegriff,Niedrig,login/page.tsx,132
+Login,Access,Zugang,Info-Text,REPARIERT,Hoch,login/page.tsx,132
+Login,Email,E-Mail,Label,REPARIERT,Hoch,login/page.tsx,137
+Login,Password,Passwort,Label,REPARIERT,Hoch,login/page.tsx,138
+Kostenkontrolle,Product,Produkt,Label,REPARIERT,Hoch,kostenkontrolle/page.tsx,135
+Kostenkontrolle,Name,Name,Label Teil,OK - Universal,Niedrig,kostenkontrolle/page.tsx,135
+Kostenkontrolle,Unit,Stück,Label,REPARIERT,Hoch,kostenkontrolle/page.tsx,222
+Kostenkontrolle,Price,Preis,Label,REPARIERT,Hoch,kostenkontrolle/page.tsx,222
+Kostenkontrolle,Total,Gesamt,Label,REPARIERT,Hoch,kostenkontrolle/page.tsx,272
+Kostenkontrolle,Costs,Kosten,Label,REPARIERT,Hoch,kostenkontrolle/page.tsx,272
+Kostenkontrolle,Recent,Letzte,Überschrift,REPARIERT,Hoch,kostenkontrolle/page.tsx,280
+Kostenkontrolle,Entries,Einträge,Überschrift,REPARIERT,Hoch,kostenkontrolle/page.tsx,280
+Lagerverwaltung,Product,Produkt,Label,REPARIERT,Hoch,lagerverwaltung/page.tsx,218
+Lagerverwaltung,Current,Aktueller,Label,REPARIERT,Hoch,lagerverwaltung/page.tsx,257
+Lagerverwaltung,Stock,Bestand,Label,REPARIERT,Hoch,lagerverwaltung/page.tsx,257
+Lagerverwaltung,Min,Mindest,Label,REPARIERT,Hoch,lagerverwaltung/page.tsx,282
+Lagerverwaltung,Expiry,Ablauf,Label,REPARIERT,Hoch,lagerverwaltung/page.tsx,294
+Lagerverwaltung,Date,Datum,Label,REPARIERT,Hoch,lagerverwaltung/page.tsx,294
+Lagerverwaltung,Optional,Optional,Label,OK - Universal,Niedrig,lagerverwaltung/page.tsx,294
+Lagerverwaltung,All,Alle,Select Option,REPARIERT,Hoch,lagerverwaltung/page.tsx,350
+Lagerverwaltung,Categories,Kategorien,Select Option,REPARIERT,Hoch,lagerverwaltung/page.tsx,350
+Lagerverwaltung,Frozen,Tiefkühl,Select Option,REPARIERT,Hoch,lagerverwaltung/page.tsx,240
+Lagerverwaltung,Goods,Waren,Select Option,REPARIERT,Hoch,lagerverwaltung/page.tsx,240
+Nährwertrechner,Search,Suchen,Label,REPARIERT,Hoch,naehrwertrechner/page.tsx,256
+Nährwertrechner,Ingredient,Zutat,Label,REPARIERT,Hoch,naehrwertrechner/page.tsx,256
+Nährwertrechner,Recipe,Rezept,Placeholder,REPARIERT,Hoch,naehrwertrechner/page.tsx,227
+Menueplaner,Dish,Gericht,Label,REPARIERT,Hoch,menueplaner/page.tsx,185
+Menueplaner,Prep,Zubereitung,Label,REPARIERT,Hoch,menueplaner/page.tsx,233
+Menueplaner,Time,Zeit,Label,REPARIERT,Hoch,menueplaner/page.tsx,233
+Speisekarten-Designer,Card,Karte,Label,REPARIERT,Hoch,speisekarten-designer/page.tsx,265
+Speisekarten-Designer,Menu,Menü,Preview Text,REPARIERT,Hoch,speisekarten-designer/page.tsx,408
+Speisekarten-Designer,Preview,Vorschau,Preview Text,REPARIERT,Hoch,speisekarten-designer/page.tsx,408
+Admin,Loading,Laden,Status Text,REPARIERT,Hoch,admin/page.tsx,101
+Admin,admin,Admin,Loading Text,REPARIERT,Hoch,admin/page.tsx,101
+Admin,dashboard,Dashboard,Loading Text,REPARIERT,Hoch,admin/page.tsx,101
+Admin,Total,Gesamt,Statistik Label,REPARIERT,Hoch,admin/page.tsx,130
+Admin,Users,Benutzer,Statistik Label,REPARIERT,Hoch,admin/page.tsx,130
+Admin,Leads,Leads,Statistik Label,OK - Fachbegriff,Niedrig,admin/page.tsx,142
+Admin,Monthly,Monatliche,Statistik Label,REPARIERT,Hoch,admin/page.tsx,154
+Admin,Signups,Anmeldungen,Statistik Label,REPARIERT,Hoch,admin/page.tsx,154
+Admin,Active,Aktive,Statistik Label,REPARIERT,Hoch,admin/page.tsx,166
+Admin,Lead,Lead,Modal Titel,OK - Fachbegriff,Niedrig,admin/page.tsx,236
+Admin,Details,Details,Modal Titel,OK - Universal,Niedrig,admin/page.tsx,236
+Admin,Interest,Interesse,Label,REPARIERT,Hoch,admin/page.tsx,262

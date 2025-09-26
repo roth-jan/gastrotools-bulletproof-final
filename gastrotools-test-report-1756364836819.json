@@ -1,0 +1,155 @@
+{
+  "timestamp": "2025-08-28T07:07:16.819Z",
+  "testSuite": "GastroTools Comprehensive Testing",
+  "url": "https://gastrotools-mac-ready-25hcq4lac-jhroth-7537s-projects.vercel.app",
+  "summary": {
+    "totalTests": 8,
+    "passed": 5,
+    "failed": 3,
+    "partial": 0
+  },
+  "results": {
+    "authentication": {
+      "homepage": "PASS",
+      "loginForm": "FAIL"
+    },
+    "admin": {},
+    "tools": {},
+    "forms": {},
+    "email": {},
+    "mobile": {
+      "navigation": "PASS"
+    },
+    "i18n": {
+      "languageSwitcher": "FAIL"
+    },
+    "security": {
+      "protection_dashboard": "PASS",
+      "protection_admin": "PASS",
+      "protection_tools": "PASS",
+      "errorHandling": "FAIL"
+    }
+  },
+  "bugs": [
+    {
+      "severity": "blocking",
+      "category": "authentication",
+      "description": "Login form fields not found",
+      "url": "https://vercel.com/login?next=%2Fsso-api%3Furl%3Dhttps%253A%252F%252Fgastrotools-mac-ready-25hcq4lac-jhroth-7537s-projects.vercel.app%252Flogin%26nonce%3D3a11ed92fc2b7581e2dad0b1bfb4313678f87842ca83a5065841125da2ecf1c6",
+      "timestamp": "2025-08-28T07:05:44.897Z"
+    },
+    {
+      "severity": "blocking",
+      "category": "tools",
+      "description": "Tools test suite failed: page.fill: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input[type=\"password\"]')\u001b[22m\n",
+      "url": "https://vercel.com/login?next=%2Fsso-api%3Furl%3Dhttps%253A%252F%252Fgastrotools-mac-ready-25hcq4lac-jhroth-7537s-projects.vercel.app%252Flogin%26nonce%3D3a11ed92fc2b7581e2dad0b1bfb4313678f87842ca83a5065841125da2ecf1c6",
+      "timestamp": "2025-08-28T07:06:16.416Z"
+    },
+    {
+      "severity": "major",
+      "category": "admin",
+      "description": "Admin functionality test failed: page.fill: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input[type=\"password\"]')\u001b[22m\n",
+      "url": "https://vercel.com/login?next=%2Fsso-api%3Furl%3Dhttps%253A%252F%252Fgastrotools-mac-ready-25hcq4lac-jhroth-7537s-projects.vercel.app%252Flogin%26nonce%3D3a11ed92fc2b7581e2dad0b1bfb4313678f87842ca83a5065841125da2ecf1c6",
+      "timestamp": "2025-08-28T07:06:47.947Z"
+    },
+    {
+      "severity": "major",
+      "category": "i18n",
+      "description": "Language switcher not found",
+      "url": "https://vercel.com/login?next=%2Fsso-api%3Furl%3Dhttps%253A%252F%252Fgastrotools-mac-ready-25hcq4lac-jhroth-7537s-projects.vercel.app%252F%26nonce%3D3a11ed92fc2b7581e2dad0b1bfb4313678f87842ca83a5065841125da2ecf1c6",
+      "timestamp": "2025-08-28T07:06:49.319Z"
+    },
+    {
+      "severity": "major",
+      "category": "mobile",
+      "description": "Mobile responsiveness test failed: locator.tap: The page does not support tap. Use hasTouch context option to enable touch support.",
+      "url": "https://vercel.com/login?next=%2Fsso-api%3Furl%3Dhttps%253A%252F%252Fgastrotools-mac-ready-25hcq4lac-jhroth-7537s-projects.vercel.app%252Flogin%26nonce%3D3a11ed92fc2b7581e2dad0b1bfb4313678f87842ca83a5065841125da2ecf1c6",
+      "timestamp": "2025-08-28T07:06:52.572Z"
+    },
+    {
+      "severity": "minor",
+      "category": "security",
+      "description": "404 error handling not working properly",
+      "url": "https://vercel.com/login?next=%2Fsso-api%3Furl%3Dhttps%253A%252F%252Fgastrotools-mac-ready-25hcq4lac-jhroth-7537s-projects.vercel.app%252Fnonexistent-page-1756364824109%26nonce%3D3a11ed92fc2b7581e2dad0b1bfb4313678f87842ca83a5065841125da2ecf1c6",
+      "timestamp": "2025-08-28T07:07:07.275Z"
+    }
+  ],
+  "screenshots": [
+    {
+      "name": "homepage",
+      "description": "Homepage loaded",
+      "timestamp": "2025-08-28T07:05:42.743Z"
+    },
+    {
+      "name": "bug-1",
+      "description": "Login form fields not found",
+      "timestamp": "2025-08-28T07:05:44.956Z"
+    },
+    {
+      "name": "bug-2",
+      "description": "Tools test suite failed: page.fill: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input[type=\"password\"]')\u001b[22m\n",
+      "timestamp": "2025-08-28T07:06:16.481Z"
+    },
+    {
+      "name": "bug-3",
+      "description": "Admin functionality test failed: page.fill: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('input[type=\"password\"]')\u001b[22m\n",
+      "timestamp": "2025-08-28T07:06:48.026Z"
+    },
+    {
+      "name": "bug-4",
+      "description": "Language switcher not found",
+      "timestamp": "2025-08-28T07:06:49.376Z"
+    },
+    {
+      "name": "mobile-homepage",
+      "description": "Mobile homepage view",
+      "timestamp": "2025-08-28T07:06:51.277Z"
+    },
+    {
+      "name": "bug-5",
+      "description": "Mobile responsiveness test failed: locator.tap: The page does not support tap. Use hasTouch context option to enable touch support.",
+      "timestamp": "2025-08-28T07:06:52.609Z"
+    },
+    {
+      "name": "bug-6",
+      "description": "404 error handling not working properly",
+      "timestamp": "2025-08-28T07:07:07.326Z"
+    }
+  ],
+  "performance": [
+    {
+      "page": "/",
+      "loadTime": 2007,
+      "url": "https://gastrotools-mac-ready-25hcq4lac-jhroth-7537s-projects.vercel.app/",
+      "timestamp": "2025-08-28T07:07:09.333Z"
+    },
+    {
+      "page": "/login",
+      "loadTime": 1898,
+      "url": "https://gastrotools-mac-ready-25hcq4lac-jhroth-7537s-projects.vercel.app/login",
+      "timestamp": "2025-08-28T07:07:11.231Z"
+    },
+    {
+      "page": "/register",
+      "loadTime": 1962,
+      "url": "https://gastrotools-mac-ready-25hcq4lac-jhroth-7537s-projects.vercel.app/register",
+      "timestamp": "2025-08-28T07:07:13.193Z"
+    },
+    {
+      "page": "/naehrwertrechner",
+      "loadTime": 1783,
+      "url": "https://gastrotools-mac-ready-25hcq4lac-jhroth-7537s-projects.vercel.app/naehrwertrechner",
+      "timestamp": "2025-08-28T07:07:14.976Z"
+    },
+    {
+      "page": "/kostenkontrolle",
+      "loadTime": 1843,
+      "url": "https://gastrotools-mac-ready-25hcq4lac-jhroth-7537s-projects.vercel.app/kostenkontrolle",
+      "timestamp": "2025-08-28T07:07:16.819Z"
+    }
+  ],
+  "recommendations": [
+    "CRITICAL: Fix blocking bugs before Upwork outsourcing"
+  ],
+  "readiness": "NOT READY - critical issues must be resolved"
+}

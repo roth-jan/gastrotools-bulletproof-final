@@ -1,0 +1,30 @@
+Englisches Wort,Häufigkeit,Dateipfad,Zeilennummer,Kontext,Deutsche Übersetzung,Status,Priorität
+Button,142,Alle Komponenten,Verschiedene,UI-Komponente,Button (Komponenten-Name),Technisch - OK,Niedrig
+Card,128,Alle Komponenten,Verschiedene,UI-Komponente,Card (Komponenten-Name),Technisch - OK,Niedrig
+string,90,TypeScript Typen,Verschiedene,Datentyp,string (TypeScript),Technisch - OK,Niedrig
+Label,86,Form-Komponenten,Verschiedene,UI-Komponente,Label (Komponenten-Name),Technisch - OK,Niedrig
+Link,70,Navigation,Verschiedene,UI-Komponente,Link (Komponenten-Name),Technisch - OK,Niedrig
+React,64,Imports,Verschiedene,Framework,React (Framework),Technisch - OK,Niedrig
+Input,46,Form-Komponenten,Verschiedene,UI-Komponente,Input (Komponenten-Name),Technisch - OK,Niedrig
+Badge,42,UI-Komponenten,Verschiedene,UI-Komponente,Badge (Komponenten-Name),Technisch - OK,Niedrig
+Navigation,34,Komponenten,Verschiedene,Komponenten-Name,Navigation (Komponenten),Technisch - OK,Niedrig
+Mail,32,Icons,Verschiedene,Icon-Name,Mail (Icon),Technisch - OK,Niedrig
+ring,27,CSS-Klassen,Verschiedene,Tailwind CSS,ring (CSS-Klasse),Technisch - OK,Niedrig
+Select,24,Form-Komponenten,Verschiedene,UI-Komponente,Select (Komponenten-Name),Technisch - OK,Niedrig
+Export,20,Funktionalität,Verschiedene,User-Text,Exportieren,BENUTZER-SICHTBAR,HOCH
+Date,17,Datum-Felder,Verschiedene,Datentyp/UI,Datum,Teilweise sichtbar,Mittel
+Calendar,17,Icons/Komponenten,Verschiedene,Icon/Komponente,Calendar (Icon/Komponente),Technisch - OK,Niedrig
+Plus,15,Icons,Verschiedene,Icon-Name,Plus (Icon),Technisch - OK,Niedrig
+Lead,15,Business-Logik,Verschiedene,Fachbegriff,Lead (Fachbegriff),Fachsprache - OK,Niedrig
+Checkbox,12,Form-Komponenten,Verschiedene,UI-Komponente,Checkbox (Komponenten-Name),Technisch - OK,Niedrig
+Users,11,Icons/User,Verschiedene,Icon/Benutzer,Benutzer,BENUTZER-SICHTBAR,MITTEL
+Sie,11,Deutsche Anrede,Verschiedene,Deutsch,Sie (korrekt deutsch),Deutsch - OK,OK
+Integration,11,Fachbegriff,Verschiedene,Fachbegriff,Integration (Fachbegriff),Fachsprache - OK,Niedrig
+Content,11,Komponenten,Verschiedene,Komponenten-Name,Content (Komponenten),Technisch - OK,Niedrig
+Management,10,Fachbegriff,Verschiedene,Fachbegriff,Management (Fachbegriff),Fachsprache - OK,Niedrig
+Tools,9,User Interface,Verschiedene,User-Text,Werkzeuge,BENUTZER-SICHTBAR,HOCH
+Please,9,User Messages,Verschiedene,User-Text,Bitte,BENUTZER-SICHTBAR,HOCH
+loading,9,Loading States,Verschiedene,User-Text,Laden,BENUTZER-SICHTBAR,HOCH
+Item,9,Form Labels,Verschiedene,User-Text,Artikel,BENUTZER-SICHTBAR,MITTEL
+Demo,9,User Interface,Verschiedene,User-Text,Demo (OK in deutsch),Deutsch - OK,OK
+Calculator,9,Tool Name,Verschiedene,User-Text,Rechner,BENUTZER-SICHTBAR,HOCH

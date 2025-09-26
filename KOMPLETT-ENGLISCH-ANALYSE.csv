@@ -1,0 +1,20 @@
+Fundstelle,Englischer Text,Deutsche Übersetzung,Datei,Zeile,Priorität,Status
+Placeholder,e.g. Beef Bolognese,z.B. Rinderbolognese,menueplaner/page.tsx,189,HOCH,ZU REPARIEREN
+Placeholder,e.g. Fresh Tomatoes Ground Beef,z.B. Frische Tomaten Rinderhack,naehrwertrechner/page.tsx,222,HOCH,ZU REPARIEREN
+Placeholder,Recipe Name,Rezeptname,naehrwertrechner/page.tsx,227,HOCH,ZU REPARIEREN
+Placeholder,e.g. Tomatoes Beef Olive Oil,z.B. Tomaten Rindfleisch Olivenöl,kuechenmanager/page.tsx,145,HOCH,ZU REPARIEREN
+Label Text,Loading admin dashboard,Admin-Dashboard laden,admin/page.tsx,101,MITTEL,ZU REPARIEREN
+Component,Professional M,Professional M (Produktname),essen-auf-raedern/page.tsx,?,NIEDRIG,FACHBEGRIFF OK
+Email Content,Professional Tools,Professionelle Tools,api/auth/verify-email/route.ts,176,MITTEL,ZU REPARIEREN
+Variable,menuItemsPlanned,menuItemsPlanned (Variable),smart-triggers.ts,11,NIEDRIG,CODE OK
+CSS Class,loading,loading (CSS),Verschiedene,?,NIEDRIG,CSS OK
+Icon Name,Users,Users (Icon),Verschiedene,?,NIEDRIG,ICON OK
+Component Name,Button,Button (React),Alle Dateien,?,NIEDRIG,FRAMEWORK OK
+Component Name,Card,Card (UI),Alle Dateien,?,NIEDRIG,FRAMEWORK OK
+Type Definition,string,string (TypeScript),Alle Dateien,?,NIEDRIG,CODE OK
+Framework,React,React (Framework),Alle Dateien,?,NIEDRIG,FRAMEWORK OK
+Technical,Date,Date (JavaScript),Verschiedene,?,NIEDRIG,CODE OK
+Business Term,Lead,Lead (Fachbegriff),Verschiedene,?,NIEDRIG,BUSINESS OK
+Business Term,Export,Export (Funktion),Verschiedene,?,NIEDRIG,FACHBEGRIFF OK
+Business Term,Management,Management (Fachbegriff),Verschiedene,?,NIEDRIG,FACHBEGRIFF OK
+Business Term,Integration,Integration (Fachbegriff),Verschiedene,?,NIEDRIG,FACHBEGRIFF OK

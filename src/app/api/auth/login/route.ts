@@ -7,7 +7,7 @@ export async function POST(request: NextRequest) {
     const { email, password } = await request.json();
 
     // Demo user - no database needed
-    if (email === 'demo@gastrotools.de' || email === 'test@gastrotools.de') {
+    if (email === 'demo@gastrotools.de' && password === 'demo123') {
       const token = jwt.sign(
         { 
           userId: 'demo-user-123',
