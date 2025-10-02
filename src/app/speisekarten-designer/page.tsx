@@ -185,8 +185,8 @@ export default function SpeisekartenDesignerPage() {
 
       <main className="container mx-auto px-4 py-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold mb-2">Menu Card Designer</h1>
-          <p className="text-gray-600">Create professional menu cards with beautiful templates</p>
+          <h1 className="text-3xl font-bold mb-2">Speisekarten Designer</h1>
+          <p className="text-gray-600">Erstellen Sie professionelle Speisekarten mit schönen Vorlagen</p>
         </div>
 
         <div className="grid lg:grid-cols-4 gap-6">
@@ -195,9 +195,9 @@ export default function SpeisekartenDesignerPage() {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <span>📄</span> Menu Cards ({menuCards.length})
+                  <span>📄</span> Speisekarten ({menuCards.length})
                 </CardTitle>
-                <CardDescription>Your menu card collection</CardDescription>
+                <CardDescription>Ihre Speisekarten-Sammlung</CardDescription>
               </CardHeader>
               <CardContent className="space-y-2">
                 {!isCreating ? (
@@ -231,7 +231,7 @@ export default function SpeisekartenDesignerPage() {
                       onClick={() => setIsCreating(true)}
                     >
                       <Plus className="w-4 h-4 mr-2" />
-                      Create New Card
+                      Neue Karte erstellen
                     </Button>
 
                     {menuCards.length === 0 && (
@@ -240,37 +240,37 @@ export default function SpeisekartenDesignerPage() {
                         className="w-full"
                         onClick={createSampleMenu}
                       >
-                        Create Sample Menu
+                        Beispielmenü erstellen
                       </Button>
                     )}
                   </>
                 ) : (
                   <div className="space-y-3">
-                    <Label>Card Name</Label>
+                    <Label>Kartenname</Label>
                     <Input
                       value={newCardName}
                       onChange={(e) => setNewCardName(e.target.value)}
-                      placeholder="e.g., Summer Menu 2024"
+                      placeholder="z.B. Sommermenü 2024"
                     />
 
-                    <Label>Template</Label>
+                    <Label>Vorlage</Label>
                     <select
                       className="w-full p-2 border rounded"
                       value={selectedTemplate}
                       onChange={(e) => setSelectedTemplate(e.target.value)}
                     >
                       <option value="modern">Modern Minimal</option>
-                      <option value="classic">Classic Elegant</option>
-                      <option value="rustic">Rustic Charm</option>
-                      <option value="fine">Fine Dining</option>
+                      <option value="classic">Klassisch Elegant</option>
+                      <option value="rustic">Rustikaler Charme</option>
+                      <option value="fine">Gehobene Küche</option>
                     </select>
 
                     <div className="flex gap-2">
                       <Button onClick={createNewCard} disabled={!newCardName}>
-                        Create
+                        Erstellen
                       </Button>
                       <Button variant="outline" onClick={() => setIsCreating(false)}>
-                        Cancel
+                        Abbrechen
                       </Button>
                     </div>
                   </div>
@@ -288,7 +288,7 @@ export default function SpeisekartenDesignerPage() {
                     <CardTitle>{selectedCard.name}</CardTitle>
                     <Button onClick={exportPDF}>
                       <Download className="w-4 h-4 mr-2" />
-                      Export PDF
+                      PDF exportieren
                     </Button>
                   </div>
                 </CardHeader>
@@ -304,7 +304,7 @@ export default function SpeisekartenDesignerPage() {
                             onClick={() => addMenuItem(category)}
                           >
                             <Plus className="w-4 h-4 mr-1" />
-                            Add Item
+                            Artikel hinzufügen
                           </Button>
                         </div>
 
@@ -320,13 +320,13 @@ export default function SpeisekartenDesignerPage() {
                                     onChange={(e) => updateMenuItem(item.id, 'name', e.target.value)}
                                   />
                                   <Input
-                                    placeholder="Description"
+                                    placeholder="Beschreibung"
                                     value={item.description}
                                     onChange={(e) => updateMenuItem(item.id, 'description', e.target.value)}
                                   />
                                   <div className="flex gap-2">
                                     <Input
-                                      placeholder="Price"
+                                      placeholder="Preis"
                                       value={item.price}
                                       onChange={(e) => updateMenuItem(item.id, 'price', e.target.value)}
                                     />
@@ -351,13 +351,13 @@ export default function SpeisekartenDesignerPage() {
               <Card>
                 <CardContent className="flex flex-col items-center justify-center h-96 text-gray-500">
                   <span className="text-6xl mb-4">📄</span>
-                  <p>Select a menu card from the left to start editing</p>
+                  <p>Wählen Sie eine Speisekarte links aus, um mit der Bearbeitung zu beginnen</p>
                   {menuCards.length === 0 && (
                     <Button
                       className="mt-4"
                       onClick={createSampleMenu}
                     >
-                      Create Sample Menu to Get Started
+                      Beispielmenü erstellen zum Starten
                     </Button>
                   )}
                 </CardContent>

@@ -145,7 +145,7 @@ export default function LoginPage() {
                   Passwort vergessen?
                 </Link>
                 <div className="text-sm text-gray-600">
-                  Don't have an account?{' '}
+                  Noch kein Konto?{' '}
                   <Link href="/signup-light" className="text-purple-600 hover:underline">
                     Konto erstellen
                   </Link>
@@ -154,13 +154,13 @@ export default function LoginPage() {
 
               {/* Demo Login Info */}
               <div className="mt-6 p-4 bg-blue-50 rounded-lg">
-                <h4 className="font-semibold text-blue-900 mb-2">Demo Access</h4>
+                <h4 className="font-semibold text-blue-900 mb-2">Demo-Zugang</h4>
                 <p className="text-sm text-blue-800 mb-2">
-                  Test all features with our demo account:
+                  Testen Sie alle Funktionen mit unserem Demo-Konto:
                 </p>
                 <div className="text-sm space-y-1">
-                  <div><strong>Email:</strong> demo@gastrotools.de</div>
-                  <div><strong>Password:</strong> demo123</div>
+                  <div><strong>E-Mail:</strong> demo@gastrotools.de</div>
+                  <div><strong>Passwort:</strong> demo123</div>
                 </div>
                 <Button
                   type="button"
@@ -168,7 +168,7 @@ export default function LoginPage() {
                   className="w-full mt-3"
                   onClick={handleDemoLogin}
                 >
-                  Use Demo Account
+                  Demo-Konto verwenden
                 </Button>
               </div>
             </CardContent>
