@@ -26,6 +26,7 @@ export default function HomePage() {
           <h1 className="text-5xl font-bold text-gray-900 mb-4">
             🍽️ GastroTools Professionell
           </h1>
+          <div className="text-xs text-gray-400">Version: 2.10.2025 - AKTUELL</div>
           <p className="text-xl text-gray-600 mb-8">
             {language === 'de'
               ? 'Professionelle Restaurant-Management-Suite - Produktionsbereit mit vollständiger Internationalisierung'
