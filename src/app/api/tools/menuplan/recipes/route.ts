@@ -162,7 +162,7 @@ export async function POST(request: NextRequest) {
       }
     })
 
-    // Update usage
+    // Aktualisieren usage
     await incrementUsage(user.id, 'recipes')
 
     return NextResponse.json({ recipe })

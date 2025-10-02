@@ -48,7 +48,7 @@ export async function POST(request: NextRequest) {
     // Generate unique file key
     const fileKey = generateFileKey(file.name, type);
 
-    // Upload to S3
+    // Hochladen to S3
     const result = await uploadToS3(
       buffer,
       fileKey,
@@ -63,7 +63,7 @@ export async function POST(request: NextRequest) {
     });
 
   } catch (error) {
-    console.error('Upload error:', error);
+    console.error('Hochladen error:', error);
     return NextResponse.json(
       { error: 'Fehler beim Hochladen der Datei' },
       { status: 500 }

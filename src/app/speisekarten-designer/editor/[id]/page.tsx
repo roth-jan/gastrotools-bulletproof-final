@@ -51,7 +51,7 @@ export default function MenuEditorBulletproof() {
   const [menuData, setMenuData] = useState<MenuData>(SAFE_DEFAULT_MENU)
   const [isLoading, setIsLoading] = useState(true)
   const [isSaving, setIsSaving] = useState(false)
-  const [isExporting, setIsExporting] = useState(false)
+  const [isExportierening, setIsExportierening] = useState(false)
   const [editingItem, setEditingItem] = useState<{sectionId: string, itemId: string} | null>(null)
   const [error, setError] = useState<string | null>(null)
 
@@ -156,22 +156,22 @@ export default function MenuEditorBulletproof() {
     }
   }, [params?.id])
 
-  // PDF Export function
-  const handleExportPDF = async () => {
+  // PDF Exportieren function
+  const handleExportierenPDF = async () => {
     if (!menuRef.current) {
       alert('Menü-Element nicht gefunden')
       return
     }
 
-    setIsExporting(true)
+    setIsExportierening(true)
     try {
       const fileName = `${menuData.title.replace(/[^a-z0-9]/gi, '_').toLowerCase() || 'speisekarte'}.pdf`
       await generateMenuPDF('menu-preview', fileName)
     } catch (error) {
-      console.error('PDF Export error:', error)
-      alert('Fehler beim Exportieren des PDFs')
+      console.error('PDF Exportieren error:', error)
+      alert('Fehler beim Exportierenieren des PDFs')
     } finally {
-      setIsExporting(false)
+      setIsExportierening(false)
     }
   }
 
@@ -332,11 +332,11 @@ export default function MenuEditorBulletproof() {
               </Button>
               <Button 
                 variant="outline"
-                onClick={handleExportPDF}
-                disabled={isExporting}
+                onClick={handleExportierenPDF}
+                disabled={isExportierening}
               >
                 <FileText className="w-4 h-4 mr-2" />
-                {isExporting ? 'Exportiere...' : 'Als PDF'}
+                {isExportierening ? 'Exportiereniere...' : 'Als PDF'}
               </Button>
               <Button 
                 variant="outline"
@@ -346,7 +346,7 @@ export default function MenuEditorBulletproof() {
                 }}
               >
                 <Save className="w-4 h-4 mr-2" />
-                Speichern
+                Save
               </Button>
             </div>
           </div>
@@ -520,14 +520,14 @@ export default function MenuEditorBulletproof() {
                     <div className="p-4 bg-gradient-to-r from-green-50 to-blue-50 border border-green-200 rounded-lg">
                       <p className="text-sm text-green-800">
                         🎉 <strong>Free Version</strong> - Vollständiger Editor aktiv!<br />
-                        ✅ Sektionen bearbeiten • ✅ Gerichte eingeben • ✅ PDF-Export
+                        ✅ Sektionen bearbeiten • ✅ Gerichte eingeben • ✅ PDF-Exportieren
                       </p>
                     </div>
                     
-                    {/* Premium Features Teaser */}
+                    {/* Premium Funktionen Teaser */}
                     <div className="p-4 bg-gradient-to-r from-purple-50 to-pink-50 border border-purple-200 rounded-lg">
                       <p className="text-sm text-purple-800">
-                        ✨ <strong>WebMenü Platform Features:</strong><br />
+                        ✨ <strong>WebMenü Platform Funktionen:</strong><br />
                         🔗 QR-Code + Online-Speisekarten • 🌐 Multi-Language • 🎨 20+ Premium-Templates • 📱 WebOrder Integration
                       </p>
                       <Button 

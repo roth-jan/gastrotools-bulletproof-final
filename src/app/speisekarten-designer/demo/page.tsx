@@ -131,16 +131,16 @@ const DEMO_MENUS: MenuData[] = [
 
 export default function SpeisekartenDemo() {
   const { t } = useLanguage()
-  const [selectedMenu, setSelectedMenu] = useState(0)
+  const [selectedMenu, setAuswählenedMenu] = useState(0)
   const menuRef = useRef<HTMLDivElement>(null)
-  const [isExporting, setIsExporting] = useState(false)
+  const [isExportierening, setIsExportierening] = useState(false)
 
   const currentMenu = DEMO_MENUS[selectedMenu]
 
   const exportToPDF = async () => {
     if (!menuRef.current) return
     
-    setIsExporting(true)
+    setIsExportierening(true)
     try {
       const canvas = await html2canvas(menuRef.current, {
         scale: 2,
@@ -176,7 +176,7 @@ export default function SpeisekartenDemo() {
     } catch (error) {
       console.error('Error generating PDF:', error)
     } finally {
-      setIsExporting(false)
+      setIsExportierening(false)
     }
   }
 
@@ -231,7 +231,7 @@ export default function SpeisekartenDemo() {
         </div>
 
         <div className="grid lg:grid-cols-3 gap-8">
-          {/* Menu Selection */}
+          {/* Menu Auswählenion */}
           <div className="lg:col-span-1">
             <Card>
               <CardHeader>
@@ -241,7 +241,7 @@ export default function SpeisekartenDemo() {
                 {DEMO_MENUS.map((menu, index) => (
                   <Button
                     key={index}
-                    onClick={() => setSelectedMenu(index)}
+                    onClick={() => setAuswählenedMenu(index)}
                     variant={selectedMenu === index ? "default" : "outline"}
                     className="w-full justify-start"
                   >
@@ -252,11 +252,11 @@ export default function SpeisekartenDemo() {
                 <div className="pt-4 border-t">
                   <Button
                     onClick={exportToPDF}
-                    disabled={isExporting}
+                    disabled={isExportierening}
                     className="w-full btn-primary flex items-center gap-2"
                   >
                     <Download className="w-4 h-4" />
-                    {isExporting ? 'Erstelle PDF...' : 'Als PDF exportieren'}
+                    {isExportierening ? 'Erstelle PDF...' : 'Als PDF exportieren'}
                   </Button>
                 </div>
               </CardContent>

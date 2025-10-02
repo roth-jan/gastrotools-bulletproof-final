@@ -7,7 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge"
 import { Navigation } from "@/components/navigation"
 import { useLanguage } from "@/contexts/LanguageContext"
-import { Users, Activity, TrendingUp, Settings, Eye, Mail } from "lucide-react"
+import { Users, Activity, TrendingUp, Einstellungen, Eye, Mail } from "lucide-react"
 
 interface AdminStats {
   totalUsers: number
@@ -37,7 +37,7 @@ export default function AdminPage() {
   })
   const [leads, setLeads] = useState<Lead[]>([])
   const [loading, setLoading] = useState(true)
-  const [selectedLead, setSelectedLead] = useState<Lead | null>(null) // ADDED: Lead detail modal
+  const [selectedLead, setAuswählenedLead] = useState<Lead | null>(null) // ADDED: Lead detail modal
 
   useEffect(() => {
     const token = localStorage.getItem('token')
@@ -213,7 +213,7 @@ export default function AdminPage() {
                         <Button 
                           variant="outline" 
                           size="sm"
-                          onClick={() => setSelectedLead(lead)}
+                          onClick={() => setAuswählenedLead(lead)}
                         >
                           <Eye className="w-4 h-4" />
                         </Button>
@@ -235,7 +235,7 @@ export default function AdminPage() {
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-xl font-semibold">Lead Details</h3>
                 <button
-                  onClick={() => setSelectedLead(null)}
+                  onClick={() => setAuswählenedLead(null)}
                   className="text-gray-500 hover:text-gray-700 text-xl"
                 >
                   ×
@@ -286,19 +286,19 @@ export default function AdminPage() {
                         ? { ...lead, status: 'contacted' }
                         : lead
                     ))
-                    setSelectedLead(null)
+                    setAuswählenedLead(null)
                     console.log(`✅ Marked lead ${selectedLead.name} as contacted`)
                   }}
                 >
                   <Mail className="w-4 h-4 mr-2" />
-                  Mark Contacted
+                  Mark Kontakted
                 </Button>
                 
                 <Button
                   variant="outline"
-                  onClick={() => setSelectedLead(null)}
+                  onClick={() => setAuswählenedLead(null)}
                 >
-                  Close
+                  Schließen
                 </Button>
               </div>
             </div>

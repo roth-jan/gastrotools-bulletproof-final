@@ -160,7 +160,7 @@ export async function GET() {
   } catch (error) {
     console.error('Error creating demo user:', error);
     return NextResponse.json(
-      { error: 'Failed to create demo user', details: error instanceof Error ? error.message : String(error) },
+      { error: 'Fehlgeschlagen to create demo user', details: error instanceof Error ? error.message : String(error) },
       { status: 500 }
     );
   }

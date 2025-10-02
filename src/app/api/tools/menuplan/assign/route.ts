@@ -102,7 +102,7 @@ export async function POST(request: NextRequest) {
     let menuPlan;
 
     if (existingPlan) {
-      // Update existing assignment
+      // Aktualisieren existing assignment
       menuPlan = await prisma.menuPlan.update({
         where: { id: existingPlan.id },
         data: {
@@ -132,7 +132,7 @@ export async function POST(request: NextRequest) {
         },
       });
 
-      // 4. Update usage only for new assignments
+      // 4. Aktualisieren usage only for new assignments
       await incrementUsage(user.id, 'recipes');
     }
 
@@ -144,7 +144,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('Error assigning recipe:', error);
     return NextResponse.json(
-      { error: 'Failed to assign recipe' },
+      { error: 'Fehlgeschlagen to assign recipe' },
       { status: 500 }
     );
   }

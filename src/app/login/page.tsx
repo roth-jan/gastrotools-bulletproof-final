@@ -48,11 +48,11 @@ export default function LoginPage() {
         // Redirect to intended page or dashboard
         router.push(redirect)
       } else {
-        setError(data.error || 'Login failed')
+        setError(data.error || 'Anmelden failed')
       }
     } catch (error) {
-      console.error('Login error:', error)
-      setError('Network error - please try again')
+      console.error('Anmelden error:', error)
+      setError('Netzwerkfehler - please try again')
     } finally {
       setIsLoading(false)
     }
@@ -152,7 +152,7 @@ export default function LoginPage() {
                 </div>
               </div>
 
-              {/* Demo Login Info */}
+              {/* Demo Anmelden Info */}
               <div className="mt-6 p-4 bg-blue-50 rounded-lg">
                 <h4 className="font-semibold text-blue-900 mb-2">Demo-Zugang</h4>
                 <p className="text-sm text-blue-800 mb-2">

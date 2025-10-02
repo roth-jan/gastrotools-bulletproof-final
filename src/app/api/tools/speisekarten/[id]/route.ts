@@ -206,15 +206,15 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
     });
 
   } catch (error) {
-    console.error('Error loading menu:', error);
+    console.error('Fehler beim Laden menu:', error);
     return NextResponse.json(
-      { error: 'Failed to load menu' },
+      { error: 'Fehlgeschlagen to load menu' },
       { status: 500 }
     );
   }
 }
 
-// PUT: Update existing menu
+// PUT: Aktualisieren existing menu
 export async function PUT(request: NextRequest, { params }: RouteParams) {
   try {
     const user = await verifyAuth(request);
@@ -266,13 +266,13 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
   } catch (error) {
     console.error('Error updating menu:', error);
     return NextResponse.json(
-      { error: 'Failed to update menu' },
+      { error: 'Fehlgeschlagen to update menu' },
       { status: 500 }
     );
   }
 }
 
-// DELETE: Delete menu
+// DELETE: Löschen menu
 export async function DELETE(request: NextRequest, { params }: RouteParams) {
   try {
     const user = await verifyAuth(request);
@@ -299,7 +299,7 @@ export async function DELETE(request: NextRequest, { params }: RouteParams) {
   } catch (error) {
     console.error('Error deleting menu:', error);
     return NextResponse.json(
-      { error: 'Failed to delete menu' },
+      { error: 'Fehlgeschlagen to delete menu' },
       { status: 500 }
     );
   }

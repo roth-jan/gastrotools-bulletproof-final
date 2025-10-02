@@ -64,7 +64,7 @@ export class EmailService {
     });
   }
 
-  async sendContactEmail(data: { name: string; email: string; subject: string; message: string }): Promise<boolean> {
+  async sendKontaktEmail(data: { name: string; email: string; subject: string; message: string }): Promise<boolean> {
     const html = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
         <h1 style="color: #7c3aed;">Neue Kontaktanfrage</h1>

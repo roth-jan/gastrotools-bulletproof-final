@@ -163,7 +163,7 @@ export async function POST(request: NextRequest) {
       }
     });
 
-    // Update usage
+    // Aktualisieren usage
     await incrementUsage(user.id, 'costEntries');
 
     return NextResponse.json({ entry });

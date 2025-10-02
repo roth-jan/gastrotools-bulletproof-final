@@ -6,8 +6,8 @@ import { LanguageProvider } from '@/contexts/LanguageContext'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'GastroTools Professional',
-  description: 'Professional Restaurant Management Suite - Production Ready',
+  title: 'GastroTools Professionell',
+  description: 'Professionelle Restaurant-Management-Suite - Production Ready',
 }
 
 export default function RootLayout({

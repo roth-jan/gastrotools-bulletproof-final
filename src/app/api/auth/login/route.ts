@@ -45,7 +45,7 @@ export async function POST(request: NextRequest) {
     );
 
   } catch (error) {
-    console.error('Login error:', error);
+    console.error('Anmelden error:', error);
     return NextResponse.json(
       { error: getTranslation('auth.login.failed', 'en'), details: error instanceof Error ? error.message : getTranslation('api.errors.unknown_error', 'en') },
       { status: 500 }

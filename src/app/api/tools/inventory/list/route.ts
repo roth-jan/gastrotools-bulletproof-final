@@ -28,7 +28,7 @@ export async function GET(request: NextRequest) {
           maxStock: 50,
           supplier: 'Bio-Hof Schmidt',
           barcode: '1234567890123',
-          lastUpdated: new Date().toISOString()
+          lastAktualisierend: new Date().toISOString()
         },
         {
           id: 'demo-item-2',
@@ -38,9 +38,9 @@ export async function GET(request: NextRequest) {
           unit: 'Liter',
           minStock: 5,
           maxStock: 20,
-          supplier: 'Italienischer Importeur',
+          supplier: 'Italienischer Importiereneur',
           barcode: '9876543210987',
-          lastUpdated: new Date().toISOString()
+          lastAktualisierend: new Date().toISOString()
         },
         {
           id: 'demo-item-3',
@@ -52,7 +52,7 @@ export async function GET(request: NextRequest) {
           maxStock: 100,
           supplier: 'Mühle Müller',
           barcode: '5555555555555',
-          lastUpdated: new Date().toISOString()
+          lastAktualisierend: new Date().toISOString()
         }
       ];
       
@@ -80,7 +80,7 @@ export async function GET(request: NextRequest) {
         maxStock: item.maxStock,
         supplier: item.supplier,
         barcode: item.barcode,
-        lastUpdated: item.updatedAt.toISOString()
+        lastAktualisierend: item.updatedAt.toISOString()
       }))
     });
 

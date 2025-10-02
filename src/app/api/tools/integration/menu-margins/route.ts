@@ -96,7 +96,7 @@ export async function POST(request: NextRequest) {
 
         menuMargins.push(itemAnalysis);
 
-        // Update totals
+        // Aktualisieren totals
         totalRevenue += itemPrice;
         totalCost += itemCost;
         totalMargin += margin;
@@ -144,7 +144,7 @@ export async function POST(request: NextRequest) {
 
     const avgMarginPercent = totalRevenue > 0 ? (totalMargin / totalRevenue) * 100 : 0;
 
-    // Update menu with calculated margins
+    // Aktualisieren menu with calculated margins
     await prisma.menu.update({
       where: { id: menu.id },
       data: {
@@ -200,7 +200,7 @@ export async function POST(request: NextRequest) {
       calculation: {
         recipeMatches: menuMargins.filter(item => item.matchType === 'recipe').length,
         estimatedItems: estimatedItems.length,
-        lastUpdate: new Date().toISOString()
+        lastAktualisieren: new Date().toISOString()
       }
     });
 

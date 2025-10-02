@@ -26,20 +26,20 @@ interface HealthStatus {
   }
 }
 
-export default function MonitoringDashboard() {
+export default function ÜberwachungDashboard() {
   const { t } = useLanguage()
   const [healthStatus, setHealthStatus] = useState<HealthStatus | null>(null)
   const [loading, setLoading] = useState(true)
-  const [lastUpdated, setLastUpdated] = useState<Date>(new Date())
+  const [lastAktualisierend, setLastAktualisierend] = useState<Date>(new Date())
 
   const fetchHealthStatus = async () => {
     try {
       const response = await fetch('/api/health')
       const data = await response.json()
       setHealthStatus(data)
-      setLastUpdated(new Date())
+      setLastAktualisierend(new Date())
     } catch (error) {
-      console.error('Failed to fetch health status:', error)
+      console.error('Fehlgeschlagen to fetch health status:', error)
     } finally {
       setLoading(false)
     }
@@ -118,7 +118,7 @@ export default function MonitoringDashboard() {
                 {t('monitoring.refresh')}
               </Button>
               <p className="text-xs text-gray-500 mt-2">
-                {t('monitoring.last_update')} {lastUpdated.toLocaleTimeString('de-DE')}
+                {t('monitoring.last_update')} {lastAktualisierend.toLocaleTimeString('de-DE')}
               </p>
             </div>
           </div>

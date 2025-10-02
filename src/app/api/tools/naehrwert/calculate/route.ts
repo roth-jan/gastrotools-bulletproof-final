@@ -146,7 +146,7 @@ export async function POST(request: NextRequest) {
       }
     });
 
-    // Update usage count
+    // Aktualisieren usage count
     if (currentUsage) {
       await prisma.usageTracking.update({
         where: { id: currentUsage.id },

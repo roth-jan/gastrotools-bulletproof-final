@@ -75,7 +75,7 @@ export async function DELETE(request: NextRequest) {
   } catch (error) {
     console.error('Error removing recipe:', error);
     return NextResponse.json(
-      { error: 'Failed to remove recipe' },
+      { error: 'Fehlgeschlagen to remove recipe' },
       { status: 500 }
     );
   }

@@ -145,7 +145,7 @@ export async function POST(request: NextRequest) {
           recipeId: plan.recipeId
         });
 
-        // Update the menu plan with calculated costs
+        // Aktualisieren the menu plan with calculated costs
         await prisma.menuPlan.update({
           where: { id: plan.id },
           data: {

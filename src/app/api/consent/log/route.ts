@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { EnterpriseMonitoring } from '@/lib/enterprise-monitoring'
+import { EnterpriseÜberwachung } from '@/lib/enterprise-monitoring'
 
 interface ConsentRecord {
   timestamp: string
@@ -32,7 +32,7 @@ export async function POST(request: NextRequest) {
     await logConsentToDatabase(consentRecord)
     
     // Monitor consent patterns
-    EnterpriseMonitoring.trackBusinessEvent('gdpr_consent_given', {
+    EnterpriseÜberwachung.trackBusinessEvent('gdpr_consent_given', {
       consentTypes: Object.keys(consentRecord).filter(key => 
         ['necessary', 'analytics', 'marketing', 'personalization'].includes(key) && 
         consentRecord[key as keyof ConsentRecord]
@@ -51,7 +51,7 @@ export async function POST(request: NextRequest) {
     })
 
   } catch (error) {
-    EnterpriseMonitoring.error('gdpr', 'Consent logging failed', {
+    EnterpriseÜberwachung.error('gdpr', 'Consent logging failed', {
       error: error instanceof Error ? error.message : 'Unknown error'
     })
     
@@ -109,7 +109,7 @@ export async function DELETE(request: NextRequest) {
     // GDPR: Right to be forgotten
     await deleteAllUserData(userId, email)
     
-    EnterpriseMonitoring.info('gdpr', 'User data deleted (Right to be forgotten)', {
+    EnterpriseÜberwachung.info('gdpr', 'User data deleted (Right to be forgotten)', {
       userId,
       email: email ? email.substring(0, 3) + '***' : undefined,
       requestedBy: 'user'
@@ -122,7 +122,7 @@ export async function DELETE(request: NextRequest) {
     })
 
   } catch (error) {
-    EnterpriseMonitoring.error('gdpr', 'Data deletion failed', {
+    EnterpriseÜberwachung.error('gdpr', 'Data deletion failed', {
       error: error instanceof Error ? error.message : 'Unknown error'
     })
     

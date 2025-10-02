@@ -7,7 +7,7 @@ import jsPDF from 'jspdf';
 import { startOfWeek, endOfWeek, addWeeks, format } from 'date-fns';
 import { de } from 'date-fns/locale';
 
-// GET: Export week plan as PDF
+// GET: Exportieren week plan as PDF
 export async function GET(request: NextRequest) {
   try {
     // 1. Auth check
@@ -215,7 +215,7 @@ export async function GET(request: NextRequest) {
   } catch (error) {
     console.error('Error exporting week plan:', error);
     return NextResponse.json(
-      { error: 'Failed to export week plan' },
+      { error: 'Fehlgeschlagen to export week plan' },
       { status: 500 }
     );
   }

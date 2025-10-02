@@ -44,7 +44,7 @@ export async function POST(request: NextRequest) {
     });
 
   } catch (error) {
-    console.error('Fehler beim Speichern der Kontaktanfrage:', error);
+    console.error('Fehler beim Save der Kontaktanfrage:', error);
     return NextResponse.json(
       { error: 'Interner Serverfehler' },
       { status: 500 }

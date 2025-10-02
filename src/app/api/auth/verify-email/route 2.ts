@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import jwt from 'jsonwebtoken'
-import { EnterpriseMonitoring } from '@/lib/enterprise-monitoring'
+import { EnterpriseÜberwachung } from '@/lib/enterprise-monitoring'
 
 export async function POST(request: NextRequest) {
   try {
@@ -26,12 +26,12 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Update user verification status
+    // Aktualisieren user verification status
     const verificationResult = await verifyUserEmail(decoded.email, decoded.userId)
     
     if (verificationResult.success) {
       // Log successful verification
-      EnterpriseMonitoring.trackBusinessEvent('email_verified', {
+      EnterpriseÜberwachung.trackBusinessEvent('email_verified', {
         email: decoded.email.substring(0, 3) + '***',
         userId: decoded.userId,
         verificationType: 'double_opt_in',
@@ -58,7 +58,7 @@ export async function POST(request: NextRequest) {
       )
     }
     
-    EnterpriseMonitoring.error('auth', 'Email verification error', {
+    EnterpriseÜberwachung.error('auth', 'Email verification error', {
       error: error instanceof Error ? error.message : 'Unknown error'
     })
     
@@ -75,10 +75,10 @@ async function verifyUserEmail(email: string, userId: string): Promise<{
   authToken?: string
 }> {
   try {
-    // TODO: Update user in database
+    // TODO: Aktualisieren user in database
     // - Set emailVerified: true
     // - Set marketingConsent: true (double-opt-in)
-    // - Update verifiedAt timestamp
+    // - Aktualisieren verifiedAt timestamp
     
     const user = {
       id: userId,
@@ -153,7 +153,7 @@ export async function PUT(request: NextRequest) {
     })
 
   } catch (error) {
-    EnterpriseMonitoring.error('auth', 'Verification email sending failed', {
+    EnterpriseÜberwachung.error('auth', 'Verification email sending failed', {
       error: error instanceof Error ? error.message : 'Unknown error'
     })
     
@@ -173,9 +173,9 @@ function generateVerificationEmail(email: string, verificationLink: string, user
     
     <p>Bitte bestätigen Sie Ihre E-Mail-Adresse, um:</p>
     <ul>
-      <li>✅ Vollzugriff auf alle 5 Professional Tools</li>
+      <li>✅ Vollzugriff auf alle 5 Professional Werkzeuge</li>
       <li>✅ Personalisierte SaaS-Empfehlungen</li>
-      <li>✅ Updates über neue Features</li>
+      <li>✅ Aktualisierens über neue Funktionen</li>
       <li>✅ Kostenlose Demo-Termine</li>
     </ul>
     
@@ -183,7 +183,7 @@ function generateVerificationEmail(email: string, verificationLink: string, user
       <a href="${verificationLink}"
          style="background: #10b981; color: white; padding: 15px 30px;
                 text-decoration: none; border-radius: 8px; font-weight: bold;">
-        ✅ E-Mail bestätigen & Tools nutzen
+        ✅ E-Mail bestätigen & Werkzeuge nutzen
       </a>
     </div>
     
@@ -191,7 +191,7 @@ function generateVerificationEmail(email: string, verificationLink: string, user
       <h3>🔒 Datenschutz & DSGVO-Compliance</h3>
       <p><strong>Mit der Bestätigung stimmen Sie zu:</strong></p>
       <ul>
-        <li>📧 Marketing-E-Mails über passende Profi-Tools</li>
+        <li>📧 Marketing-E-Mails über passende Profi-Werkzeuge</li>
         <li>📊 Anonymisierte Nutzungsanalyse für Verbesserungen</li>
         <li>🎯 Personalisierte Empfehlungen basierend auf Ihrem Bereich</li>
       </ul>
@@ -229,7 +229,7 @@ export async function GET(request: NextRequest) {
     // GDPR Article 20: Right to data portability
     const userData = await exportAllUserData(userId, email)
     
-    EnterpriseMonitoring.info('gdpr', 'User data export requested', {
+    EnterpriseÜberwachung.info('gdpr', 'User data export requested', {
       userId,
       email: email ? email.substring(0, 3) + '***' : undefined,
       dataSize: JSON.stringify(userData).length
@@ -243,7 +243,7 @@ export async function GET(request: NextRequest) {
     })
 
   } catch (error) {
-    EnterpriseMonitoring.error('gdpr', 'Data export failed', {
+    EnterpriseÜberwachung.error('gdpr', 'Data export failed', {
       error: error instanceof Error ? error.message : 'Unknown error'
     })
     
@@ -271,7 +271,7 @@ async function exportAllUserData(userId?: string | null, email?: string | null):
     },
     analyticsData: {
       toolUsage: [], // Which tools used when
-      exportActions: [], // Export history
+      exportActions: [], // Exportieren history
       sessionData: [], // Session information
       // ... behavioral data
     },

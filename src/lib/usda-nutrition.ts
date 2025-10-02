@@ -64,7 +64,7 @@ class UsdaNutritionService {
       }
     ]
 
-    // Filter based on query
+    // Filtern based on query
     const filtered = demoData.filter(item =>
       item.name.toLowerCase().includes(query.toLowerCase())
     )

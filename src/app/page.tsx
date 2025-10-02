@@ -24,27 +24,27 @@ export default function HomePage() {
           </div>
 
           <h1 className="text-5xl font-bold text-gray-900 mb-4">
-            🍽️ GastroTools Professional
+            🍽️ GastroTools Professionell
           </h1>
           <p className="text-xl text-gray-600 mb-8">
             {language === 'de'
               ? 'Professionelle Restaurant-Management-Suite - Produktionsbereit mit vollständiger Internationalisierung'
-              : 'Professional Restaurant Management Suite - Production Ready with Full Internationalization'
+              : 'Professionelle Restaurant-Management-Suite - Produktionsbereit mit vollständiger Internationalisierung'
             }
           </p>
         </div>
 
-        {/* Features Grid */}
+        {/* Funktionen Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                🧮 {language === 'de' ? 'Nährwert-Rechner' : 'Nutrition Calculator'}
+                🧮 {language === 'de' ? 'Nährwert-Rechner' : 'Nährwert-Rechner'}
               </CardTitle>
               <CardDescription>
                 {language === 'de'
                   ? 'EU-konform mit USDA-Integration (20.000+ Lebensmittel)'
-                  : 'EU-compliant with USDA integration (20,000+ foods)'
+                  : 'EU-konform mit USDA-Integration (20.000+ Lebensmittel)'
                 }
               </CardDescription>
             </CardHeader>
@@ -53,12 +53,12 @@ export default function HomePage() {
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                💰 {language === 'de' ? 'Kostenkontrolle' : 'Cost Control'}
+                💰 {language === 'de' ? 'Kostenkontrolle' : 'Kostenkontrolle'}
               </CardTitle>
               <CardDescription>
                 {language === 'de'
                   ? 'Ausgaben tracken, Budgets, Analytics'
-                  : 'Track expenses, budgets, analytics'
+                  : 'Ausgaben tracken, Budgets, Analytics'
                 }
               </CardDescription>
             </CardHeader>
@@ -67,12 +67,12 @@ export default function HomePage() {
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                📦 {language === 'de' ? 'Lagerbestand' : 'Inventory'}
+                📦 {language === 'de' ? 'Lagerbestand' : 'Lagerbestand'}
               </CardTitle>
               <CardDescription>
                 {language === 'de'
                   ? 'Bestandsführung mit Alerts'
-                  : 'Stock tracking with alerts'
+                  : 'Bestandsführung mit Benachrichtigungen'
                 }
               </CardDescription>
             </CardHeader>
@@ -81,12 +81,12 @@ export default function HomePage() {
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                📅 {language === 'de' ? 'Menüplaner' : 'Menu Planner'}
+                📅 {language === 'de' ? 'Menüplaner' : 'Menüplaner'}
               </CardTitle>
               <CardDescription>
                 {language === 'de'
                   ? 'Wochenplanung mit Kostenberechnungen'
-                  : 'Weekly planning with cost calculations'
+                  : 'Wochenplanung mit Kostenberechnungen'
                 }
               </CardDescription>
             </CardHeader>
@@ -95,12 +95,12 @@ export default function HomePage() {
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                🎨 {language === 'de' ? 'Menükarten-Designer' : 'Menu Card Designer'}
+                🎨 {language === 'de' ? 'Menükarten-Designer' : 'Menükarten-Designer'}
               </CardTitle>
               <CardDescription>
                 {language === 'de'
                   ? 'Professionelle Vorlagen'
-                  : 'Professional templates'
+                  : 'Professionelle Vorlagen'
                 }
               </CardDescription>
             </CardHeader>
@@ -109,36 +109,36 @@ export default function HomePage() {
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                🌐 {language === 'de' ? 'Internationalisierung' : 'Internationalization'}
+                🌐 {language === 'de' ? 'Internationalisierung' : 'Internationalisierung'}
               </CardTitle>
               <CardDescription>
                 {language === 'de'
                   ? 'Vollständige Deutsch/Englisch Unterstützung'
-                  : 'Complete German/English support'
+                  : 'Vollständige Deutsch/Englisch Unterstützung'
                 }
               </CardDescription>
             </CardHeader>
           </Card>
         </div>
 
-        {/* Demo & Tools */}
+        {/* Demo & Werkzeuge */}
         <div className="grid md:grid-cols-2 gap-6 mb-12">
           <Card>
             <CardHeader>
               <CardTitle>
-                {language === 'de' ? '🚀 Demo starten' : '🚀 Start Demo'}
+                {language === 'de' ? '🚀 Demo starten' : '🚀 Demo starten'}
               </CardTitle>
               <CardDescription>
                 {language === 'de'
                   ? 'Teste die Speisekarten-Designer Demo'
-                  : 'Try the Menu Card Designer Demo'
+                  : 'Teste die Speisekarten-Designer Demo'
                 }
               </CardDescription>
             </CardHeader>
             <CardContent>
               <Link href="/speisekarten-designer/demo">
                 <Button className="w-full">
-                  {language === 'de' ? 'Demo öffnen' : 'Open Demo'}
+                  {language === 'de' ? 'Demo öffnen' : 'Demo öffnen'}
                 </Button>
               </Link>
             </CardContent>
@@ -152,14 +152,14 @@ export default function HomePage() {
               <CardDescription>
                 {language === 'de'
                   ? 'System-Monitoring und Metriken'
-                  : 'System monitoring and metrics'
+                  : 'System-Monitoring und Metriken'
                 }
               </CardDescription>
             </CardHeader>
             <CardContent>
               <Link href="/admin/monitoring">
                 <Button variant="outline" className="w-full">
-                  {language === 'de' ? 'Monitoring öffnen' : 'Open Monitoring'}
+                  {language === 'de' ? 'Überwachung öffnen' : 'Überwachung öffnen'}
                 </Button>
               </Link>
             </CardContent>
@@ -170,7 +170,7 @@ export default function HomePage() {
         <Card>
           <CardHeader>
             <CardTitle>
-              {language === 'de' ? '🛠️ Technologie-Stack' : '🛠️ Technology Stack'}
+              {language === 'de' ? '🛠️ Technologie-Stack' : '🛠️ Technologie-Stack'}
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -196,8 +196,8 @@ export default function HomePage() {
               <div>
                 <strong>i18n:</strong><br />
                 React Context<br />
-                40 Translation Keys<br />
-                97.5% Coverage
+                40 Übersetzungen<br />
+                97.5% Abdeckung
               </div>
             </div>
           </CardContent>

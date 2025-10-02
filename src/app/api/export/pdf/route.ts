@@ -20,7 +20,7 @@ export async function POST(request: NextRequest) {
     const pdfContent = generatePDFContent(menuCard)
     
     // Log export event
-    console.log('📄 PDF Export:', {
+    console.log('📄 PDF Exportieren:', {
       userId,
       filename,
       menuName: menuCard.name,
@@ -35,7 +35,7 @@ export async function POST(request: NextRequest) {
         'Content-Type': 'application/pdf',
         'Content-Disposition': `attachment; filename="${filename}"`,
         'Cache-Control': 'no-cache, no-store, must-revalidate',
-        'X-Export-Success': 'true',
+        'X-Exportieren-Success': 'true',
         'X-Filename': filename
       }
     })
@@ -43,7 +43,7 @@ export async function POST(request: NextRequest) {
     return response
 
   } catch (error) {
-    console.error('PDF Export error:', error)
+    console.error('PDF Exportieren error:', error)
     
     return NextResponse.json(
       { 
@@ -75,7 +75,7 @@ ${item.description}
 
 ────────────────────────────────────────────────────────
 Erstellt mit GastroTools Speisekarten-Designer
-Professional Restaurant Management Suite
+Professionelle Restaurant-Management-Suite
 
 ✅ Alle Preise verstehen sich inkl. MwSt.
 ✅ Bei Allergien fragen Sie bitte unser Personal

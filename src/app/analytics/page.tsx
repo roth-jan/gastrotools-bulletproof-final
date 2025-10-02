@@ -51,7 +51,7 @@ export default function AnalyticsDashboard() {
     setAnalytics(mockData)
   }, [])
 
-  const topPerformingTools = Object.entries(analytics.leadsByTool)
+  const topPerformingWerkzeuge = Object.entries(analytics.leadsByTool)
     .sort(([,a], [,b]) => b - a)
     .slice(0, 3)
 
@@ -120,12 +120,12 @@ export default function AnalyticsDashboard() {
             <CardHeader>
               <CardTitle className="flex items-center text-lg">
                 <Mail className="w-5 h-5 mr-2" />
-                Export → Lead
+                Exportieren → Lead
               </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="text-3xl font-bold text-orange-600">{analytics.userBehavior.exportConversion}%</div>
-              <p className="text-sm text-gray-600">Export Conversion</p>
+              <p className="text-sm text-gray-600">Exportieren Conversion</p>
             </CardContent>
           </Card>
         </div>
@@ -156,11 +156,11 @@ export default function AnalyticsDashboard() {
 
           <Card>
             <CardHeader>
-              <CardTitle>Top Performing Tools</CardTitle>
+              <CardTitle>Top Performing Werkzeuge</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-3">
-                {topPerformingTools.map(([tool, leads], index) => (
+                {topPerformingWerkzeuge.map(([tool, leads], index) => (
                   <div key={tool} className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <Badge variant="outline">#{index + 1}</Badge>

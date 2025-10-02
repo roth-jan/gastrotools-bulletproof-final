@@ -35,7 +35,7 @@ export async function GET() {
       <!DOCTYPE html>
       <html>
         <head>
-          <title>Demo Login - GastroTools</title>
+          <title>Demo Anmelden - GastroTools</title>
         </head>
         <body>
           <script>

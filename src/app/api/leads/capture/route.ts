@@ -114,7 +114,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('Lead capture error:', error);
     return NextResponse.json(
-      { error: 'Fehler beim Speichern Ihrer Anfrage' },
+      { error: 'Fehler beim Save Ihrer Anfrage' },
       { status: 500 }
     );
   }

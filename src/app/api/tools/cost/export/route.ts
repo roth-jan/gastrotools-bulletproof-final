@@ -18,7 +18,7 @@ export async function POST(request: NextRequest) {
     const usage = await checkUsageLimit(user.id, 'exports');
     if (usage.exceeded && user.id !== 'demo-user-123') {
       return NextResponse.json({ 
-        error: 'Monatliches Export-Limit erreicht',
+        error: 'Monatliches Exportieren-Limit erreicht',
         showLeadCapture: true,
         limit: usage.limit,
         used: usage.used
@@ -129,7 +129,7 @@ export async function POST(request: NextRequest) {
       // Convert to base64
       const pdfBase64 = doc.output('datauristring');
       
-      // Update usage
+      // Aktualisieren usage
       await incrementUsage(user.id, 'exports');
       
       return NextResponse.json({ pdf: pdfBase64 });
@@ -154,7 +154,7 @@ export async function POST(request: NextRequest) {
       const csvContent = csvRows.map(row => row.join(';')).join('\n');
       const csvBase64 = Buffer.from(csvContent, 'utf-8').toString('base64');
       
-      // Update usage
+      // Aktualisieren usage
       await incrementUsage(user.id, 'exports');
       
       return NextResponse.json({ 
@@ -166,9 +166,9 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Ungültiges Format' }, { status: 400 });
 
   } catch (error) {
-    console.error('Export error:', error);
+    console.error('Exportieren error:', error);
     return NextResponse.json(
-      { error: 'Fehler beim Exportieren' },
+      { error: 'Fehler beim Exportierenieren' },
       { status: 500 }
     );
   }

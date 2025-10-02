@@ -74,7 +74,7 @@ export default function MenuEditor() {
         }
       }
     } catch (error) {
-      console.error('Error loading menu:', error)
+      console.error('Fehler beim Laden menu:', error)
     } finally {
       setIsLoading(false)
     }
@@ -319,7 +319,7 @@ export default function MenuEditor() {
             </Button>
             <Button onClick={saveMenu} disabled={isSaving} className="btn-primary">
               <Save className="w-4 h-4 mr-2" />
-              {isSaving ? 'Speichern...' : 'Speichern'}
+              {isSaving ? 'Save...' : 'Save'}
             </Button>
           </div>
         </div>

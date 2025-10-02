@@ -31,7 +31,7 @@ export async function POST(request: NextRequest) {
         ],
         calculation: {
           method: 'Demo-Kalkulation',
-          lastUpdate: new Date().toISOString(),
+          lastAktualisieren: new Date().toISOString(),
           accuracy: 'Demo-Daten für Testzwecke'
         }
       });
@@ -148,13 +148,13 @@ export async function POST(request: NextRequest) {
 
     const costPerServing = totalRecipeCost / (parseFloat(recipe.portions || '1') || 1);
 
-    // Update recipe with calculated costs
+    // Aktualisieren recipe with calculated costs
     await prisma.recipe.update({
       where: { id: recipe.id },
       data: {
         totalCost: Math.round(totalRecipeCost * 100) / 100,
         costPerServing: Math.round(costPerServing * 100) / 100,
-        lastCostUpdate: new Date()
+        lastCostAktualisieren: new Date()
       }
     });
 
@@ -168,7 +168,7 @@ export async function POST(request: NextRequest) {
       calculation: {
         basedOnEntries: costEntries.length,
         dateRange: `${thirtyDaysAgo.toISOString().split('T')[0]} bis heute`,
-        lastUpdate: new Date().toISOString()
+        lastAktualisieren: new Date().toISOString()
       }
     });
 
@@ -194,7 +194,7 @@ export async function GET(request: NextRequest) {
       include: {
         ingredientCosts: true
       },
-      orderBy: { lastCostUpdate: 'desc' }
+      orderBy: { lastCostAktualisieren: 'desc' }
     });
 
     const recipesWithCosts = recipes.map(recipe => ({
@@ -203,7 +203,7 @@ export async function GET(request: NextRequest) {
       category: recipe.category,
       totalCost: recipe.totalCost || 0,
       costPerServing: recipe.costPerServing || 0,
-      lastCostUpdate: recipe.lastCostUpdate,
+      lastCostAktualisieren: recipe.lastCostAktualisieren,
       hasCostData: recipe.ingredientCosts.length > 0,
       ingredientCount: recipe.ingredientCosts.length
     }));

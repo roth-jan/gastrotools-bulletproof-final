@@ -85,7 +85,7 @@ export async function POST(request: NextRequest) {
     return response;
 
   } catch (error) {
-    console.error('Login error:', error);
+    console.error('Anmelden error:', error);
     return NextResponse.json(
       { error: 'Anmeldung fehlgeschlagen' },
       { status: 500 }

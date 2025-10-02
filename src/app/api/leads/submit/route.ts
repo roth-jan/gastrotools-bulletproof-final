@@ -105,7 +105,7 @@ async function sendLeadConfirmationEmail(leadData: any): Promise<boolean> {
     // Log email for debugging
     console.log('📧 Email would be sent:', {
       to: leadData.email,
-      subject: `Ihr ${leadData.exportType.toUpperCase()} Export + passende Profi-Tools`,
+      subject: `Ihr ${leadData.exportType.toUpperCase()} Exportieren + passende Profi-Werkzeuge`,
       preview: emailTemplate.substring(0, 100) + '...'
     })
     
@@ -126,7 +126,7 @@ Hallo,
 
 vielen Dank für Ihr Interesse an GastroTools!
 
-🎯 Ihr ${leadData.exportType.toUpperCase()} Export:
+🎯 Ihr ${leadData.exportType.toUpperCase()} Exportieren:
 [Hier würde der Download-Link stehen]
 
 💡 Basierend auf Ihrem Bereich (${leadData.orgTyp}) empfehlen wir:
@@ -144,7 +144,7 @@ Freundliche Grüße
 Ihr GastroTools Team
 
 ---
-Sie erhalten diese E-Mail, weil Sie Ihr Interesse an unseren Profi-Tools bekundet haben.
+Sie erhalten diese E-Mail, weil Sie Ihr Interesse an unseren Profi-Werkzeuge bekundet haben.
 Abmelden: [Unsubscribe-Link]
   `.trim()
 }
@@ -187,7 +187,7 @@ function getSegmentInfo(segment: string) {
           'Kundenverwaltung mit Rollen',
           'Online-Bestellsystem',
           'Tourenplanung & Etiketten',
-          'Rechnungen & DATEV/SEPA Export',
+          'Rechnungen & DATEV/SEPA Exportieren',
           'Web-Shop Integration'
         ],
         demoUrl: 'https://essen-auf-raedern.eu/demo',
@@ -195,7 +195,7 @@ function getSegmentInfo(segment: string) {
       }
     default:
       return {
-        name: 'GastroTools Professional',
+        name: 'GastroTools Professionell',
         description: 'Professionelle Gastronomie-Software',
         features: ['Vollständige Restaurant-Verwaltung'],
         demoUrl: 'https://ntc.software/demo',

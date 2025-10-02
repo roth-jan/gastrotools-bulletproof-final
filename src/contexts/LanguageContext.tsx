@@ -2,7 +2,7 @@
 
 import React, { createContext, useContext, useState, ReactNode } from 'react'
 
-// Import translation files
+// Importieren translation files
 import enTranslations from '../../i18n/en.json'
 import deTranslations from '../../i18n/de.json'
 

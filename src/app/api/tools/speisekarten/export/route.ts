@@ -43,7 +43,7 @@ export async function POST(request: NextRequest) {
     if (user.plan === 'free' && usage.exportsCount >= 5) {
       return NextResponse.json(
         { 
-          error: 'Export-Limit erreicht',
+          error: 'Exportieren-Limit erreicht',
           limitReached: true 
         },
         { status: 403 }
@@ -69,7 +69,7 @@ export async function POST(request: NextRequest) {
     // In a real implementation, you would generate the PDF here
     // using a library like puppeteer or jsPDF on the server
 
-    // Update export count
+    // Aktualisieren export count
     await prisma.usageTracking.update({
       where: { id: usage.id },
       data: { exportsCount: usage.exportsCount + 1 }
@@ -93,9 +93,9 @@ export async function POST(request: NextRequest) {
     });
 
   } catch (error) {
-    console.error('Export error:', error);
+    console.error('Exportieren error:', error);
     return NextResponse.json(
-      { error: 'Fehler beim Exportieren' },
+      { error: 'Fehler beim Exportierenieren' },
       { status: 500 }
     );
   }

@@ -49,7 +49,7 @@ export async function POST(request: NextRequest) {
       body = await request.json();
     } catch (error) {
       return NextResponse.json(
-        { error: 'Invalid request body' },
+        { error: 'Ungültige Anfrage body' },
         { status: 400 }
       );
     }
@@ -155,7 +155,7 @@ export async function POST(request: NextRequest) {
       }
     });
 
-    // Update usage count
+    // Aktualisieren usage count
     await prisma.usageTracking.update({
       where: { id: usage.id },
       data: { speisekartenCount: usage.speisekartenCount + 1 }

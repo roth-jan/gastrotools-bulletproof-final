@@ -65,16 +65,16 @@ const INITIAL_MENU_DATA: MenuSection[] = [
 export default function MenuEditor() {
   const { t } = useLanguage()
   const [menuData, setMenuData] = useState<MenuSection[]>(INITIAL_MENU_DATA)
-  const [selectedElement, setSelectedElement] = useState<string | null>(null)
+  const [selectedElement, setAuswählenedElement] = useState<string | null>(null)
   const [draggedItem, setDraggedItem] = useState<string | null>(null)
   const [menuTitle, setMenuTitle] = useState("Restaurant Bella Vista")
   const [menuSubtitle, setMenuSubtitle] = useState("Authentische italienische Küche")
   const [qrCodeUrl, setQrCodeUrl] = useState<string | null>(null)
-  const [isExporting, setIsExporting] = useState(false)
+  const [isExportierening, setIsExportierening] = useState(false)
 
   const handleGenerateQR = async () => {
     try {
-      setIsExporting(true)
+      setIsExportierening(true)
       const menuUrl = getMenuPreviewUrl("demo-menu-123")
       const qrCode = await generateQRCode(menuUrl)
       setQrCodeUrl(qrCode)
@@ -85,22 +85,22 @@ export default function MenuEditor() {
       link.download = 'menu-qr-code.png'
       link.click()
     } catch (error) {
-      console.error('Failed to generate QR code:', error)
+      console.error('Fehlgeschlagen to generate QR code:', error)
       alert('Fehler beim Erstellen des QR-Codes')
     } finally {
-      setIsExporting(false)
+      setIsExportierening(false)
     }
   }
 
-  const handleExportPDF = async () => {
+  const handleExportierenPDF = async () => {
     try {
-      setIsExporting(true)
+      setIsExportierening(true)
       await generateMenuPDF('menu-canvas', `${menuTitle.replace(/\s+/g, '-').toLowerCase()}.pdf`)
     } catch (error) {
-      console.error('Failed to export PDF:', error)
-      alert('Fehler beim PDF-Export')
+      console.error('Fehlgeschlagen to export PDF:', error)
+      alert('Fehler beim PDF-Exportieren')
     } finally {
-      setIsExporting(false)
+      setIsExportierening(false)
     }
   }
 
@@ -220,7 +220,7 @@ export default function MenuEditor() {
                 variant="outline" 
                 size="sm"
                 onClick={handleGenerateQR}
-                disabled={isExporting}
+                disabled={isExportierening}
               >
                 <QrCode className="h-4 w-4 mr-2" />
                 QR-Code
@@ -228,15 +228,15 @@ export default function MenuEditor() {
               <Button 
                 variant="outline" 
                 size="sm"
-                onClick={handleExportPDF}
-                disabled={isExporting}
+                onClick={handleExportierenPDF}
+                disabled={isExportierening}
               >
                 <Download className="h-4 w-4 mr-2" />
                 {t('ui.export.pdf')}
               </Button>
               <Button size="sm">
                 <Save className="h-4 w-4 mr-2" />
-                Speichern
+                Save
               </Button>
             </div>
           </div>
@@ -249,7 +249,7 @@ export default function MenuEditor() {
           <div className="lg:col-span-1">
             <Card>
               <CardHeader>
-                <CardTitle className="text-lg">Design Tools</CardTitle>
+                <CardTitle className="text-lg">Design Werkzeuge</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="grid grid-cols-2 gap-2">
@@ -353,7 +353,7 @@ export default function MenuEditor() {
                                 ? 'border-primary bg-primary/5' 
                                 : 'border-gray-200 hover:border-gray-300'
                             } ${draggedItem === item.id ? 'opacity-50' : ''}`}
-                            onClick={() => setSelectedElement(item.id)}
+                            onClick={() => setAuswählenedElement(item.id)}
                           >
                             <div className="flex items-start justify-between">
                               <div className="flex-1 space-y-2">

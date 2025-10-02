@@ -378,7 +378,7 @@ export default function MenuEditor() {
             </Button>
             <Button onClick={saveMenu} disabled={isSaving} className="btn-primary">
               <Save className="w-4 h-4 mr-2" />
-              {isSaving ? 'Speichern...' : 'Speichern'}
+              {isSaving ? 'Save...' : 'Save'}
             </Button>
           </div>
         </div>

@@ -136,7 +136,7 @@ export async function POST(request: NextRequest) {
 
     let target;
     if (existingTarget) {
-      // Update existing
+      // Aktualisieren existing
       target = await prisma.costTarget.update({
         where: { id: existingTarget.id },
         data: {

@@ -97,7 +97,7 @@ export async function GET(request: NextRequest) {
   } catch (error) {
     console.error('Error fetching week plan:', error);
     return NextResponse.json(
-      { error: 'Failed to fetch week plan' },
+      { error: 'Fehlgeschlagen to fetch week plan' },
       { status: 500 }
     );
   }

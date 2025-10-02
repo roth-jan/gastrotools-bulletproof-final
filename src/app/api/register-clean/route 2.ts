@@ -89,7 +89,7 @@ export async function POST(request: Request) {
   } catch (error: any) {
     console.error('Clean registration error:', error);
     return new Response(JSON.stringify({
-      error: `Failed: ${error?.message || 'Unknown'}`
+      error: `Fehlgeschlagen: ${error?.message || 'Unknown'}`
     }), { 
       status: 500,
       headers: { 'Content-Type': 'application/json' }

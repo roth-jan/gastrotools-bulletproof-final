@@ -68,7 +68,7 @@ export function isAdmin(user: User): boolean {
   return user.email === 'admin@gastrotools.de' || user.plan === 'admin'
 }
 
-export function canAccessAdminFeatures(user: User): boolean {
+export function canAccessAdminFunktionen(user: User): boolean {
   return isAdmin(user) || user.plan === 'professional'
 }
 

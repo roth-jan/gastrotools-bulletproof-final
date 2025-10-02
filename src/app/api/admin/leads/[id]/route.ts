@@ -29,7 +29,7 @@ export async function PATCH(
     const { status } = await request.json();
     const { id } = await params;
 
-    // Update lead status
+    // Aktualisieren lead status
     const lead = await prisma.lead.update({
       where: {
         id

@@ -106,20 +106,20 @@ function generateMagicLinkEmail(email: string, magicLink: string, segment: strin
     webmenue: 'Perfekt für Bildungseinrichtungen: Online-Bestellung + BuT-Abrechnung',
     kuechenmanager: 'Professional für Gastro: EU-konforme Nährwerte + DATEV-Integration', 
     ear: 'Ideal für Lieferdienste: Tourenplanung + DATEV/SEPA + Starterpakete',
-    general: 'Professional Restaurant Management Tools'
+    general: 'Professional Restaurant Management Werkzeuge'
   }
 
   return `
     <h1>Willkommen bei GastroTools!</h1>
     
     <p>Hallo,</p>
-    <p>hier ist Ihr direkter Zugang zu den professionellen Gastro-Tools:</p>
+    <p>hier ist Ihr direkter Zugang zu den professionellen Gastro-Werkzeuge:</p>
     
     <div style="text-align: center; margin: 30px 0;">
       <a href="${magicLink}" 
          style="background: #2563eb; color: white; padding: 15px 30px; 
                 text-decoration: none; border-radius: 8px; font-weight: bold;">
-        🚀 Jetzt anmelden & Tools nutzen
+        🚀 Jetzt anmelden & Werkzeuge nutzen
       </a>
     </div>
     
@@ -128,13 +128,13 @@ function generateMagicLinkEmail(email: string, magicLink: string, segment: strin
       <p>Basierend auf Ihrer E-Mail-Domain haben wir passende Empfehlungen vorbereitet.</p>
     </div>
     
-    <p><strong>Ihre 5 Professional Tools:</strong></p>
+    <p><strong>Ihre 5 Professional Werkzeuge:</strong></p>
     <ul>
       <li>🧮 Nährwertrechner (USDA + EU-konform)</li>
       <li>💰 Kostenkontrolle (Wareneinsatz + Analytics)</li>
       <li>📦 Lagerverwaltung (Bestände + Alerts)</li>
       <li>📅 Menüplaner (Wochenplanung + Drag & Drop)</li>
-      <li>🍽️ Speisekarten-Designer (PDF Export)</li>
+      <li>🍽️ Speisekarten-Designer (PDF Exportieren)</li>
     </ul>
     
     <p>Der Link ist 15 Minuten gültig. Bei Fragen: info@gastrotools.de</p>
